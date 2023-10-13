@@ -20,9 +20,9 @@ export class GlobeComponent {
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
         //Display the map as a globe, since satellite-v9 defaults to Mercator
-      zoom: 0.01,
+      zoom: 1.5,
       center: [-90, 40],
-      interactive: false,
+
     });
 
     map.on('style.load', () => {
