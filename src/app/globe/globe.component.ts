@@ -11,7 +11,7 @@ export class GlobeComponent {
   style = 'mapbox://styles/mapbox/streets-v12';
   lat = 37.75;
   lng = -122.41;
-  constructor() { }
+  constructor() {}
   ngOnInit() {
     const token =
       'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
@@ -24,7 +24,6 @@ export class GlobeComponent {
       center: [41.9027835, 12.4963655],
       interactive: false,
       scrollZoom: false,
-      doubleClickZoom: false,
     });
 
     const size = 200;
@@ -90,12 +89,9 @@ export class GlobeComponent {
           this.context.stroke();
 
           // Update this image's data with data from the canvas.
-          this.data = new Uint8Array(this.context.getImageData(
-            0,
-            0,
-            this.width,
-            this.height
-          ).data.buffer);
+          this.data = new Uint8Array(
+            this.context.getImageData(0, 0, this.width, this.height).data.buffer
+          );
 
           // Continuously repaint the map, resulting
           // in the smooth animation of the dot.
@@ -107,7 +103,7 @@ export class GlobeComponent {
           console.error('context is null');
           return false;
         }
-      }
+      },
     };
 
     map.on('load', () => {
@@ -119,35 +115,37 @@ export class GlobeComponent {
         console.log(coordinates);
 
         map.addSource('dot-point', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
               {
-                'type': 'Feature',
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': coordinates
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: coordinates,
                 },
-                'properties': {}
-              }
-            ]
-          }
+                properties: {},
+              },
+            ],
+          },
         });
-        
+
         // Check if the dot-point source exists and is valid
         if (!map.getSource('dot-point')) {
           console.error('dot-point source does not exist');
         }
 
         map.addLayer({
-          'id': 'layer-with-pulsing-dot',
-          'type': 'symbol',
-          'source': 'dot-point',
-          'layout': {
+          id: 'layer-with-pulsing-dot',
+          type: 'symbol',
+          source: 'dot-point',
+          layout: {
             'icon-image': 'pulsing-dot',
-            'visibility': 'visible' // Ensure the layer is visible
-          }
+            //Change the size and the color of the pulsing dot here
+            'icon-size': 0.3,
+            visibility: 'visible', // Ensure the layer is visible
+          },
         });
 
         // Check if the layer exists and is valid
@@ -200,6 +198,5 @@ export class GlobeComponent {
     map.on('moveend', () => {
       spinGlobe();
     });
-
   }
 }
