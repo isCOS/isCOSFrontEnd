@@ -19,6 +19,7 @@ export class GlobeComponent {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
+
       zoom: 0.01,
       center: [41.9027835, 12.4963655],
       interactive: false,
@@ -133,7 +134,7 @@ export class GlobeComponent {
             ]
           }
         });
-
+        
         // Check if the dot-point source exists and is valid
         if (!map.getSource('dot-point')) {
           console.error('dot-point source does not exist');
