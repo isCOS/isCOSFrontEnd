@@ -70,7 +70,7 @@ export class GlobeComponent {
             0,
             Math.PI * 2
           );
-          this.context.fillStyle = `rgba(255, 200, 200, ${1 - t})`;
+          this.context.fillStyle = `rgba(45, 85, 255, ${1 - t})`;
           this.context.fill();
 
           // Draw the inner circle.
@@ -82,7 +82,7 @@ export class GlobeComponent {
             0,
             Math.PI * 2
           );
-          this.context.fillStyle = 'rgba(255, 100, 100, 1)';
+          this.context.fillStyle = 'rgba(45, 85, 255, 1)';
           this.context.strokeStyle = 'white';
           this.context.lineWidth = 2 + 4 * (1 - t);
           this.context.fill();
