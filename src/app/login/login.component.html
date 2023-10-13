@@ -1,12 +1,15 @@
-<div class="body flex align-items-center justify-content-center">
-    <div class="flex">
-        <button pButton type="button" label="Login" class="p-button-rounded p-button-success"></button>
+<div class="body flex align-items-center justify-content-around">
+    <div class="photoDiv flex p-4 h-full w-full">
+        <app-globe></app-globe>
     </div>
-    <div class="flex-column gap-8">
-        <div class="flex-column">
-            <h1 class="text-center ">Login</h1>
+    <div class="flex relative h-full flex-column justify-content-center">
+        <div class="description justify-content-center p-3">
+            <p class="text-center">(qui la descrizione) la mamma di giovanni è una bellissima donna a cui piace fare gli gnocchi al sugo e le autopompe</p>
         </div>
         <div class="box flex flex-column mt-2 mb-4 p-4">
+            <div class="flex-column">
+                <h1 class="text-center ">Login</h1>
+            </div>
             <div class="flex justify-content-center">
                 <div class="flex-column">
                     <!-- Aggiungere il formcontrolname -->
@@ -16,11 +19,15 @@
                             <label for="lastName" htmlFor="lastName">codice azienda</label>
                         </span>
                     </div>
-                    <div class="flex flex-column mt-4">
+                    <div class="flex flex-column mt-4 mb-4">
                         <span class="p-float-label">
                             <input pInputText type="password" />
                             <label for="lastName" htmlFor="lastName">password</label>
                         </span>
+                    </div>
+                    <div>
+                        <p-button label="Primary" [text]="true">Create account</p-button>
+                        <p-button class="flex justify-content-end" label="login"></p-button>
                     </div>
                 </div>
             </div>
