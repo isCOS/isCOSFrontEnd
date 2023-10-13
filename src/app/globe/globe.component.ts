@@ -21,7 +21,7 @@ export class GlobeComponent {
       style: 'mapbox://styles/mapbox/streets-v12',
       zoom: 0.01,
       center: [41.9027835, 12.4963655],
-      interactive: true,
+      interactive: false,
       scrollZoom: false,
       doubleClickZoom: false,
     });
