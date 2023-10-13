@@ -11,7 +11,7 @@ export class GlobeComponent {
   style = 'mapbox://styles/mapbox/streets-v12';
   lat = 37.75;
   lng = -122.41;
-  constructor() {}
+  constructor() { }
   ngOnInit() {
     const token =
       'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
@@ -19,10 +19,146 @@ export class GlobeComponent {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
-        //Display the map as a globe, since satellite-v9 defaults to Mercator
-      zoom: 1.5,
-      center: [-90, 40],
 
+      zoom: 0.01,
+      center: [41.9027835, 12.4963655],
+      interactive: false,
+      scrollZoom: false,
+      doubleClickZoom: false,
+    });
+
+    const size = 200;
+
+    interface StyleImageInterface {
+      width: number;
+      height: number;
+      data: Uint8Array;
+      onAdd: () => void;
+      render: () => boolean;
+      context?: CanvasRenderingContext2D;
+    }
+
+    const pulsingDot: StyleImageInterface = {
+      // This implements `StyleImageInterface`
+      // to draw a pulsing dot icon on the map.
+      width: size,
+      height: size,
+      data: new Uint8Array(size * size * 4),
+      // When the layer is added to the map,
+      // get the rendering context for the map canvas.
+      onAdd: function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        this.context = canvas.getContext('2d')!;
+      },
+
+      // Call once before every frame where the icon will be used.
+      render: function () {
+        const duration = 1000;
+        const t = (performance.now() % duration) / duration;
+
+        const radius = (size / 2) * 0.3;
+        const outerRadius = (size / 2) * 0.7 * t + radius;
+        if (this.context) {
+          // Draw the outer circle.
+          this.context.clearRect(0, 0, this.width, this.height);
+          this.context.beginPath();
+          this.context.arc(
+            this.width / 2,
+            this.height / 2,
+            outerRadius,
+            0,
+            Math.PI * 2
+          );
+          this.context.fillStyle = `rgba(255, 200, 200, ${1 - t})`;
+          this.context.fill();
+
+          // Draw the inner circle.
+          this.context.beginPath();
+          this.context.arc(
+            this.width / 2,
+            this.height / 2,
+            radius,
+            0,
+            Math.PI * 2
+          );
+          this.context.fillStyle = 'rgba(255, 100, 100, 1)';
+          this.context.strokeStyle = 'white';
+          this.context.lineWidth = 2 + 4 * (1 - t);
+          this.context.fill();
+          this.context.stroke();
+
+          // Update this image's data with data from the canvas.
+          this.data = new Uint8Array(this.context.getImageData(
+            0,
+            0,
+            this.width,
+            this.height
+          ).data.buffer);
+
+          // Continuously repaint the map, resulting
+          // in the smooth animation of the dot.
+          map.triggerRepaint();
+
+          // Return `true` to let the map know that the image was updated.
+          return true;
+        } else {
+          console.error('context is null');
+          return false;
+        }
+      }
+    };
+
+    map.on('load', () => {
+      map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+      let coordinates;
+
+      navigator.geolocation.getCurrentPosition(function (position) {
+        coordinates = [position.coords.longitude, position.coords.latitude];
+        console.log(coordinates);
+
+        map.addSource('dot-point', {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': coordinates
+                },
+                'properties': {}
+              }
+            ]
+          }
+        });
+        
+        // Check if the dot-point source exists and is valid
+        if (!map.getSource('dot-point')) {
+          console.error('dot-point source does not exist');
+        }
+
+        map.addLayer({
+          'id': 'layer-with-pulsing-dot',
+          'type': 'symbol',
+          'source': 'dot-point',
+          'layout': {
+            'icon-image': 'pulsing-dot',
+            'visibility': 'visible' // Ensure the layer is visible
+          }
+        });
+
+        // Check if the layer exists and is valid
+        if (!map.getLayer('layer-with-pulsing-dot')) {
+          console.error('layer-with-pulsing-dot does not exist');
+        }
+      });
+    });
+
+    map.on('style.load', () => {
+      map.setFog({}); // Set the default atmosphere style
     });
 
     map.on('style.load', () => {
@@ -58,38 +194,12 @@ export class GlobeComponent {
         map.easeTo({ center, duration: 1000, easing: (n) => n });
       }
     }
-
-    // Pause spinning on interaction
-    map.on('mousedown', () => {
-      userInteracting = true;
-    });
-
-    // Restart spinning the globe when interaction is complete
-    map.on('mouseup', () => {
-      userInteracting = false;
-      spinGlobe();
-    });
-
-    // These events account for cases where the mouse has moved
-    // off the map, so 'mouseup' will not be fired.
-    map.on('dragend', () => {
-      userInteracting = false;
-      spinGlobe();
-    });
-    map.on('pitchend', () => {
-      userInteracting = false;
-      spinGlobe();
-    });
-    map.on('rotateend', () => {
-      userInteracting = false;
-      spinGlobe();
-    });
+    spinGlobe();
 
     // When animation is complete, start spinning if there is no ongoing interaction
     map.on('moveend', () => {
       spinGlobe();
     });
-
 
   }
 }
