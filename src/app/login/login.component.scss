@@ -1,0 +1,13 @@
+.box{
+    border-radius: 1rem;
+    margin-right: 3rem;
+    margin-left: 3rem;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease-in-out;   
+}
+
+.body{
+    height: 100vh;
+    place-items: center;
+}
