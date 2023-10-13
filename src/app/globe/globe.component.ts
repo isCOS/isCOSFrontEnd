@@ -22,6 +22,7 @@ export class GlobeComponent {
         //Display the map as a globe, since satellite-v9 defaults to Mercator
       zoom: 0.01,
       center: [-90, 40],
+      interactive: false,
     });
 
     map.on('style.load', () => {

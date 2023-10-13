@@ -1,24 +1,25 @@
-.box{
-    border-radius: 1rem;
-    margin-right: 3rem;
-    margin-left: 3rem;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0,0,0,0.25);
-    transition: all 0.3s ease-in-out;   
+.box {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.photoDiv{
+.photoDiv {
     border-radius: 1rem;
     border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
-.body{
+.body {
     height: 100vh;
     place-items: center;
 }
 
-.description{
+.description {
     position: absolute;
     top: 1rem;
     left: 50%;
