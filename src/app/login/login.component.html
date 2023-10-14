@@ -1,40 +1,44 @@
-<app-globe></app-globe>
-<div class="photoDiv justify-content-center align-items-center flex p-4 h-full w-full">
-    <div class="description justify-content-center p-3">
-        <h1 class="text-center text-white">Project's Title</h1>
-    </div>
+<div>
+    <app-globe></app-globe>
 </div>
-<div class="body flex justify-content-between">
-    <div class="flex box ml-4 p-4 max-w-28rem">
-        <p class="text-white">Qui va la descrizione del sito web Qui va la descrizione del sito webQui va la descrizione del sito webQui va la descrizione del sito webQui va la descrizione del sito web</p>
-    </div>
-    <div class="box flex-column mt-2 mb-4 p-4 mr-4">
-        <div class=" flex-column">
-            <h1 class="text-center text-blue-100">Login</h1>
+<div class="body relative h-screen w-screen">
+    <div class="justify-content-center align-items-center flex p-4">
+        <div class="description justify-content-center p-3">
+            <h1 class="text-center text-white">Project's Title</h1>
         </div>
-        <div class="flex">
-            <div class="flex-column">
-                <!-- Aggiungere il formcontrolname -->
-                <div class="flex flex-column mt-4">
-                    <span class="p-float-label">
-                        <input pInputText />
-                        <label for="lastName" htmlFor="lastName">codice azienda</label>
-                    </span>
-                </div>
-                <div class="flex flex-column mt-4 mb-4">
-                    <span class="p-float-label">
-                        <input pInputText type="password" />
-                        <label for="lastName" htmlFor="lastName">password</label>
-                    </span>
-                </div>
-                <div>
-                    <div class="flex justify-content-around">
-                        <p-button [text]="true">Create account</p-button>
-                        <p-button [text]="true">Login</p-button>
+    </div>
+    <div class="divInfoLog flex justify-content-between">
+        <div class="box flex p-4 max-w-28rem ml-4">
+            <p class="text-white">Qui va la descrizione del sito web Qui va la descrizione del sito webQui va la
+                descrizione del sito webQui va la descrizione del sito webQui va la descrizione del sito web</p>
+        </div>
+        <div class="box flex-column p-4 mr-4">
+            <div class=" flex-column">
+                <h1 class="text-center text-blue-100">Login</h1>
+            </div>
+            <div class="flex">
+                <div class="flex-column">
+                    <!-- Aggiungere il formcontrolname -->
+                    <div class="flex flex-column mt-4">
+                        <span class="p-float-label">
+                            <input pInputText />
+                            <label for="lastName" htmlFor="lastName">codice azienda</label>
+                        </span>
+                    </div>
+                    <div class="flex flex-column mt-4 mb-4">
+                        <span class="p-float-label">
+                            <input pInputText type="password" />
+                            <label for="lastName" htmlFor="lastName">password</label>
+                        </span>
+                    </div>
+                    <div>
+                        <div class="flex justify-content-around">
+                            <p-button [text]="true">Create account</p-button>
+                            <p-button [text]="true">Login</p-button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
 </div>

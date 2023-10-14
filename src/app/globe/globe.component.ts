@@ -19,8 +19,7 @@ export class GlobeComponent {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
-
-      zoom: 0.01,
+      zoom: 1.6,
       center: [41.9027835, 12.4963655],
       interactive: false,
       scrollZoom: false,
