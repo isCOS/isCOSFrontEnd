@@ -33,4 +33,9 @@ import { trigger, state, style, animate, transition, query } from '@angular/anim
 })
 export class HomeComponent {
   clickRegisterButton: boolean = false;
+  homepageElementsView: boolean = true;
+
+  constructor() { }
+
+
 }

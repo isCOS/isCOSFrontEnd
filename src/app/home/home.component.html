@@ -5,19 +5,19 @@
 <div class="body relative h-screen w-screen">
     <div class="justify-content-center align-items-center flex p-4">
         <div class="description justify-content-center p-3">
-            <h1 class="text-center text-white">isCOS</h1>
+            <h1 class="text-center text-white" (click)="homepageElementsView = !homepageElementsView">isCOS</h1>
         </div>
     </div>
-    <div class="divInfoLog flex justify-content-between">
-        <div class="box infoDiv flex p-4 max-w-28rem ml-4 align-items-center">
+    <div class="divInfoLog flex justify-content-between" *ngIf="homepageElementsView" [@clickButtonRegister]>
+        <div class="box infoDiv flex p-4 max-w-28rem ml-4 align-items-center" [@clickButtonRegister]>
             <p class="text-white">Condurre un'analisi sul consumo di carburante dei veicoli aziendali e 
                 individuare percorsi ottimizzati per ridurre i costi e minimizzare le soste, per mitigare l'impatto ambientale</p>
         </div>
         <div>
-            <div class="wrapper flex" *ngIf="!clickRegisterButton" [@clickButtonRegister]="'leave'">
+            <div class="wrapper flex" *ngIf="!clickRegisterButton" [@clickButtonRegister]>
                 <app-login (toggle)="clickRegisterButton = !clickRegisterButton"></app-login>
             </div>
-            <div class="wrapper flex" *ngIf="clickRegisterButton" [@clickButtonRegister]="'enter'">
+            <div class="wrapper flex" *ngIf="clickRegisterButton" [@clickButtonRegister]>
                 <app-register (toggle)="clickRegisterButton = !clickRegisterButton"></app-register>
             </div>
         </div>
