@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -6,4 +7,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  @Output() toggle = new EventEmitter<void>();
+
+  onToggle() {
+    this.toggle.emit();
+  }
 }

@@ -1,37 +1,23 @@
-<div>
-    <app-globe></app-globe>
-</div>
-<div class="body relative h-screen w-screen">
-    <div class="justify-content-center align-items-center flex p-4">
-        <div class="description justify-content-center p-3">
-            <h1 class="text-center text-white">Project's Title</h1>
-        </div>
-    </div>
-    <div class="divInfoLog flex justify-content-between">
-        <div class="box flex p-4 max-w-28rem ml-4">
-            <p class="text-white">Qui va la descrizione del sito web Qui va la descrizione del sito webQui va la
-                descrizione del sito webQui va la descrizione del sito webQui va la descrizione del sito web</p>
-        </div>
-        <div class="wrapper flex">
-            <div class="form-wrapper sign-in">
-                <form action="">
-                    <h2>Sign In</h2>
-                    <div class="input-group">
-                        <input type="text" required>
-                        <label for="">Username</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="password" required>
-                        <label for="">Password</label>
-                    </div>
-                    <div class="remember">
-                        <label><input type="checkbox"> Remember me</label>
-                    </div>
-                    <button type="submit">Sign In</button>
-                    <div class="signUpBtn-link">
-                        <p>Don't have an account?<a routerLink="register"> Sign Up</a></p>
-                    </div>
-                </form>
+<div class="wrapper flex">
+    <div class="form-wrapper sign-in">
+        <form action="">
+            <h2>Login</h2>
+            <div class="input-group">
+                <input type="text" required>
+                <label for="">Email</label>
             </div>
+            <div class="input-group">
+                <input type="password" required>
+                <label for="">Password</label>
+            </div>
+            <div class="remember">
+                <label><input type="checkbox"> Ricorda i miei dati</label>
+            </div>
+            <button type="submit">Accedi</button>
+            <div class="flex align-items-center">
+                <p>Non hai ancora un account?</p>
+                <p-button (click)="onToggle()" [text]="true" styleClass="text-white">Registrati</p-button>
+            </div>
+        </form>
     </div>
 </div>

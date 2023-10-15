@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimengModule } from 'src/primeng.module';
@@ -8,6 +10,7 @@ import { PrimengModule } from 'src/primeng.module';
 import { LoginComponent} from './login/login.component';
 import { GlobeComponent } from './globe/globe.component';
 import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -16,8 +19,10 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     GlobeComponent,
     RegisterComponent,
+    HomeComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     PrimengModule,

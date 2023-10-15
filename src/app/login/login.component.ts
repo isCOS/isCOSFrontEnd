@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild} from '@angular/core';
+import { Component} from '@angular/core';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -6,5 +7,11 @@ import { Component, ElementRef, ViewChild} from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  
+ 
+  @Output() toggle = new EventEmitter<void>();
+
+  onToggle() {
+    this.toggle.emit();
+  }
+
 }
