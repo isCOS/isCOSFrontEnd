@@ -15,14 +15,14 @@ import { trigger, state, style, animate, transition, query } from '@angular/anim
           height: '0px',
           transform: 'translateX(100%)'
         }),
-        animate('800ms ease-in', style({
+        animate('800ms ease-in-out', style({
           opacity: 1,
           height: '*',
           transform: 'translateX(0)'
         })),
       ]),
       transition(':leave', [
-        animate('800ms ease-out', style({
+        animate('300ms ease-in-out', style({
           opacity: 0,
           height: '0px',
           transform: 'translateX(100%)'
