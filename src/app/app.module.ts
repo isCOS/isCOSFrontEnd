@@ -6,14 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimengModule } from 'src/primeng.module';
-
+import { DialogModule } from 'primeng/dialog';
 import { LoginComponent} from './login/login.component';
 import { GlobeComponent } from './globe/globe.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
 import { GestioneComponent } from './gestione/gestione.component';
-import { TextBoxComponent } from './text-box/text-box.component';
 
 
 @NgModule({
@@ -25,13 +24,13 @@ import { TextBoxComponent } from './text-box/text-box.component';
     HomeComponent,
     ConfirmRegistrationComponent,
     GestioneComponent,
-    TextBoxComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     PrimengModule,
+    DialogModule
   ],
   providers: [
   ],

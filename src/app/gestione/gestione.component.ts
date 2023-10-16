@@ -9,11 +9,10 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
   ]
 })
 export class GestioneComponent {
-  
-  ngAfterViewInit(): void {
-   
-  }
-
+  visible: boolean = false;
+  showDialog() {
+        this.visible = true;
+    }
 
   constructor() { }
 
