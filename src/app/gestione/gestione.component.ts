@@ -9,10 +9,22 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
   ]
 })
 export class GestioneComponent {
-  visible: boolean = false;
-  showDialog() {
-        this.visible = true;
-    }
+
+  accountDialogVisible: boolean = false;
+  usageDialogVisible: boolean = false;
+  contactsDialogVisible: boolean = false;
+
+  showAccountDialog() {
+    this.accountDialogVisible = true;
+  }
+
+  showUsageDialog(){
+    this.usageDialogVisible = true;
+  }
+
+  showContactsDialog(){
+    this.contactsDialogVisible = true;
+  }
 
   constructor() { }
 
