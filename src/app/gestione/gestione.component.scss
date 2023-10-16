@@ -53,12 +53,12 @@ body {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 2px;
     background: #fff;
-    transition: .3s;
+    transition: width .3s;
 }
 
 .navbar a:hover::before {
-   width: 100%; 
+    width: 100%;
 }

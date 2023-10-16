@@ -15,14 +15,14 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
           height: '0px',
           transform: 'translateX(100%)'
         }),
-        animate('600ms ease-in-out', style({
+        animate('800ms ease-in-out', style({
           opacity: 1,
-          height: '*',
+          height: '0px',
           transform: 'translateX(0)'
         })),
       ]),
       transition(':leave', [
-        animate('300ms ease-in-out', style({
+        animate('200ms ease-in-out', style({
           opacity: 0,
           height: '0px',
           transform: 'translateX(100%)'
@@ -36,7 +36,7 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
           opacity: 0,
           transform: 'translateX(-100%)'
         }),
-        animate('600ms ease-in-out', style({
+        animate('800ms ease-in-out', style({
           opacity: 1,
           transform: 'translateX(0)'
         })),
