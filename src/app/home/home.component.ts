@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, query, keyframes } from '@angular/animations';
 
 
@@ -15,7 +15,7 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
           height: '0px',
           transform: 'translateX(100%)'
         }),
-        animate('800ms ease-in-out', style({
+        animate('600ms ease-in-out', style({
           opacity: 1,
           height: '*',
           transform: 'translateX(0)'
@@ -45,9 +45,19 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
     ]),
   ]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   clickRegisterButton: boolean = false;
   DescriptionLeave: boolean = true;
+
+  ngOnInit(): void {
+    
+  }
+
+  ngAfterViewInit(): void {
+    this.clickRegisterButton = !this.clickRegisterButton;
+    this.DescriptionLeave = !this.DescriptionLeave;
+  }
+
 
   constructor() { }
 
