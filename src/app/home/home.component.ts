@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { trigger, state, style, animate, transition, query } from '@angular/animations';
+import { trigger, state, style, animate, transition, query, keyframes } from '@angular/animations';
 
 
 
@@ -15,7 +15,7 @@ import { trigger, state, style, animate, transition, query } from '@angular/anim
           height: '0px',
           transform: 'translateX(100%)'
         }),
-        animate('800ms ease-in-out', style({
+        animate('600ms ease-in-out', style({
           opacity: 1,
           height: '*',
           transform: 'translateX(0)'
@@ -29,13 +29,26 @@ import { trigger, state, style, animate, transition, query } from '@angular/anim
         })),
       ]),
     ]),
+    
+    trigger('DescriptionLeave', [
+      transition(':enter', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100%)'
+        }),
+        animate('600ms ease-in-out', style({
+          opacity: 1,
+          transform: 'translateX(0)'
+        })),
+      ]),
+      
+    ]),
   ]
 })
 export class HomeComponent {
   clickRegisterButton: boolean = false;
-  homepageElementsView: boolean = true;
+  DescriptionLeave: boolean = true;
 
   constructor() { }
-
 
 }
