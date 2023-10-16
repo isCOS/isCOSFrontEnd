@@ -12,6 +12,7 @@ import { GlobeComponent } from './globe/globe.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
+import { GestioneComponent } from './gestione/gestione.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ConfirmRegistrationComponent } from './confirm-registration/confirm-reg
     RegisterComponent,
     HomeComponent,
     ConfirmRegistrationComponent,
+    GestioneComponent,
   ],
   imports: [
     BrowserAnimationsModule,

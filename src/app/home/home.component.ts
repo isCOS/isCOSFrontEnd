@@ -30,7 +30,7 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
       ]),
     ]),
     
-    trigger('DescriptionLeave', [
+    trigger('DescriptionEnter', [
       transition(':enter', [
         style({
           opacity: 0,
@@ -47,7 +47,7 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
 })
 export class HomeComponent implements OnInit {
   clickRegisterButton: boolean = false;
-  DescriptionLeave: boolean = true;
+  DescriptionEnter: boolean = true;
 
   ngOnInit(): void {
     
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.clickRegisterButton = !this.clickRegisterButton;
-    this.DescriptionLeave = !this.DescriptionLeave;
+    this.DescriptionEnter = !this.DescriptionEnter;
   }
 
 
