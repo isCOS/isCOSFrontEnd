@@ -13,6 +13,11 @@ export class GestioneComponent {
   accountDialogVisible: boolean = false;
   usageDialogVisible: boolean = false;
   contactsDialogVisible: boolean = false;
+  currentDialog: string = '';
+
+  openDialog(dialogName: string) {
+    this.currentDialog = dialogName;
+  }  
 
   showAccountDialog() {
     this.accountDialogVisible = true;
