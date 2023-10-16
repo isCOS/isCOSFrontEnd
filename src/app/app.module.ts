@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
 import { GestioneComponent } from './gestione/gestione.component';
+import { TextBoxComponent } from './text-box/text-box.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { GestioneComponent } from './gestione/gestione.component';
     HomeComponent,
     ConfirmRegistrationComponent,
     GestioneComponent,
+    TextBoxComponent,
   ],
   imports: [
     BrowserAnimationsModule,
