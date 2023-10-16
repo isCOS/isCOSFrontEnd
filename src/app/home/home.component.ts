@@ -15,7 +15,7 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
           height: '0px',
           transform: 'translateX(100%)'
         }),
-        animate('600ms ease-in-out', style({
+        animate('800ms ease-in-out', style({
           opacity: 1,
           height: '*',
           transform: 'translateX(0)'
