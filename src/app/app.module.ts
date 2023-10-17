@@ -11,7 +11,6 @@ import { LoginComponent} from './login/login.component';
 import { GlobeComponent } from './globe/globe.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
 import { GestioneComponent } from './gestione/gestione.component';
 
 
@@ -22,7 +21,6 @@ import { GestioneComponent } from './gestione/gestione.component';
     GlobeComponent,
     RegisterComponent,
     HomeComponent,
-    ConfirmRegistrationComponent,
     GestioneComponent,
   ],
   imports: [
