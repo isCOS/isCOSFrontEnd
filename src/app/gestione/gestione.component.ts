@@ -17,18 +17,24 @@ export class GestioneComponent {
 
   openDialog(dialogName: string) {
     this.currentDialog = dialogName;
-  }  
+  }
 
   showAccountDialog() {
-    this.accountDialogVisible = true;
+    this.accountDialogVisible = !this.accountDialogVisible;
   }
 
-  showUsageDialog(){
-    this.usageDialogVisible = true;
+  showUsageDialog() {
+    this.usageDialogVisible = !this.usageDialogVisible;
   }
 
-  showContactsDialog(){
-    this.contactsDialogVisible = true;
+  showContactsDialog() {
+    this.contactsDialogVisible = !this.contactsDialogVisible;
+  }
+
+  visible: boolean = false;
+
+  showDialog() {
+    this.visible = true;
   }
 
   constructor() { }
