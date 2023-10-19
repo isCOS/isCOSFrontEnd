@@ -6,6 +6,8 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 400px;
+    margin-right: 25px;
 }
 
 .wrapper {
@@ -25,6 +27,8 @@
 .form-wrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
+    position: relative;
     width: 100%;
     height: 100%;
     transition: transform 1s ease-in-out;
@@ -33,6 +37,7 @@
 }
 
 h2 {
+    margin-top: 10px;
     font-size: 30px;
     color: #FFF;
     text-align: center;
@@ -53,7 +58,7 @@ h2 {
 :host ::ng-deep { 
     .p-inputtext{
         background: transparent !important;
-        color: #FFF;
+        color: #FFF !important;
         border: none;
         width: 15rem;
     }
@@ -80,4 +85,5 @@ button {
     border: none;
     outline: none;
     margin-bottom: 15px;
+    margin-top: 15px;
 }

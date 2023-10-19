@@ -14,6 +14,7 @@ interface driveLicences {
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  showContinueButton = false;
   driveLicences: driveLicences[] | undefined;
   selectedDriveLicence: driveLicences| undefined;
   @Output() toggle = new EventEmitter<void>();
@@ -35,6 +36,11 @@ export class RegisterComponent implements OnInit {
       
   ];
   }
+
+  onContinue() {
+    this.showContinueButton = true;
+  }
+  
 
   onToggle() {
     this.toggle.emit();
