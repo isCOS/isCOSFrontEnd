@@ -2,18 +2,18 @@
     <app-globe></app-globe>
 </div>
 
-<div class="body relative h-screen w-screen">
-    <div class="justify-content-center align-items-center flex p-4">
+<div class="body relative w-screen ">
+    <div class="justify-content-center align-items-center flex p-4 h-4rem">
         <div class="description justify-content-center p-3">
             <h1 class="text-center text-white" (click)="DescriptionEnter = !DescriptionEnter">isCOS</h1>
         </div>
     </div>
-    <div class="divInfoLog flex justify-content-between">
+    <div class="flex justify-content-between">
         <div class="box infoDiv flex p-4 max-w-28rem ml-4 align-items-center" [@DescriptionEnter]>
             <p class="text-white">Condurre un'analisi sul consumo di carburante dei veicoli aziendali e 
                 individuare percorsi ottimizzati per ridurre i costi e minimizzare le soste, per mitigare l'impatto ambientale</p>
         </div>
-        <div>
+        <div class="">
             <div class="wrapper flex" *ngIf="!clickRegisterButton" [@clickButtonRegister]>
                 <app-login (toggle)="clickRegisterButton = !clickRegisterButton"></app-login>
             </div>

@@ -34,11 +34,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeng/resources/themes/arya-purple/theme.css",
-              "node_modules/mapbox-gl/dist/mapbox-gl.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -64,7 +60,9 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+              ]
             }
           },
           "defaultConfiguration": "production"

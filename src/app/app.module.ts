@@ -8,10 +8,14 @@ import { AppComponent } from './app.component';
 import { PrimengModule } from 'src/primeng.module';
 import { DialogModule } from 'primeng/dialog';
 import { LoginComponent} from './login/login.component';
-import { GlobeComponent } from './globe/globe.component';
+import { GlobeComponent } from './globes/globe/globe.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { GestioneComponent } from './gestione/gestione.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { WorkingGlobeComponent } from './globes/working-globe/working-globe.component';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,15 +26,19 @@ import { GestioneComponent } from './gestione/gestione.component';
     RegisterComponent,
     HomeComponent,
     GestioneComponent,
+    WorkingGlobeComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     PrimengModule,
-    DialogModule
+    ReactiveFormsModule,  
+    DialogModule,
+    HttpClientModule
   ],
   providers: [
+    HttpClient,
   ],
   bootstrap: [AppComponent],
   exports: [

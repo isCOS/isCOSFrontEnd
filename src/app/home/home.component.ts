@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, query, keyframes } from '@angular/animations';
-
+import { RegistrationService } from '../service/registration.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -29,7 +31,7 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
         })),
       ]),
     ]),
-    
+
     trigger('DescriptionEnter', [
       transition(':enter', [
         style({
@@ -41,7 +43,7 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
           transform: 'translateX(0)'
         })),
       ]),
-      
+
     ]),
   ]
 })
@@ -49,8 +51,11 @@ export class HomeComponent implements OnInit {
   clickRegisterButton: boolean = false;
   DescriptionEnter: boolean = true;
 
+  constructor(private http: HttpClient) {
+  }
+
   ngOnInit(): void {
-    
+    console.log(environment.apiUrl)
   }
 
   ngAfterViewInit(): void {
@@ -58,7 +63,5 @@ export class HomeComponent implements OnInit {
     this.DescriptionEnter = !this.DescriptionEnter;
   }
 
-
-  constructor() { }
 
 }
