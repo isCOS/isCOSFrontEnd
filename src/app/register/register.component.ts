@@ -35,12 +35,7 @@ export class RegisterComponent implements OnInit {
       { name: 'DE', code: 'de' }
       
   ];
-  }
-
-  onContinue() {
-    this.showContinueButton = true;
-  }
-  
+  } 
 
   onToggle() {
     this.toggle.emit();
@@ -83,5 +78,9 @@ export class RegisterComponent implements OnInit {
     console.log(this.form.value);
     this.form.reset();
   }
+
+  onContinue() {
+    this.showContinueButton = true;
+  } 
 
 }

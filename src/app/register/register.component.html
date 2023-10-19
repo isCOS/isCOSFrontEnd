@@ -2,29 +2,31 @@
     <div class="form-wrapper sign-out">
         <form [formGroup]="form" method="post" (ngSubmit)="sendRegistrationRequest()">
             <h2>Registrazione</h2>
-            <div class="card flex justify-content-center">
-                <span class="p-float-label input-group">
-                    <input pInputText id="username" [(ngModel)]="value" formControlName="name" />
-                    <label htmlFor="name">Username</label>
-                </span>
-            </div>
-            <div class="card flex justify-content-center mt-4">
-                <span class="p-float-label input-group">
-                    <input pInputText type="text" formControlName="lastName" required>
-                    <label htmlFor="lastname">Cognome</label>
-                </span>
-            </div>
-            <div class="card flex justify-content-center mt-4">
-                <span class="p-float-label input-group">
-                    <input pInputText type="email" formControlName="email" required>
-                    <label htmlFor="email">Email</label>
-                </span>
-            </div>
-            <div class="card flex justify-content-center mt-4 class=calendar" [formGroup]="form">
-                <span class="p-float-label input-group">
-                    <p-calendar formControlName="date" dateFormat="dd/mm/yy"></p-calendar>
-                    <label htmlFor="date">Data di nascita</label>
-                </span>
+            <div *ngIf="!showContinueButton">
+                <div class="card flex justify-content-center">
+                    <span class="p-float-label input-group">
+                        <input pInputText id="username" [(ngModel)]="value" formControlName="name" />
+                        <label htmlFor="name">Username</label>
+                    </span>
+                </div>
+                <div class="card flex justify-content-center mt-4">
+                    <span class="p-float-label input-group">
+                        <input pInputText type="text" formControlName="lastName" required>
+                        <label htmlFor="lastname">Cognome</label>
+                    </span>
+                </div>
+                <div class="card flex justify-content-center mt-4">
+                    <span class="p-float-label input-group">
+                        <input pInputText type="email" formControlName="email" required>
+                        <label htmlFor="email">Email</label>
+                    </span>
+                </div>
+                <div class="card flex justify-content-center mt-4 class=calendar" [formGroup]="form">
+                    <span class="p-float-label input-group">
+                        <p-calendar formControlName="date" dateFormat="dd/mm/yy"></p-calendar>
+                        <label htmlFor="date">Data di nascita</label>
+                    </span>
+                </div>
             </div>
             <div *ngIf="showContinueButton">
                 <div class="card flex justify-content-center mt-4">
@@ -50,7 +52,8 @@
                     </span>
                 </div>
             </div>
-            <button *ngIf="showContinueButton" type="button" (click)="onContinue()">Continua</button>
+            <button *ngIf="!showContinueButton" type="button" (click)="onContinue()">Continua</button>
+            <button *ngIf="showContinueButton" type="button" (click)="onContinue()" (click)="onToggle()">Registrati</button>
             <div class="signUp-link flex align-items-center">
                 <p>Hai già un account?</p>
                 <p-button (click)="onToggle()" [text]="true" styleClass="text-white"
