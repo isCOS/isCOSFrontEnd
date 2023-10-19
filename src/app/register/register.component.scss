@@ -53,6 +53,17 @@ h2 {
 :host ::ng-deep { 
     .p-inputtext{
         background: transparent !important;
+        color: #FFF;
+        border: none;
+        width: 15rem;
+    }
+    .p-dropdown {
+        background: transparent !important;
+        border: none;
+        width: 15rem;
+    }
+    .p-element {
+        background: transparent !important;
         border: none;
     }
 }
