@@ -42,36 +42,27 @@ h2 {
     text-align: center;
 }
 
-.input-group {
-    border-bottom: 1px solid #fff;
-}
+// .input-group {
+//     border-bottom: 1px solid #fff;
+// }
 
 .input-group label {
     color: #FFF
-}
-
-.input-group input {
-    color: #fff;
-    background: transparent;
-    border: none;
-    outline: none;
 }
 
 :host ::ng-deep { 
     .p-inputtext{
         background: transparent !important;
         color: #FFF !important;
-        border: none;
         width: 15rem;
     }
     .p-dropdown {
         background: transparent !important;
-        border: none;
+        border-bottom: 1px solid #fff;
         width: 15rem;
     }
     .p-element {
         background: transparent !important;
-        border: none;
     }
 }
 
@@ -86,6 +77,9 @@ button {
     border-radius: 30px;
     border: none;
     outline: none;
-    margin-bottom: 15px;
-    margin-top: 15px;
+}
+button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
 }

@@ -48,18 +48,18 @@ import { environment } from 'src/environments/environment';
   ]
 })
 export class HomeComponent implements OnInit {
-  clickRegisterButton: boolean = false;
+  clickRegisterButton: boolean = true;
   DescriptionEnter: boolean = true;
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
+    this.clickRegisterButton = true;
     console.log(environment.apiUrl)
   }
 
   ngAfterViewInit(): void {
-    this.clickRegisterButton = !this.clickRegisterButton;
     this.DescriptionEnter = !this.DescriptionEnter;
   }
 

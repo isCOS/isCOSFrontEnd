@@ -1,27 +1,27 @@
-<div class="box flex-wrap pt-2 pb-2 pl-3 pr-3">
+<div class="box flex-wrap pt-2 pb-2 pl-3 pr-3 overflow-hidden">
     <div class="form-wrapper sign-out">
-        <form [formGroup]="form" method="post" (ngSubmit)="sendRegistrationRequest()">
+        <form [formGroup]="form" method="post" (ngSubmit)="proceedRegistration()">
             <h2>Registrazione</h2>
             <div *ngIf="!showContinueButton">
                 <div class="card flex justify-content-center">
                     <span class="p-float-label input-group">
-                        <input pInputText id="username" [(ngModel)]="value" formControlName="name" />
-                        <label htmlFor="name">Username</label>
+                        <input pInputText id="username" formControlName="name" />
+                        <label htmlFor="name">Nome</label>
                     </span>
                 </div>
                 <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <input pInputText type="text" formControlName="lastName" required>
+                        <input pInputText type="text" formControlName="lastName">
                         <label htmlFor="lastname">Cognome</label>
                     </span>
                 </div>
                 <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <input pInputText type="email" formControlName="email" required>
+                        <input pInputText formControlName="email">
                         <label htmlFor="email">Email</label>
                     </span>
                 </div>
-                <div class="card flex justify-content-center mt-4 class=calendar" [formGroup]="form">
+                <div class="card flex mt-4">
                     <span class="p-float-label input-group">
                         <p-calendar formControlName="date" dateFormat="dd/mm/yy"></p-calendar>
                         <label htmlFor="date">Data di nascita</label>
@@ -30,30 +30,45 @@
             </div>
             <div *ngIf="showContinueButton">
                 <div class="card flex justify-content-center mt-4">
-                    <p-dropdown formControlName="driveLicenses" [(ngModel)]="selectedDriveLicence"
-                        [options]="driveLicences" optionLabel="name" placeholder="Tipo patente"></p-dropdown>
+                    <p-dropdown formControlName="selectedDriveLicence" [options]="driveLicences" optionLabel="name"
+                        placeholder="Tipo patente"></p-dropdown>
                 </div>
-                <div class="card flex justify-content-center mt-4" [formGroup]="form">
+                <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <p-calendar formControlName="date" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar formControlName="expiringLicenseDate" dateFormat="dd/mm/yy"></p-calendar>
                         <label htmlFor="date">Data scadenza patente</label>
                     </span>
                 </div>
                 <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <input pInputText type="text" formControlName="ragioneSociale" required>
+                        <input pInputText type="text" formControlName="ragioneSociale">
                         <label htmlFor="ragioneSociale">Ragione Sociale</label>
                     </span>
                 </div>
                 <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <input pInputText type="password" formControlName="password" required>
+                        <input pInputText type="password" formControlName="password">
                         <label htmlFor="password">Password</label>
                     </span>
                 </div>
             </div>
-            <button *ngIf="!showContinueButton" type="button" (click)="onContinue()">Continua</button>
-            <button *ngIf="showContinueButton" type="button" (click)="onContinue()" (click)="onToggle()">Registrati</button>
+            <button *ngIf="!showContinueButton" type="button" class="mt-3" (click)="onContinue()">Continua</button>
+            <button *ngIf="showContinueButton" type="button" class="mt-3" (click)="onContinue()">Indietro</button>
+            <button *ngIf="showContinueButton" type="button" [disabled]="!form.valid"
+                (click)="onToggle(); proceedRegistration()" class="mt-3">Registrati</button>
+            <div *ngIf="showContinueButton">
+                <div *ngIf="form.invalid">
+                    <div>
+                        <p class="text-danger text-center text-red-500">Compila tutti i campi</p>
+                    </div>
+                    <div *ngFor="let formControl in form">
+                        <div *ngIf="isInvalid(formControl.formControlName)">
+                            <p class="text-danger text-center text-red-500">Compila il campo
+                                {{formControl.formControlName}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="signUp-link flex align-items-center">
                 <p>Hai già un account?</p>
                 <p-button (click)="onToggle()" [text]="true" styleClass="text-white"
