@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   @Output() toggle = new EventEmitter<void>();
   emailRegex: any = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   value: string | undefined;
+
+  ngOnInit(): void {
+  }
 
   onToggle() {
     this.toggle.emit();

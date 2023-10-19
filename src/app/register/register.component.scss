@@ -43,23 +43,18 @@ h2 {
 }
 
 .input-group input {
-    width: 320px;
-    height: 25px;
-    font-size: 16px;
+    
     color: #fff;
     background: transparent;
     border: none;
     outline: none;
 }
 
-.calendar input{
-    width: 320px;
-    height: 25px;
-    font-size: 16px;
-    color: #fff;
-    background: transparent;
-    border: none;
-    outline: none;
+:host ::ng-deep { 
+    .p-inputtext{
+        background: transparent !important;
+        border: none;
+    }
 }
 
 button {
