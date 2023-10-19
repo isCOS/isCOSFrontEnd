@@ -47,19 +47,11 @@ h2 {
 }
 
 .input-group {
-
-    border-bottom: 2px solid #fff;
+    border-bottom: 1px solid #fff;
 }
 
 .input-group label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 16px;
     color: #fff;
-    pointer-events: none;
-    transition: .5s;
 }
 
 .input-group input {
