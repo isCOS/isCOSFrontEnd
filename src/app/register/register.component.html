@@ -1,26 +1,65 @@
-<div class="wrapper">
-    <div class="form-wrapper sign-in">
-        <form action="">
+<div class="box flex-wrap pt-2 pb-2 pl-3 pr-3">
+    <div class="form-wrapper sign-out">
+        <form [formGroup]="form" method="post" (ngSubmit)="sendRegistrationRequest()">
             <h2>Registrazione</h2>
-            <div class="input-group">
-                <input type="text" required>
-                <label for="">Ragione sociale azienda</label>
+            <div class="card flex justify-content-center">
+                <span class="p-float-label input-group">
+                    <input pInputText id="username" [(ngModel)]="value" formControlName="name" />
+                    <label htmlFor="name">Username</label>
+                </span>
             </div>
-            <div class="input-group">
-                <input type="email" required>
-                <label for="">Email</label>
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group">
+                    <input pInputText type="text" formControlName="lastName" required>
+                    <label htmlFor="lastname">Cognome</label>
+                </span>
             </div>
-            <div class="input-group">
-                <input type="password" required>
-                <label for="">Password</label>
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group">
+                    <input pInputText type="email" formControlName="email" required>
+                    <label htmlFor="email">Email</label>
+                </span>
             </div>
-            <div class="remember">
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group">
+                    <p-calendar formControlName="date" class="calendar"></p-calendar>
+                    <label htmlFor="date">Data di nascita</label>
+                </span>
+            </div>
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group ">
+                    <input pInputText type="text" formControlName="driveLicense" required>
+                    <label htmlFor="driveLicence">Tipo patente</label>
+                </span>
+            </div>
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group">
+                    <input pInputText type="text" formControlName="expiringLicenseDate" required>
+                    <label htmlFor="expiringLicenseDate">Data scadenza patente</label>
+                </span>
+            </div>
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group">
+                    <input pInputText type="text" formControlName="ragioneSociale" required>
+                    <label htmlFor="ragioneSociale">Ragione Sociale</label>
+                </span>
+            </div>
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group">
+                    <input pInputText type="password" formControlName="password" required>
+                    <label htmlFor="password">Password</label>
+                </span>
+            </div>
+            <div class="remember mt-3">
                 <label><input type="checkbox"> Accetto i termini e le condizioni</label>
             </div>
-            <button type="submit">Registrati</button>
-            <div class="signInBtn-link flex align-items-center">
+            <div class="mt-3">
+                <p-button class="border-round-2xl" type="submit" [disabled]="!form.valid">Registrati</p-button>
+            </div>
+            <div class="signUp-link flex align-items-center">
                 <p>Hai già un account?</p>
-                <p-button (click)="onToggle()" [text]="true" styleClass="text-white">Accedi</p-button>
+                <p-button (click)="onToggle()" [text]="true" label="Accedi"
+                    class="tableButton cursor-pointer"></p-button>
             </div>
         </form>
     </div>
