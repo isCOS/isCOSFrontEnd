@@ -2,13 +2,17 @@
     <div class="form-wrapper sign-in" *ngIf="showBox" [@leaveRight]>
         <form action="">
             <h2>Login</h2>
-            <div class="input-group">
-                <input type="text" required>
-                <label for="">Email</label>
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group">
+                    <input pInputText type="email" formControlName="email" required>
+                    <label htmlFor="email">Email</label>
+                </span>
             </div>
-            <div class="input-group">
-                <input type="password" required>
-                <label for="">Password</label>
+            <div class="card flex justify-content-center mt-4">
+                <span class="p-float-label input-group">
+                    <input pInputText type="password" formControlName="password" required>
+                    <label htmlFor="password">Password</label>
+                </span>
             </div>
             <button type="submit">Accedi</button>
             <div class="flex align-items-center">

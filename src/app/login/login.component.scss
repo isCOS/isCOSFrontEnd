@@ -32,7 +32,6 @@
     margin-left: 10px;
 }
 
-
 .wrapper .form-wrapper.sign-up {
     position: absolute;
     top: 0;
@@ -45,8 +44,7 @@ h2 {
 }
 
 .input-group {
-    position: relative;
-    margin: 30px;
+
     border-bottom: 2px solid #fff;
 }
 
@@ -62,9 +60,6 @@ h2 {
 }
 
 .input-group input {
-    width: 320px;
-    height: 40px;
-    font-size: 16px;
     color: #fff;
     background: transparent;
     border: none;
@@ -101,6 +96,7 @@ button {
     border: none;
     outline: none;
     margin-bottom: 15px;
+    margin-top: 30px;
 }
 
 .signUp-link {
@@ -123,6 +119,4 @@ button {
 .signUp-link p a:hover {
     text-decoration: underline;
 }
-
-
 
