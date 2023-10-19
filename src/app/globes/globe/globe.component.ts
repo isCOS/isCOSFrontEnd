@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 
 @Component({

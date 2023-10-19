@@ -8,25 +8,9 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-}
-
 .wrapper {
     position: relative;
+    overflow: hidden;
     width: 400px;
     height: 500px;
     background: rgba(255, 255, 255, .2);
