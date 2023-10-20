@@ -46,10 +46,6 @@ h2 {
     text-align: center;
 }
 
-.input-group {
-    border-bottom: 1px solid #fff;
-}
-
 .input-group label {
     color: #fff;
 }
@@ -57,13 +53,7 @@ h2 {
 .input-group input {
     color: #fff;
     background: transparent;
-    border: none;
     outline: none;    
-}
-
-.input-group input:focus~label,
-.input-group input:valid~label {
-    top: -5px;
 }
 
 .remember {
@@ -78,6 +68,7 @@ h2 {
 .remember label input {
     accent-color: #8b6fa4;
 }
+
 
 button {
     position: relative;
