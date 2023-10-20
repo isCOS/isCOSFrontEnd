@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit {
   onToggle() {
     this.toggle.emit();
   }
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private datePipe: DatePipe) { }
   //Build the form
   form = this.fb.group({
     name: new FormControl(
@@ -65,15 +66,29 @@ export class RegisterComponent implements OnInit {
     ),
     date: new FormControl<Date | null>(null, Validators.required),
     selectedDriveLicence: new FormControl<driveLicences | null>(null),
-    expiringLicenseDate: new FormControl('', Validators.required),
+    expiringLicenseDate: new FormControl<Date | null>(null, Validators.required),
     ragioneSociale: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     //Set date to the current date
   });
 
   proceedRegistration() {
-    console.log(this.form.value);
-    this.form.reset();
+    // console.log(this.form.value);
+    //this.form.reset();
+    const tempDate = new Date(this.form.value.date!);
+    const tempDate2 = new Date(this.form.value.expiringLicenseDate!);
+    tempDate.setTime(tempDate.getTime() - tempDate.getTimezoneOffset() * 60 * 1000);
+    tempDate2.setTime(tempDate2.getTime() - tempDate2.getTimezoneOffset() * 60 * 1000);
+    tempDate.getTimezoneOffset();
+    tempDate2.getTimezoneOffset();
+    this.form.patchValue({ date: tempDate });
+    this.form.patchValue({ expiringLicenseDate: tempDate2 });
+    const toSend = {
+      ...this.form.value,
+      date: this.datePipe.transform(this.form.value.date, 'dd-MM-yyyy'),
+      expiringLicenseDate: this.datePipe.transform(this.form.value.expiringLicenseDate, 'dd-MM-yyyy')
+    };
+    console.log(toSend);
   }
 
   onContinue() {

@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { WorkingGlobeComponent } from './globes/working-globe/working-globe.component';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     HttpClient,
+    DatePipe
   ],
   bootstrap: [AppComponent],
   exports: [

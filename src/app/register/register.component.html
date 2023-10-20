@@ -30,7 +30,7 @@
             </div>
             <div *ngIf="showContinueButton">
                 <div class="card flex justify-content-center mt-4">
-                    <p-dropdown formControlName="selectedDriveLicence" [options]="driveLicences" optionLabel="name"
+                    <p-dropdown formControlName="selectedDriveLicence"  [options]="driveLicences" optionValue="name" optionLabel="name"
                         placeholder="Tipo patente"></p-dropdown>
                 </div>
                 <div class="card flex justify-content-center mt-4">
@@ -60,12 +60,6 @@
                 <div *ngIf="form.invalid">
                     <div>
                         <p class="text-danger text-center text-red-500">Compila tutti i campi</p>
-                    </div>
-                    <div *ngFor="let formControl in form">
-                        <div *ngIf="isInvalid(formControl.formControlName)">
-                            <p class="text-danger text-center text-red-500">Compila il campo
-                                {{formControl.formControlName}}</p>
-                        </div>
                     </div>
                 </div>
             </div>
