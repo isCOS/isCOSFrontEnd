@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
+import { RegistrationService } from '../service/registration.service';
 
 
 interface driveLicences {
@@ -38,7 +39,7 @@ export class RegisterComponent implements OnInit {
   onToggle() {
     this.toggle.emit();
   }
-  constructor(private fb: FormBuilder, private datePipe: DatePipe) { }
+  constructor(private fb: FormBuilder, private datePipe: DatePipe, private regSer: RegistrationService) { }
   //Build the form
   form = this.fb.group({
     name: new FormControl(
@@ -57,7 +58,7 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(20),
       ])
     ),
-    email: new FormControl(
+    id: new FormControl(
       '',
       Validators.compose([
         Validators.required,
@@ -73,7 +74,6 @@ export class RegisterComponent implements OnInit {
   });
 
   proceedRegistration() {
-    // console.log(this.form.value);
     //this.form.reset();
     const tempDate = new Date(this.form.value.date!);
     const tempDate2 = new Date(this.form.value.expiringLicenseDate!);
@@ -88,6 +88,9 @@ export class RegisterComponent implements OnInit {
       date: this.datePipe.transform(this.form.value.date, 'dd-MM-yyyy'),
       expiringLicenseDate: this.datePipe.transform(this.form.value.expiringLicenseDate, 'dd-MM-yyyy')
     };
+    this.regSer.proceedRegistration(toSend).subscribe((data: any) => {
+      console.log(data);
+    });
     console.log(toSend);
   }
 

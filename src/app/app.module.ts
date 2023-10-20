@@ -17,6 +17,7 @@ import { WorkingGlobeComponent } from './globes/working-globe/working-globe.comp
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { ManagerAccountComponent } from './managementSystem/manager-account/manager-account.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DatePipe } from '@angular/common';
     RegisterComponent,
     HomeComponent,
     GestioneComponent,
-    WorkingGlobeComponent
+    WorkingGlobeComponent,
+    ManagerAccountComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -7,11 +7,16 @@ import { environment } from '../../environments/environment';
 })
 export class RegistrationService {
 
-  registrationUrl = environment.apiUrl + '/User/AddPersona';
+  // registrationUrl = environment.apiUrl + '/User/AddPersona';
+  apiurl = 'http://localhost:3000/accounts'
   constructor(private http: HttpClient) {}
 
-  sendRegistrationRequest(user:any) {
-    return this.http.post<any>(this.registrationUrl, user);
+  getUserByEmail(email:any) {
+    return this.http.post<any>(this.apiurl, email);
+  }
+
+  proceedRegistration(data: any) {
+    return this.http.post(this.apiurl, data);
   }
 
 }

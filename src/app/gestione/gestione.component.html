@@ -11,24 +11,17 @@
                     class="active cursor-pointer">Account</a>
                 <p-dialog header="Gestione Account" [showHeader]="true" [resizable]='false' [draggable]='false'
                     [(visible)]="accountDialogVisible" [style]="{width: '50vw'}">
-                    <p class="pt-5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.
-                    </p>
+                    <app-manager-account></app-manager-account>
                 </p-dialog>
-                <a (click)="showUsageDialog(); accountDialogVisible = false; contactsDialogVisible = false" label="Show"
-                    class="active cursor-pointer">Come usarlo</a>
+                <a (click)="showVeicleDialog(); accountDialogVisible = false; contactsDialogVisible = false; usageDialogVisible =false" label="Show"
+                    class="active cursor-pointer">Veicoli</a>
                 <p-dialog header="Veicoli" [showHeader]="true" [resizable]='false' [draggable]='false'
-                    [(visible)]="usageDialogVisible" [style]="{width: '50vw'}">
+                    [(visible)]="veicleDialogVisible" [style]="{width: '50vw'}">
                     <p class="pt-5">
                         testo da inserire
                     </p>
                 </p-dialog>
-                <a (click)="showUsageDialog(); accountDialogVisible = false; contactsDialogVisible = false" label="Show"
+                <a (click)="showUsageDialog(); veicleDialogVisible = false; accountDialogVisible = false; contactsDialogVisible = false" label="Show"
                     class="active cursor-pointer">Come usarlo</a>
                 <p-dialog header="Informazioni sull'utilizzo" [showHeader]="true" [resizable]='false'
                     [draggable]='false' [(visible)]="usageDialogVisible" [style]="{width: '50vw'}">
@@ -36,7 +29,7 @@
                         testo da inserire
                     </p>
                 </p-dialog>
-                <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false" label="Show"
+                <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; veicleDialogVisible=false;" label="Show"
                     class="active cursor-pointer">Contatti</a>
                 <p-dialog header="Contatti" [showHeader]="true" [resizable]='false' [draggable]='false'
                     [(visible)]="contactsDialogVisible" [style]="{width: '60vw'}">
