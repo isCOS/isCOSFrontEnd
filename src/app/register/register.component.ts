@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.driveLicences = [
-      { name: 'A' },
       { name: 'B' },
       { name: 'C' },
       { name: 'C1' },
