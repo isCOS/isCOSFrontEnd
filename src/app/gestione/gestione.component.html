@@ -8,7 +8,7 @@
             <a href="#" class="logo">isCOS</a>
             <nav class="navbar">
                 <a (click)="showAccountDialog(); usageDialogVisible = false; contactsDialogVisible = false" label="Show" class="active cursor-pointer">Account</a>
-                <p-dialog header="Gestione Account" [showHeader]="false" [resizable]='false' [draggable]='false'
+                <p-dialog header="Gestione Account" [showHeader]="true" [resizable]='false' [draggable]='false'
                     [(visible)]="accountDialogVisible" [style]="{width: '50vw'}">
                     <p class="pt-5">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -20,14 +20,21 @@
                     </p>
                 </p-dialog>
                 <a (click)="showUsageDialog(); accountDialogVisible = false; contactsDialogVisible = false" label="Show" class="active cursor-pointer">Come usarlo</a>
-                <p-dialog header="Informazioni sull'utilizzo" [showHeader]="false" [resizable]='false' [draggable]='false'
+                <p-dialog header="Veicoli" [showHeader]="true" [resizable]='false' [draggable]='false'
+                    [(visible)]="usageDialogVisible" [style]="{width: '50vw'}">
+                    <p class="pt-5">
+                        testo da inserire
+                    </p>
+                </p-dialog>
+                <a (click)="showUsageDialog(); accountDialogVisible = false; contactsDialogVisible = false" label="Show" class="active cursor-pointer">Come usarlo</a>
+                <p-dialog header="Informazioni sull'utilizzo" [showHeader]="true" [resizable]='false' [draggable]='false'
                     [(visible)]="usageDialogVisible" [style]="{width: '50vw'}">
                     <p class="pt-5">
                         testo da inserire
                     </p>
                 </p-dialog>
                 <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false" label="Show" class="active cursor-pointer">Contatti</a>
-                <p-dialog header="Contatti" [showHeader]="false" [resizable]='false' [draggable]='false'
+                <p-dialog header="Contatti" [showHeader]="true" [resizable]='false' [draggable]='false'
                     [(visible)]="contactsDialogVisible" [style]="{width: '50vw'}">
                     <p class="pt-5">
                         testo da inserire

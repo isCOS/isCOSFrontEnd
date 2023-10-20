@@ -85,6 +85,12 @@ button {
     margin-top: 30px;
 }
 
+button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
 .signUp-link {
     font-size: 14px;
     text-align: center;
