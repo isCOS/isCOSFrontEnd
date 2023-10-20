@@ -9,9 +9,6 @@
 }
 
 :host ::ng-deep { 
-    .p-dialog { 
-        width: 55vw !important; 
-    } 
     .p-dialog-header { 
         background-color: rgba(255, 255, 255, 0.9)!important; 
         color: black !important; 
@@ -102,3 +99,4 @@ body {
 .navbar a:hover::before {
     width: 100%;
 }
+
