@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { RegistrationService } from '../service/registration.service';
+import { MessageService } from 'primeng/api';
 
 
 interface driveLicences {
@@ -39,7 +40,7 @@ export class RegisterComponent implements OnInit {
   onToggle() {
     this.toggle.emit();
   }
-  constructor(private fb: FormBuilder, private datePipe: DatePipe, private regSer: RegistrationService) { }
+  constructor(private fb: FormBuilder, private datePipe: DatePipe, private regSer: RegistrationService, private messageService: MessageService) { }
   //Build the form
   form = this.fb.group({
     name: new FormControl(
@@ -91,6 +92,7 @@ export class RegisterComponent implements OnInit {
     this.regSer.proceedRegistration(toSend).subscribe((data: any) => {
       console.log(data);
     });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Registration completed' });
     console.log(toSend);
   }
 

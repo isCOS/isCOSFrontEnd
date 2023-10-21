@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { WorkingGlobeComponent } from './globes/working-globe/working-globe.component';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { ManagerAccountComponent } from './managementSystem/manager-account/manager-account.component';
 
@@ -42,7 +43,8 @@ import { ManagerAccountComponent } from './managementSystem/manager-account/mana
   ],
   providers: [
     HttpClient,
-    DatePipe
+    DatePipe,
+    MessageService
   ],
   bootstrap: [AppComponent],
   exports: [
