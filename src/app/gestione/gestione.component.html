@@ -7,20 +7,24 @@
         <header class="header">
             <a href="#" class="logo">isCOS</a>
             <nav class="navbar">
-                <a (click)="showAccountDialog(); usageDialogVisible = false; contactsDialogVisible = false" label="Show"
+                <a (click)="showAccountDialog(); usageDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false" label="Show"
                     class="active cursor-pointer">Account</a>
                 <p-dialog header="Gestione Account" [showHeader]="true" [resizable]='false' [draggable]='false'
                     [(visible)]="accountDialogVisible" [style]="{width: '50vw'}">
                     <app-manager-account></app-manager-account>
                 </p-dialog>
+                <a (click)="showVehiclesDialog(); accountDialogVisible = false; contactsDialogVisible = false; usageDialogVisible = false" label="Show"
+                    class="active cursor-pointer">Veicoli</a>
                 <a (click)="showVeicleDialog(); accountDialogVisible = false; contactsDialogVisible = false; usageDialogVisible =false" label="Show"
                     class="active cursor-pointer">Veicoli</a>
                 <p-dialog header="Veicoli" [showHeader]="true" [resizable]='false' [draggable]='false'
+                    [(visible)]="vehiclesDialogVisible" [style]="{width: '50vw'}">
                     [(visible)]="veicleDialogVisible" [style]="{width: '50vw'}">
                     <p class="pt-5">
                         testo da inserire
                     </p>
                 </p-dialog>
+                <a (click)="showUsageDialog(); accountDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false" label="Show"
                 <a (click)="showUsageDialog(); veicleDialogVisible = false; accountDialogVisible = false; contactsDialogVisible = false" label="Show"
                     class="active cursor-pointer">Come usarlo</a>
                 <p-dialog header="Informazioni sull'utilizzo" [showHeader]="true" [resizable]='false'
@@ -29,20 +33,41 @@
                         testo da inserire
                     </p>
                 </p-dialog>
+                <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; vehiclesDialogVisible = false" label="Show"
                 <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; veicleDialogVisible=false;" label="Show"
                     class="active cursor-pointer">Contatti</a>
                 <p-dialog header="Contatti" [showHeader]="true" [resizable]='false' [draggable]='false'
                     [(visible)]="contactsDialogVisible" [style]="{width: '60vw'}">
                     <div class="flex justify-content-around">
                         <div class="flex">
-                            <img src="/assets/gabriele.png" alt="Image" width="230" class="border-round-lg">
+                            <div class="caption">
+                                <img src="/assets/gabriele.png" alt="" width="230" class="border-round-lg" />
+                                <span>
+                                    <strong>Gabriele Santangelo</strong>
+                                </span>
+                            </div>
                         </div>
                         <div class="flex">
-                            <img src="/assets/umberto.png" alt="Image" width="230" class="border-round-lg">
+                            <div class="caption">
+                                <img src="/assets/umberto.png" alt="" width="230" class="border-round-lg" />
+                                <span>
+                                    <strong>Umberto Francesco Carolini</strong>
+                                </span>
+                            </div>
                         </div>
                         <div class="flex">
-                            <img src="/assets/flavio.png" alt="Image" width="200" class="border-round-lg">
+                            <div class="caption">
+                                <img src="/assets/flavio.png" alt="" width="200" class="border-round-lg" />
+                                <span>
+                                    <strong>Flavio Olivieri</strong>
+                                </span>
+                            </div>
                         </div>
+                        
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <p-avatar image="/assets/github.png" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+                        <a href="https://github.com/GabrieleSantangelo/isCOS.git" color="black">https://github.com/GabrieleSantangelo/isCOS.git</a>
                     </div>
                 </p-dialog>
             </nav>

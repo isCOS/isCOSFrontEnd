@@ -11,6 +11,7 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
 export class GestioneComponent {
 
   accountDialogVisible: boolean = false;
+  vehiclesDialogVisible: boolean = false;
   usageDialogVisible: boolean = false;
   contactsDialogVisible: boolean = false;
   veicleDialogVisible: boolean = false;
@@ -27,6 +28,10 @@ export class GestioneComponent {
 
   showAccountDialog() {
     this.accountDialogVisible = !this.accountDialogVisible;
+  }
+
+  showVehiclesDialog() {
+    this.vehiclesDialogVisible = !this.vehiclesDialogVisible;
   }
 
   showUsageDialog() {
