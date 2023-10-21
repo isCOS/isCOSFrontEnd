@@ -25,8 +25,21 @@
                     class="active cursor-pointer">Come usarlo</a>
                 <p-dialog header="Informazioni sull'utilizzo" [showHeader]="true" [resizable]='false'
                     [draggable]='false' [(visible)]="usageDialogVisible" [style]="{width: '50vw'}">
-                    <p class="pt-5">
-                        testo da inserire
+                    <p class="pt-5" align="justify">
+                        Rapida panoramica del sito: <br>
+                        All'interno della navbar ci saranno una serie di opzioni: la sezione "Account" sarà predisposta per gestire tutte le informazioni 
+                        relative agli utenti, la sezione "Veicoli" invece sarà il fulcro del sito, in quanto qui sarà possibile inserire i veicoli 
+                        aziendali, visualizzarne il proprietario e alcune informazioni, sostanzialmente gestirli, infine nella sezione "Contatti" 
+                        saranno presenti i membri del team che hanno contribuito a realizzare il progetto e il link Github della repository.
+                    </p>
+                    <p class="pt-5" align="justify">
+                        Il modo di utilizzare il sito è molto semplice: <br>
+                        Dopo aver fatto il login, si verrà reindirizzati alla pagina principale, dove sarà possibile visualizzare la mappa del mondo 
+                        (il puntino blu indica la posizione corrente dell'utente). Una volta inseriti i vari veicoli nell'apposita sezione della navbar,
+                        l'utente potrà premere il tasto "Naviga", per essere portato alla pagina del navigatore, dove sarà possibile scegliere il punto 
+                        iniziale e il punto finale del percorso. Il sito in automatico calcolerà il percorso più opportuno in base a diversi fattori, come il
+                        consumo e il costo del carburante, il tempo di percorrenza, il numero di soste e aiuterà l'azienda a mitigare l'impatto ambientale e a 
+                        risparmiare.
                     </p>
                 </p-dialog>
                 <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; vehiclesDialogVisible = false" label="Show"
@@ -67,5 +80,6 @@
                 </p-dialog>
             </nav>
         </header>
+        <button type="button" (click)="onToggle()">Naviga</button>
     </div>
 </div>

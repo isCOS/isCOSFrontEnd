@@ -142,3 +142,19 @@ body {
     width: 100%;
 }
 
+button {
+    position: relative;
+    width: 20%;
+    height: 40px;
+    background: linear-gradient(to right, #8b6fa4, #795796, #784f9b);
+    font-size: 16px;
+    color: #FFF;
+    cursor: pointer;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    margin-bottom: 15px;
+    margin-top: 630px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);;
+}
+

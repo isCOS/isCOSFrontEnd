@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, query, keyframes } from '@angular/animations';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-gestione',
@@ -10,12 +11,20 @@ import { trigger, state, style, animate, transition, query, keyframes } from '@a
 })
 export class GestioneComponent {
 
+  showBox: boolean = true;
   accountDialogVisible: boolean = false;
   vehiclesDialogVisible: boolean = false;
   usageDialogVisible: boolean = false;
   contactsDialogVisible: boolean = false;
   veicleDialogVisible: boolean = false;
   currentDialog: string = '';
+
+  @Output() toggle = new EventEmitter<void>();
+
+  onToggle() {
+    this.toggle.emit();
+    this.showBox = !this.showBox;
+  }
 
   openDialog(dialogName: string) {
     this.currentDialog = dialogName;
