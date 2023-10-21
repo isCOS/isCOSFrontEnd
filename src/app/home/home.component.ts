@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, query, keyframes } from '@angular/animations';
 import { RegistrationService } from '../service/registration.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -56,7 +55,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.clickRegisterButton = true;
-    console.log(environment.apiUrl)
   }
 
   ngAfterViewInit(): void {

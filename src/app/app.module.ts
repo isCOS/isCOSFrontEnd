@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { ManagerAccountComponent } from './managementSystem/manager-account/manager-account.component';
+import { NavigatorComponent } from './navigator/navigator.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ManagerAccountComponent } from './managementSystem/manager-account/mana
     HomeComponent,
     GestioneComponent,
     WorkingGlobeComponent,
-    ManagerAccountComponent
+    ManagerAccountComponent,
+    NavigatorComponent
   ],
   imports: [
     BrowserAnimationsModule,
