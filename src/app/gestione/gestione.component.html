@@ -33,8 +33,8 @@
                         testo da inserire
                     </p>
                 </p-dialog>
-                <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; vehiclesDialogVisible = false" label="Show"
-                <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; veicleDialogVisible=false;" label="Show"
+                <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; vehiclesDialogVisible = false" label="Show"></a>
+                <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; veicleDialogVisible=false;" label="Show"></a>
                     class="active cursor-pointer">Contatti</a>
                 <p-dialog header="Contatti" [showHeader]="true" [resizable]='false' [draggable]='false'
                     [(visible)]="contactsDialogVisible" [style]="{width: '60vw'}">
