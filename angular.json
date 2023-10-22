@@ -25,7 +25,8 @@
             ],
             "allowedCommonJsDependencies": [
               "mapbox-gl",
-              "mapbox-gl-geocoder"
+              "mapbox-gl-geocoder",
+              "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",

@@ -7,79 +7,107 @@
         <header class="header">
             <a href="#" class="logo">isCOS</a>
             <nav class="navbar">
-                <a (click)="showAccountDialog(); usageDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false" label="Show"
-                    class="active cursor-pointer">Account</a>
-                <p-dialog header="Gestione Account" [showHeader]="true" [resizable]='false' [draggable]='false'
-                    [(visible)]="accountDialogVisible" [style]="{width: '50vw'}">
-                    <!-- <app-manager-account></app-manager-account> -->
-                </p-dialog>
-                <a (click)="showVehiclesDialog(); accountDialogVisible = false; contactsDialogVisible = false; usageDialogVisible = false" label="Show"
-                    class="active cursor-pointer">Veicoli</a>
-                <p-dialog header="Veicoli" [showHeader]="true" [resizable]='false' [draggable]='false'
-                    [(visible)]="vehiclesDialogVisible" [style]="{width: '50vw'}">
-                    <p class="pt-5">
-                        testo da inserire
-                    </p>
-                </p-dialog>
-                <a (click)="showUsageDialog(); accountDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false" label="Show"
-                    class="active cursor-pointer">Come usarlo</a>
-                <p-dialog header="Informazioni sull'utilizzo" [showHeader]="true" [resizable]='false'
-                    [draggable]='false' [(visible)]="usageDialogVisible" [style]="{width: '50vw'}">
-                    <p class="pt-5" align="justify">
-                        Rapida panoramica del sito: <br>
-                        All'interno della navbar ci saranno una serie di opzioni: la sezione "Account" sarà predisposta per gestire tutte le informazioni 
-                        relative agli utenti, la sezione "Veicoli" invece sarà il fulcro del sito, in quanto qui sarà possibile inserire i veicoli 
-                        aziendali, visualizzarne il proprietario e alcune informazioni, sostanzialmente gestirli, infine nella sezione "Contatti" 
-                        saranno presenti i membri del team che hanno contribuito a realizzare il progetto e il link Github della repository.
-                    </p>
-                    <p class="pt-5" align="justify">
-                        Il modo di utilizzare il sito è molto semplice: <br>
-                        Dopo aver fatto il login, si verrà reindirizzati alla pagina principale, dove sarà possibile visualizzare la mappa del mondo 
-                        (il puntino blu indica la posizione corrente dell'utente). Una volta inseriti i vari veicoli nell'apposita sezione della navbar,
-                        l'utente potrà premere il tasto "Naviga", per essere portato alla pagina del navigatore, dove sarà possibile scegliere il punto 
-                        iniziale e il punto finale del percorso. Il sito in automatico calcolerà il percorso più opportuno in base a diversi fattori, come il
-                        consumo e il costo del carburante, il tempo di percorrenza, il numero di soste e aiuterà l'azienda a mitigare l'impatto ambientale e a 
-                        risparmiare.
-                    </p>
-                </p-dialog>
-                <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; vehiclesDialogVisible = false" label="Show"
-                    class="active cursor-pointer">Contatti</a>
-                <p-dialog header="Contatti" [showHeader]="true" [resizable]='false' [draggable]='false'
-                    [(visible)]="contactsDialogVisible" [style]="{width: '60vw'}">
-                    <div class="flex justify-content-around">
-                        <div class="flex">
-                            <div class="caption">
-                                <img src="/assets/gabriele.png" alt="" width="230" class="border-round-lg" />
-                                <span>
-                                    <strong>Gabriele Santangelo</strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="caption">
-                                <img src="/assets/umberto.png" alt="" width="230" class="border-round-lg" />
-                                <span>
-                                    <strong>Umberto Francesco Carolini</strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="caption">
-                                <img src="/assets/flavio.png" alt="" width="200" class="border-round-lg" />
-                                <span>
-                                    <strong>Flavio Olivieri</strong>
-                                </span>
-                            </div>
-                        </div>
-                        
+                <div class="flex align-items-center align-content-center">
+                    <div>
+                        <a (click)="showAccountDialog(); usageDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false"
+                            label="Show" class="active cursor-pointer">Account</a>
+                        <p-dialog header="Gestione Account" [showHeader]="true" [resizable]='false' [draggable]='false'
+                            [(visible)]="accountDialogVisible" [style]="{width: '50vw'}">
+                            <!-- <app-manager-account></app-manager-account> -->
+                        </p-dialog>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <p-avatar image="/assets/github.png" styleClass="mr-2" size="large" shape="circle"></p-avatar>
-                        <a href="https://github.com/GabrieleSantangelo/isCOS.git" color="black">Repository progetto</a>
+                    <div>
+                        <a (click)="showVehiclesDialog(); accountDialogVisible = false; contactsDialogVisible = false; usageDialogVisible = false"
+                            label="Show" class="active cursor-pointer">Veicoli</a>
+                        <p-dialog header="Veicoli" [showHeader]="true" [resizable]='false' [draggable]='false'
+                            [(visible)]="vehiclesDialogVisible" [style]="{width: '50vw'}">
+                            <p class="pt-5">
+                                testo da inserire
+                            </p>
+                        </p-dialog>
                     </div>
-                </p-dialog>
+                    <div>
+                        <a (click)="showUsageDialog(); accountDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false"
+                            label="Show" class="active cursor-pointer">Come usarlo</a>
+                        <p-dialog header="Informazioni sull'utilizzo" [showHeader]="true" [resizable]='false'
+                            [draggable]='false' [(visible)]="usageDialogVisible" [style]="{width: '50vw'}">
+                            <p class="pt-5 justify">
+                                Rapida panoramica del sito: <br>
+                                All'interno della navbar ci saranno una serie di opzioni: la sezione "Account" sarà
+                                predisposta
+                                per gestire tutte le informazioni
+                                relative agli utenti, la sezione "Veicoli" invece sarà il fulcro del sito, in quanto qui
+                                sarà
+                                possibile inserire i veicoli
+                                aziendali, visualizzarne il proprietario e alcune informazioni, sostanzialmente
+                                gestirli,
+                                infine
+                                nella sezione "Contatti"
+                                saranno presenti i membri del team che hanno contribuito a realizzare il progetto e il
+                                link
+                                Github della repository.
+                            </p>
+                            <p class="pt-5 justify">
+                                Il modo di utilizzare il sito è molto semplice: <br>
+                                Dopo aver fatto il login, si verrà reindirizzati alla pagina principale, dove sarà
+                                possibile
+                                visualizzare la mappa del mondo
+                                (il puntino blu indica la posizione corrente dell'utente). Una volta inseriti i vari
+                                veicoli
+                                nell'apposita sezione della navbar,
+                                l'utente potrà premere il tasto "Naviga", per essere portato alla pagina del navigatore,
+                                dove
+                                sarà possibile scegliere il punto
+                                iniziale e il punto finale del percorso. Il sito in automatico calcolerà il percorso più
+                                opportuno in base a diversi fattori, come il
+                                consumo e il costo del carburante, il tempo di percorrenza, il numero di soste e aiuterà
+                                l'azienda a mitigare l'impatto ambientale e a
+                                risparmiare.
+                            </p>
+                        </p-dialog>
+                    </div>
+                    <div>
+                        <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; vehiclesDialogVisible = false"
+                            label="Show" class="active cursor-pointer">Contatti</a>
+                        <p-dialog header="Contatti" [showHeader]="true" [resizable]='false' [draggable]='false'
+                            [(visible)]="contactsDialogVisible" [style]="{width: '60vw'}">
+                            <div class="flex justify-content-around">
+                                <div class="flex">
+                                    <div class="caption">
+                                        <img src="/assets/gabriele.png" alt="" width="230" class="border-round-lg" />
+                                        <span>
+                                            <strong>Gabriele Santangelo</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="caption">
+                                        <img src="/assets/umberto.png" alt="" width="230" class="border-round-lg" />
+                                        <span>
+                                            <strong>Umberto Francesco Carolini</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="caption">
+                                        <img src="/assets/flavio.png" alt="" width="200" class="border-round-lg" />
+                                        <span>
+                                            <strong>Flavio Olivieri</strong>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </p-dialog>
+                    </div>
+                    <div>
+                        <a label="Show" href="https://github.com/GabrieleSantangelo/isCOS.git"
+                            class="active cursor-pointer"><p-avatar image="/assets/GitHub2.png" styleClass="mr-2"
+                                size="large" shape="circle"></p-avatar></a>
+                    </div>
+                </div>
             </nav>
         </header>
-        <button type="button" (click)="onToggle()">Naviga</button>
+        <button type="button" routerLink="/navigator">Naviga</button>
     </div>
 </div>
