@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { RegistrationService } from 'src/app/service/registration.service';
+import { userService } from 'src/app/service/user.service';
 import { MessageService } from 'primeng/api';
 
 
@@ -11,14 +11,14 @@ import { MessageService } from 'primeng/api';
 })
 export class ManagerAccountComponent implements OnInit {
 
-  constructor(private http: HttpClient, private registrationService: RegistrationService, private messageService: MessageService) { }
+  constructor(private http: HttpClient, private userService: userService, private messageService: MessageService) { }
 
 
 
   ngOnInit(): void {
-    this.registrationService.getUserByEmail(this.userEmailLoggedIn).subscribe((data: any) => {
-      this.account = data;
-    });
+    // this.userService.getUserByEmail(this.userEmailLoggedIn).subscribe((data: any) => {
+    //   this.account = data;
+    // });
     console.log(this.userEmailLoggedIn);
   }
 

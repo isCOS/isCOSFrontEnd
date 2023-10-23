@@ -21,11 +21,6 @@ export class GestioneComponent {
 
   @Output() toggle = new EventEmitter<void>();
 
-  onToggle() {
-    this.toggle.emit();
-    this.showBox = !this.showBox;
-  }
-
   openDialog(dialogName: string) {
     this.currentDialog = dialogName;
   }

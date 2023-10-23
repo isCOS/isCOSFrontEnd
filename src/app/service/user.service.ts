@@ -4,18 +4,22 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrationService {
+export class userService {
 
   // registrationUrl = environment.apiUrl + '/User/AddPersona';
   apiurl = 'http://localhost:3000/accounts'
   constructor(private http: HttpClient) {}
 
-  getUserByEmail(email:any) {
-    return this.http.post<any>(this.apiurl, email);
+  getUserByEmail(code: any) {
+    return this.http.get(this.apiurl + '/' +code ); 
   }
 
   proceedRegistration(data: any) {
     return this.http.post(this.apiurl, data);
+  }
+
+  proceedLogin(data: any) {
+    return this.http.get(this.apiurl, data);
   }
 
 }

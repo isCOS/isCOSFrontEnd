@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
-import { RegistrationService } from '../service/registration.service';
+import { userService } from '../service/user.service';
 import { MessageService } from 'primeng/api';
 
 
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
   onToggle() {
     this.toggle.emit();
   }
-  constructor(private fb: FormBuilder, private datePipe: DatePipe, private regSer: RegistrationService, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private datePipe: DatePipe, private userService: userService, private messageService: MessageService) { }
   //Build the form
   form = this.fb.group({
     name: new FormControl(
@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
       date: this.datePipe.transform(this.form.value.date, 'dd-MM-yyyy'),
       expiringLicenseDate: this.datePipe.transform(this.form.value.expiringLicenseDate, 'dd-MM-yyyy')
     };
-    this.regSer.proceedRegistration(toSend).subscribe((data: any) => {
+    this.userService.proceedRegistration(toSend).subscribe((data: any) => {
       console.log(data);
     });
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Registration completed' });
@@ -99,13 +99,7 @@ export class RegisterComponent implements OnInit {
   onContinue() {
     this.showContinueButton = !this.showContinueButton;
   }
-  notValidElement: any;
-  isInvalid(controlName: string) {
-    const control = this.form.get(controlName);
-    const notValidElement = control?.invalid && (control.dirty || control.touched);
-    console.log(notValidElement)
-    return notValidElement;
-  }
+
 
 
 }
