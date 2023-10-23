@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(25),
       ])
     ),
-    lastName: new FormControl(
+    surname: new FormControl(
       '',
       Validators.compose([
         Validators.required,
@@ -59,37 +59,39 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(20),
       ])
     ),
-    id: new FormControl(
+    email: new FormControl(
       '',
       Validators.compose([
         Validators.required,
         Validators.pattern(this.emailRegex),
       ])
     ),
-    date: new FormControl<Date | null>(null, Validators.required),
-    selectedDriveLicence: new FormControl<driveLicences | null>(null),
-    expiringLicenseDate: new FormControl<Date | null>(null, Validators.required),
-    ragioneSociale: new FormControl('', Validators.required),
+    dateBirth: new FormControl<Date | null>(null, Validators.required),
+    drivingLicense: new FormControl<driveLicences | null>(null),
+    deadLine: new FormControl<Date | null>(null, Validators.required),
+    businessName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     //Set date to the current date
   });
 
   proceedRegistration() {
     //this.form.reset();
-    const tempDate = new Date(this.form.value.date!);
-    const tempDate2 = new Date(this.form.value.expiringLicenseDate!);
-    tempDate.setTime(tempDate.getTime() - tempDate.getTimezoneOffset() * 60 * 1000);
-    tempDate2.setTime(tempDate2.getTime() - tempDate2.getTimezoneOffset() * 60 * 1000);
-    tempDate.getTimezoneOffset();
-    tempDate2.getTimezoneOffset();
-    this.form.patchValue({ date: tempDate });
-    this.form.patchValue({ expiringLicenseDate: tempDate2 });
+    // const tempDate = new Date(this.form.value.dateBirth!);
+    // const tempDate2 = new Date(this.form.value.deadLine!);
+    // tempDate.setTime(tempDate.getTime() - tempDate.getTimezoneOffset() * 60 * 1000);
+    // tempDate2.setTime(tempDate2.getTime() - tempDate2.getTimezoneOffset() * 60 * 1000);
+    // tempDate.getTimezoneOffset();
+    // tempDate2.getTimezoneOffset();
+    // this.form.patchValue({ dateBirth: tempDate });
+    // this.form.patchValue({ deadLine: tempDate2 });
     const toSend = {
       ...this.form.value,
-      date: this.datePipe.transform(this.form.value.date, 'dd-MM-yyyy'),
-      expiringLicenseDate: this.datePipe.transform(this.form.value.expiringLicenseDate, 'dd-MM-yyyy')
+      // dateBirth: this.datePipe.transform(this.form.value.dateBirth, 'dd-MM-yyyy'),
+      // deadLine: this.datePipe.transform(this.form.value.deadLine, 'dd-MM-yyyy'),
+      drivingLicense: {type: 0, deadLine: this.form.value.deadLine! },
     };
-    this.userService.proceedRegistration(toSend).subscribe((data: any) => {
+    delete toSend.deadLine;
+    this.userService.AddUser(toSend).subscribe((data: any) => {
       console.log(data);
     });
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Registration completed' });

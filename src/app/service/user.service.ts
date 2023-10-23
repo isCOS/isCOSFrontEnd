@@ -7,11 +7,12 @@ import { HttpClient } from '@angular/common/http';
 export class userService {
 
   // registrationUrl = environment.apiUrl + '/User/AddPersona';
-  apiurl = 'http://localhost:3000/accounts'
+  // apiurl = 'http://localhost:3000/accounts'
+  apiurl = 'https://192.168.70.167:5294/api/User/AddUser'
   constructor(private http: HttpClient) {}
 
-  getUserByEmail(code: any) {
-    return this.http.get(this.apiurl + '/' +code ); 
+  AddUser(data: any) {
+    return this.http.post(this.apiurl, data); 
   }
 
   proceedRegistration(data: any) {

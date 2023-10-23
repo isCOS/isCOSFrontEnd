@@ -51,7 +51,7 @@ export class LoginComponent {
     this.form.reset();
   }
   checkCorrectPassword() {
-    this.userService.getUserByEmail(this.form.value.id).subscribe((res) => {
+    this.userService.AddUser(this.form.value).subscribe((res) => {
       this.userdata =  res;
       if (this.form.value.password === this.userdata.password) {
         console.log('ok');

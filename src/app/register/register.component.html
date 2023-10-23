@@ -11,37 +11,37 @@
                 </div>
                 <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <input pInputText type="text" formControlName="lastName">
+                        <input pInputText type="text" formControlName="surname">
                         <label htmlFor="lastname">Cognome</label>
                     </span>
                 </div>
                 <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <input pInputText formControlName="id">
+                        <input pInputText formControlName="email">
                         <label htmlFor="email">Email</label>
                     </span>
                 </div>
                 <div class="card flex mt-4">
                     <span class="p-float-label input-group">
-                        <p-calendar formControlName="date" appendTo="body" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar formControlName="dateBirth" appendTo="body" dateFormat="dd/mm/yy"></p-calendar>
                         <label htmlFor="date">Data di nascita</label>
                     </span>
                 </div>
             </div>
             <div *ngIf="showContinueButton">
                 <div class="card flex justify-content-center mt-4">
-                    <p-dropdown formControlName="selectedDriveLicence"  [options]="driveLicences" optionValue="name" optionLabel="name"
+                    <p-dropdown formControlName="drivingLicense"  [options]="driveLicences" optionValue="name" optionLabel="name"
                         placeholder="Tipo patente"></p-dropdown>
                 </div>
                 <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <p-calendar formControlName="expiringLicenseDate" appendTo="body" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar formControlName="deadLine" appendTo="body" dateFormat="dd/mm/yy"></p-calendar>
                         <label htmlFor="date">Data scadenza patente</label>
                     </span>
                 </div>
                 <div class="card flex justify-content-center mt-4">
                     <span class="p-float-label input-group">
-                        <input pInputText type="text" formControlName="ragioneSociale">
+                        <input pInputText type="text" formControlName="businessName">
                         <label htmlFor="ragioneSociale">Ragione Sociale</label>
                     </span>
                 </div>
