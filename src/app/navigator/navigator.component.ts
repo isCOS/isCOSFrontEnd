@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Renderer2 } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import * as mapboxDirection from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+
+
 
 @Component({
   selector: 'app-navigator',
@@ -11,8 +14,54 @@ export class NavigatorComponent implements OnInit {
   style = 'mapbox://styles/mapbox/streets-v12';
   lat = 37.75;
   lng = -122.41;
-  constructor() { }
-  ngOnInit() {
+  constructor(private renderer: Renderer2) { }
+ ngOnInit() {
+  
+    this.loadScript('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js')
+    .then(() => this.loadScript('https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'))
+    .then(() => this.loadScript('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css'))
+    .then(() => {
+      this.loadMap();
+    })
+    .catch((error) => console.error('Errore durante il caricamento degli script:', error));
+ }
+
+
+
+  ngOnDestroy() {
+    const mapboxScript = document.querySelector('script[src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"]');
+    if (mapboxScript) {
+      mapboxScript.remove();
+    }
+  
+    const mapboxCssLink = document.querySelector('link[href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css"]');
+    if (mapboxCssLink) {
+      mapboxCssLink.remove();
+    }
+  }
+
+  loadScript(src: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const script = this.renderer.createElement('script');
+      script.src = src;
+      script.onload = () => resolve();
+      script.onerror = (error) => reject(error);
+      this.renderer.appendChild(document.body, script);
+    });
+  }
+
+  loadMap(){
+          // Carica lo script di Mapbox
+          const mapboxScript = this.renderer.createElement('script');
+          mapboxScript.src = 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js';
+          this.renderer.appendChild(document.body, mapboxScript);
+        
+          // Carica il link CSS di Mapbox
+          const mapboxCssLink = this.renderer.createElement('link');
+          mapboxCssLink.rel = 'stylesheet';
+          mapboxCssLink.href = 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css';
+          mapboxCssLink.type = 'text/css';
+          this.renderer.appendChild(document.head, mapboxCssLink);
     const token =
       'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
     (mapboxgl as any).accessToken = token;
@@ -111,6 +160,7 @@ export class NavigatorComponent implements OnInit {
         }
       },
     };
+    
 
     map.on('load', () => {
       map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
