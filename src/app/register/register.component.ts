@@ -88,13 +88,13 @@ export class RegisterComponent implements OnInit {
       ...this.form.value,
       // dateBirth: this.datePipe.transform(this.form.value.dateBirth, 'dd-MM-yyyy'),
       // deadLine: this.datePipe.transform(this.form.value.deadLine, 'dd-MM-yyyy'),
-      drivingLicense: {type: 0, deadLine: this.form.value.deadLine! },
+      drivingLicense: {type: this.form.value.drivingLicense, deadLine: this.form.value.deadLine! },
     };
-    delete toSend.deadLine;
     this.userService.AddUser(toSend).subscribe((data: any) => {
       console.log(data);
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Registration completed' });
     });
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Registration completed' });
+    
     console.log(toSend);
   }
 
