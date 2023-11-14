@@ -20,6 +20,7 @@ import { MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { ManagerAccountComponent } from './managementSystem/manager-account/manager-account.component';
 import { NavigatorComponent } from './navigator/navigator.component';
+import { ProfilePageComponent } from './profilePage/profilePage.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { NavigatorComponent } from './navigator/navigator.component';
     GestioneComponent,
     WorkingGlobeComponent,
     ManagerAccountComponent,
-    NavigatorComponent
+    NavigatorComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -41,7 +43,7 @@ import { NavigatorComponent } from './navigator/navigator.component';
     PrimengModule,
     ReactiveFormsModule,  
     DialogModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     HttpClient,

@@ -1,0 +1,78 @@
+.wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 400px;
+    height: 500px;
+    background: rgba(255, 255, 255, .2);
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, .1);
+    padding: 40px;
+    margin: 20px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s ease-in-out;
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+.input-group label {
+    color: #9b9b9b;
+    border: 20px;
+}
+
+:host ::ng-deep { 
+    .p-inputtext{
+        background: transparent !important;
+        color: #9b9b9b !important;
+        width: 20rem;
+    }
+    .p-dropdown {
+        background: transparent !important;
+        border-bottom: 1px solid #dbdbdb;
+        width: 20rem;
+    }
+    .p-element {
+        background: transparent !important;
+    }
+}
+
+button {
+    position: relative;
+    width: 10rem;
+    height: 40px;
+    background: linear-gradient(to right, #8b6fa4, #795796, #784f9b);
+    font-size: 16px;
+    color: #FFF;
+    cursor: pointer;
+    border-radius: 30px;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+}
+
+.continue {
+    position: relative;
+    width: 80%;
+    height: 40px;
+    background: linear-gradient(to right, #8b6fa4, #795796, #784f9b);
+    font-size: 16px;
+    color: #FFF;
+    cursor: pointer;
+    border-radius: 30px;
+    margin-top: 15px;
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    outline: none;
+}
+

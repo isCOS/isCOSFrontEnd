@@ -11,9 +11,9 @@
                     <div>
                         <a (click)="showAccountDialog(); usageDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false"
                             label="Show" class="active cursor-pointer">Account</a>
-                        <p-dialog header="Gestione Account" [showHeader]="true" [resizable]='false' [draggable]='false'
+                        <p-dialog header="Modifica dati" [showHeader]="true" [resizable]='false' [draggable]='false'
                             [(visible)]="accountDialogVisible" [style]="{width: '50vw'}">
-                            <!-- <app-manager-account></app-manager-account> -->
+                             <app-profile-page></app-profile-page>
                         </p-dialog>
                     </div>
                     <div>
