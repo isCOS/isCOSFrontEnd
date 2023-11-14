@@ -36,7 +36,7 @@ export class LoginComponent {
   }
   constructor(private fb: FormBuilder, private userService: userService, private messageService: MessageService, private router: Router) { }
   form = this.fb.group({
-    id: new FormControl(
+    email: new FormControl(
       '',
       Validators.compose([
         Validators.required,
@@ -51,13 +51,13 @@ export class LoginComponent {
     this.form.reset();
   }
   checkCorrectPassword() {
-    this.userService.AddUser(this.form.value).subscribe((res) => {
+    this.userService.ProceedLogin(this.form.value).subscribe((res) => {
       this.userdata =  res;
-      if (this.form.value.password === this.userdata.password) {
+      if (this.userdata.code === "0") {
         console.log('ok');
         // this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login effettuato con successo' });
         this.router.navigate(['/gestione']);
-      } else if (this.form.value.password !== this.userdata.password) {
+      } else {
         console.log('no');
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Password errata' });
       }
@@ -67,9 +67,6 @@ export class LoginComponent {
           this.messageService.add({ severity: 'error', summary: 'Errore', detail: 'User not found' });
         }
       });
-  }
-  goToGestione() {
-    this.router.navigate(['/gestione']);
   }
 
 }

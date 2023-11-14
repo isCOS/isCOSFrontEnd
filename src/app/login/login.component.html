@@ -5,7 +5,7 @@
             <h2>Login</h2>
             <div class="card flex justify-content-center mt-4">
                 <span class="p-float-label input-group">
-                    <input pInputText type="email" formControlName="id" required>
+                    <input pInputText type="email" formControlName="email" required>
                     <label htmlFor="email">Email</label>
                 </span>
             </div>
@@ -15,7 +15,7 @@
                     <label htmlFor="password">Password</label>
                 </span>
             </div>
-            <button type="button" (click)="checkCorrectPassword(this.form.value!); goToGestione()" [disabled]="!form.valid">Accedi</button>
+            <button type="button" (click)="checkCorrectPassword(this.form.value!)" [disabled]="!form.valid">Accedi</button>
             <div class="signUp-link flex align-items-center">
                 <p>Non hai ancora un account?</p>
                 <p-button (click)="onToggle()" [text]="true" styleClass="text-white">Registrati</p-button>
