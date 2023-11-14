@@ -15,7 +15,7 @@
                     <label htmlFor="password">Password</label>
                 </span>
             </div>
-            <button type="button" (click)="checkCorrectPassword(this.form.value!)" [disabled]="!form.valid">Accedi</button>
+            <button type="button" (click)="checkCorrectPassword(this.form.value!); goToGestione()" [disabled]="!form.valid">Accedi</button>
             <div class="signUp-link flex align-items-center">
                 <p>Non hai ancora un account?</p>
                 <p-button (click)="onToggle()" [text]="true" styleClass="text-white">Registrati</p-button>

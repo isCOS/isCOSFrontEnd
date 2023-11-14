@@ -68,5 +68,8 @@ export class LoginComponent {
         }
       });
   }
+  goToGestione() {
+    this.router.navigate(['/gestione']);
+  }
 
 }

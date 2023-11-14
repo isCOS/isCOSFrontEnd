@@ -10,9 +10,9 @@ import { NavigatorComponent } from './navigator/navigator.component';
 const routes: Routes = [
 { path: '', component: HomeComponent },
 { path: 'register', component: RegisterComponent },
+{ path: 'navigator', component: NavigatorComponent },
+{ path: 'navigator', component: NavigatorComponent },
 { path: 'gestione', component: GestioneComponent },
-{ path: 'navigator', component: NavigatorComponent },
-{ path: 'navigator', component: NavigatorComponent },
 { path: '', redirectTo: '/login', pathMatch: 'full' },
 { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
