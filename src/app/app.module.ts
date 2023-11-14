@@ -21,6 +21,7 @@ import { DatePipe } from '@angular/common';
 import { ManagerAccountComponent } from './managementSystem/manager-account/manager-account.component';
 import { NavigatorComponent } from './navigator/navigator.component';
 import { GestioneAccountComponent } from './gestione/gestioneAccount/gestioneAccount.component';
+import { AuthGuard } from './guard/auth.guard';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { GestioneAccountComponent } from './gestione/gestioneAccount/gestioneAcc
   providers: [
     HttpClient,
     DatePipe,
-    MessageService
+    MessageService,
+    AuthGuard
   ],
   bootstrap: [AppComponent],
   exports: [
