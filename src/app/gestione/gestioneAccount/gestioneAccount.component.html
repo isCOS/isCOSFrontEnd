@@ -1,0 +1,134 @@
+<p-toast></p-toast>
+<p-table
+  [value]="user"
+  dataKey="id"
+  editMode="row"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 20%">Nome</th>
+      <th style="width: 20%">Cognome</th>
+      <th style="width: 20%">Email</th>
+      <th style="width: 20%">Data di Nascita</th>
+      <th style="width: 20%">Tipo patente</th>
+      <th style="width: 20%">Data scadenza patente</th>
+      <th style="width: 20%">Ragione Sociale</th>
+      <th style="width: 20%">Password</th>
+      <th style="width: 20%"></th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-user
+    let-editing="editing"
+    let-ri="rowIndex"
+  >
+    <tr [pEditableRow]="product">
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.name" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.name }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.surname" required />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.surname }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <ng-template pTemplate="output">
+          {{ user.email }}
+        </ng-template>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.dateBirth" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.dateBirth }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.drivingLicense" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.drivingLicense }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.deadLine" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.deadLine }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="user.businessName" />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ user.businessName }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <ng-template pTemplate="output">
+          {{ user.password }}
+        </ng-template>
+      </td>
+      <td>
+        <div class="flex align-items-center justify-content-center gap-2">
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            icon="pi pi-pencil"
+            (click)="onRowEditInit(product)"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            icon="pi pi-check"
+            (click)="onRowEditSave(product)"
+            class="p-button-rounded p-button-text p-button-success mr-2"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            icon="pi pi-times"
+            (click)="onRowEditCancel(product, ri)"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

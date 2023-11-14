@@ -12,15 +12,15 @@
                         <a (click)="showAccountDialog(); usageDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false"
                             label="Show" class="active cursor-pointer">Account</a>
                         <p-dialog header="Modifica dati" [showHeader]="true" [resizable]='false' [draggable]='false'
-                            [(visible)]="accountDialogVisible" [style]="{width: '50vw'}">
-                             <app-profile-page></app-profile-page>
+                            [(visible)]="accountDialogVisible" [style]="{width: 'auto'}">
+                            <app-gestione-account></app-gestione-account>
                         </p-dialog>
                     </div>
                     <div>
                         <a (click)="showVehiclesDialog(); accountDialogVisible = false; contactsDialogVisible = false; usageDialogVisible = false"
                             label="Show" class="active cursor-pointer">Veicoli</a>
                         <p-dialog header="Veicoli" [showHeader]="true" [resizable]='false' [draggable]='false'
-                            [(visible)]="vehiclesDialogVisible" [style]="{width: '50vw'}">
+                            [(visible)]="vehiclesDialogVisible" [style]="{width: 'auto'}">
                             <p class="pt-5">
                                 testo da inserire
                             </p>
@@ -30,7 +30,7 @@
                         <a (click)="showUsageDialog(); accountDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false"
                             label="Show" class="active cursor-pointer">Come usarlo</a>
                         <p-dialog header="Informazioni sull'utilizzo" [showHeader]="true" [resizable]='false'
-                            [draggable]='false' [(visible)]="usageDialogVisible" [style]="{width: '50vw'}">
+                            [draggable]='false' [(visible)]="usageDialogVisible" [style]="{width: '70vw'}">
                             <p class="pt-5 justify">
                                 Rapida panoramica del sito: <br>
                                 All'interno della navbar ci saranno una serie di opzioni: la sezione "Account" sarà
@@ -70,7 +70,7 @@
                         <a (click)="showContactsDialog(); accountDialogVisible = false; usageDialogVisible = false; vehiclesDialogVisible = false"
                             label="Show" class="active cursor-pointer">Contatti</a>
                         <p-dialog header="Contatti" [showHeader]="true" [resizable]='false' [draggable]='false'
-                            [(visible)]="contactsDialogVisible" [style]="{width: '60vw'}">
+                            [(visible)]="contactsDialogVisible" [style]="{width: '70vw'}">
                             <div class="flex justify-content-around">
                                 <div class="flex">
                                     <div class="caption">

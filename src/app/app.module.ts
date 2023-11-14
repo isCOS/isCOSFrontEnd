@@ -20,7 +20,7 @@ import { MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { ManagerAccountComponent } from './managementSystem/manager-account/manager-account.component';
 import { NavigatorComponent } from './navigator/navigator.component';
-import { ProfilePageComponent } from './profilePage/profilePage.component';
+import { GestioneAccountComponent } from './gestione/gestioneAccount/gestioneAccount.component';
 
 
 @NgModule({
@@ -34,7 +34,7 @@ import { ProfilePageComponent } from './profilePage/profilePage.component';
     WorkingGlobeComponent,
     ManagerAccountComponent,
     NavigatorComponent,
-    ProfilePageComponent
+    GestioneAccountComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -7,7 +7,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SplitterModule } from 'primeng/splitter';
 import { ToastModule } from 'primeng/toast';
 import { ImageModule } from 'primeng/image';
-
 import { TableModule } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';

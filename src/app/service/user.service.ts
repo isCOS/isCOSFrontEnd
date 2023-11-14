@@ -11,8 +11,8 @@ export class userService {
   constructor(private http: HttpClient) {}
 
   AddUser(data: any) {
-    this.apiurl = 'http://192.168.102.167:5294/api/User/AddUser';
-    return this.http.post<any>(this.apiurl, data, {
+    const url = 'http://192.168.102.167:5294/api/User/AddUser';
+    return this.http.post<any>(url, data, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'text/plain',
@@ -35,6 +35,17 @@ export class userService {
   ProceedLogin(user: any){
     const url = `http://192.168.102.167:5294/api/User/GetUserByEmailAndPassword?email=${user.email}&Password=${user.password}`;
     return this.http.get<any>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
+
+  EditUser(user: any) {
+    const url = 'http://localhost:5294/api/User/EditUser';
+    return this.http.post<any>(url, user, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'text/plain',
