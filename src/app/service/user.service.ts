@@ -1,31 +1,47 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class userService {
-
   // registrationUrl = environment.apiUrl + '/User/AddPersona';
   // apiurl = 'http://localhost:3000/accounts'
-  apiurl = 'http://192.168.70.167:5294/api/User/AddUser'
+  apiurl = 'http://192.168.102.167:5294/api/User/';
   constructor(private http: HttpClient) {}
 
   AddUser(data: any) {
-    return this.http.post<any>(
-      this.apiurl,
-      data,
-      {
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'text/plain',
-          'Access-Control-Allow-Origin': '*'
-        }
-      }      
-      ); 
+    this.apiurl = 'http://192.168.102.167:5294/api/User/AddUser';
+    return this.http.post<any>(this.apiurl, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
   }
 
+  GetUser(userId: string) {
+    const url = `http://192.168.102.167:5294/api/User/GetUserByEmail/${userId}`;
+    return this.http.get<any>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
+
+  ProceedLogin(user: any){
+    const url = `http://192.168.102.167:5294/api/User/GetUserByEmailAndPassword?email=${user.email}&Password=${user.password}`;
+    return this.http.get<any>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
 }
 
 /*
