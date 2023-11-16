@@ -5,6 +5,7 @@ import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { userService } from '../service/user.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,7 @@ export class LoginComponent {
     this.toggle.emit();
     this.showBox = !this.showBox;
   }
-  constructor(private fb: FormBuilder, private userService: userService, private messageService: MessageService, private router: Router) { }
+  constructor(private fb: FormBuilder,private authService: AuthService ,private userService: userService, private messageService: MessageService, private router: Router) { }
   form = this.fb.group({
     email: new FormControl(
       '',
@@ -53,14 +54,8 @@ export class LoginComponent {
   checkCorrectPassword() {
     this.userService.ProceedLogin(this.form.value).subscribe((res) => {
       this.userdata =  res;
-      if (this.userdata.code === "0") {
-        console.log('ok');
-        // this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login effettuato con successo' });
-        this.router.navigate(['/gestione']);
-      } else {
-        console.log('no');
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Password errata' });
-      }
+      const token = this.userdata.data.token;
+      sessionStorage.setItem(this.userdata.data.email, token);
     },
       error => {
         if (error.status === 404) {
@@ -68,5 +63,7 @@ export class LoginComponent {
         }
       });
   }
+
+                            
 
 }

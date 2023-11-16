@@ -1,11 +1,44 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  IsLoggedIn() {
-    return sessionStorage.getItem('user') != null;
+  constructor(private http: HttpClient) {}
+  ip = "10.31.12.211:5294"
+  // GetAllUsers() {
+  //   return this.http.get(this.apiurl);
+  // }
+
+  // GetByCode(code: any) {
+  //   return this.http.get(this.apiurl + '/' +code);
+  // }
+
+  // ProceedRegistrater(data: any) {
+  //   return this.http.post(this.apiurl, data);
+  // }
+
+  // UpdateUser(code: any, data: any) {
+  //   return this.http.put(`${this.apiurl}/${code}`, data);
+  // }
+
+  CheckAuthoritation(email: any, token: any) {
+    const url = `http://10.31.12.211:5294/api/User/checkAuthorization?email=${email}&token=${token}`
+    return this.http.get<any>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      }
+    });
   }
-  constructor() {}
+
+  login() {
+    return sessionStorage.getItem('username') != null;
+  }
+
+  logout() {
+    sessionStorage.removeItem('username');
+  }
 }

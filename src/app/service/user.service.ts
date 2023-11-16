@@ -5,13 +5,15 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class userService {
+  ip = "10.31.12.211:5294"
   // registrationUrl = environment.apiUrl + '/User/AddPersona';
   // apiurl = 'http://localhost:3000/accounts'
-  apiurl = 'http://192.168.102.167:5294/api/User/';
+  apiurl = `http://${this.ip}/api/User/`;
+  logeed = false;
   constructor(private http: HttpClient) {}
 
   AddUser(data: any) {
-    const url = 'http://192.168.102.167:5294/api/User/AddUser';
+    const url = `http://${this.ip}/api/User/AddUser`;
     return this.http.post<any>(url, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -22,7 +24,7 @@ export class userService {
   }
 
   GetUser(userId: string) {
-    const url = `http://192.168.102.167:5294/api/User/GetUserByEmail/${userId}`;
+    const url = `http://${this.ip}/api/User/GetUserByEmail/${userId}`;
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -33,8 +35,19 @@ export class userService {
   }
 
   ProceedLogin(user: any){
-    const url = `http://192.168.102.167:5294/api/User/GetUserByEmailAndPassword?email=${user.email}&Password=${user.password}`;
+    const url = `http://${this.ip}/api/User/GetUserByEmailAndPassword?email=${user.email}&Password=${user.password}`;
     return this.http.get<any>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      }
+    });
+  }
+
+  EditUser(user: any) {
+    const url = `http://${this.ip}/api/User/EditUser`;
+    return this.http.post<any>(url, user, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'text/plain',
@@ -42,15 +55,15 @@ export class userService {
       },
     });
   }
-
-  EditUser(user: any) {
-    const url = 'http://localhost:5294/api/User/EditUser';
-    return this.http.post<any>(url, user, {
+  
+  CheckAuthoritation(email: any, token: any) {
+    const url = `http://10.31.12.211:5294/api/User/checkAuthorization?email=${email}&token=${token}`
+    return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'text/plain',
         'Access-Control-Allow-Origin': '*',
-      },
+      }
     });
   }
 }
