@@ -54,8 +54,9 @@ export class LoginComponent {
   checkCorrectPassword() {
     this.userService.ProceedLogin(this.form.value).subscribe((res) => {
       this.userdata =  res;
-      const token = this.userdata.data.token;
-      sessionStorage.setItem(this.userdata.data.email, token);
+      sessionStorage.setItem('email', this.userdata.data.email);
+      sessionStorage.setItem('token', this.userdata.data.token);
+      this.router.navigate(['/gestione']);
     },
       error => {
         if (error.status === 404) {

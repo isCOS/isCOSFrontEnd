@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class AuthService {
   //   return this.http.put(`${this.apiurl}/${code}`, data);
   // }
 
-  CheckAuthoritation(email: any, token: any) {
+  CheckAuthoritation(email: any, token: any): Observable<string> {
     const url = `http://10.31.12.211:5294/api/User/checkAuthorization?email=${email}&token=${token}`
     return this.http.get<any>(url, {
       headers: {
@@ -31,7 +32,7 @@ export class AuthService {
         Accept: 'text/plain',
         'Access-Control-Allow-Origin': '*',
       }
-    });
+    }).pipe(map(res => res.code));
   }
 
   login() {
