@@ -57,7 +57,7 @@ export class userService {
   }
   
   CheckAuthoritation(email: any, token: any) {
-    const url = `http://${this.ip}:5294/api/User/checkAuthorization?email=${email}&token=${token}`
+    const url = `http://${this.ip}/api/User/checkAuthorization?email=${email}&token=${token}`
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',

@@ -8,24 +8,9 @@ import { Observable, map } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
   ip = "10.31.12.211:5294"
-  // GetAllUsers() {
-  //   return this.http.get(this.apiurl);
-  // }
-
-  // GetByCode(code: any) {
-  //   return this.http.get(this.apiurl + '/' +code);
-  // }
-
-  // ProceedRegistrater(data: any) {
-  //   return this.http.post(this.apiurl, data);
-  // }
-
-  // UpdateUser(code: any, data: any) {
-  //   return this.http.put(`${this.apiurl}/${code}`, data);
-  // }
 
   CheckAuthoritation(email: any, token: any): Observable<string> {
-    const url = `http://${this.ip}:5294/api/User/checkAuthorization?email=${email}&token=${token}`
+    const url = `http://${this.ip}/api/User/checkAuthorization?email=${email}&token=${token}`
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +21,7 @@ export class AuthService {
   }
 
   login() {
-    return sessionStorage.getItem('username') != null;
+    return sessionStorage.getItem('email') != null;
   }
 
   logout() {
