@@ -71,6 +71,7 @@ export class RegisterComponent implements OnInit {
     deadLine: new FormControl<Date | null>(null, Validators.required),
     businessName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
+    repeatPassword: new FormControl('', Validators.required),
     //Set date to the current date
   });
 

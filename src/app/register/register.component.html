@@ -51,11 +51,17 @@
                         <label htmlFor="password">Password</label>
                     </span>
                 </div>
+                <div class="card flex justify-content-center mt-4">
+                    <span class="p-float-label input-group">
+                        <input pInputText type="password" formControlName="repeatPassword">
+                        <label htmlFor="password">Ripeti password</label>
+                    </span>
+                </div>
             </div>
             <button *ngIf="!showContinueButton" type="button" class="mt-3" (click)="onContinue()">Continua</button>
-            <button *ngIf="showContinueButton" type="button" class="mt-3" (click)="onContinue()">Indietro</button>
             <button *ngIf="showContinueButton" type="button" [disabled]="!form.valid"
                 (click)="onToggle(); proceedRegistration()" class="mt-3">Registrati</button>
+            <button *ngIf="showContinueButton" type="button" class="mt-3" (click)="onContinue()">Indietro</button>
             <div *ngIf="showContinueButton">
                 <div *ngIf="form.invalid">
                     <div>
