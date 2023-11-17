@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class userService {
-  ip = "10.31.12.211:5294"
+  ip = "192.168.102.167:5294"
   // registrationUrl = environment.apiUrl + '/User/AddPersona';
   // apiurl = 'http://localhost:3000/accounts'
   apiurl = `http://${this.ip}/api/User/`;
@@ -57,7 +57,7 @@ export class userService {
   }
   
   CheckAuthoritation(email: any, token: any) {
-    const url = `http://10.31.12.211:5294/api/User/checkAuthorization?email=${email}&token=${token}`
+    const url = `http://192.168.102.167:5294/api/User/checkAuthorization?email=${email}&token=${token}`
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',

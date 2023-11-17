@@ -7,7 +7,7 @@ import { Observable, map } from 'rxjs';
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  ip = "10.31.12.211:5294"
+  ip = "192.168.102.167:5294"
   // GetAllUsers() {
   //   return this.http.get(this.apiurl);
   // }
@@ -25,7 +25,7 @@ export class AuthService {
   // }
 
   CheckAuthoritation(email: any, token: any): Observable<string> {
-    const url = `http://10.31.12.211:5294/api/User/checkAuthorization?email=${email}&token=${token}`
+    const url = `http://192.168.102.167:5294/api/User/checkAuthorization?email=${email}&token=${token}`
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
