@@ -10,7 +10,7 @@ export class AuthService {
   ip = "10.31.12.211:5294"
 
   CheckAuthoritation(email: any, token: any): Observable<string> {
-    const url = `http://${this.ip}/api/User/checkAuthorization?email=${email}&token=${token}`
+    const url = `http://${this.ip}  /api/User/checkAuthorization?email=${email}&token=${token}`
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
