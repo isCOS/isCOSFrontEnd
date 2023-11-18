@@ -77,14 +77,14 @@ export class RegisterComponent implements OnInit {
 
   proceedRegistration() {
     //this.form.reset();
-    // const tempDate = new Date(this.form.value.dateBirth!);
-    // const tempDate2 = new Date(this.form.value.deadLine!);
-    // tempDate.setTime(tempDate.getTime() - tempDate.getTimezoneOffset() * 60 * 1000);
-    // tempDate2.setTime(tempDate2.getTime() - tempDate2.getTimezoneOffset() * 60 * 1000);
+    const tempDate = new Date(this.form.value.dateBirth!);
+    const tempDate2 = new Date(this.form.value.deadLine!);
+    tempDate.setTime(tempDate.getTime() - tempDate.getTimezoneOffset() * 60 * 1000);
+    tempDate2.setTime(tempDate2.getTime() - tempDate2.getTimezoneOffset() * 60 * 1000);
     // tempDate.getTimezoneOffset();
     // tempDate2.getTimezoneOffset();
-    // this.form.patchValue({ dateBirth: tempDate });
-    // this.form.patchValue({ deadLine: tempDate2 });
+    this.form.patchValue({ dateBirth: tempDate });
+    this.form.patchValue({ deadLine: tempDate2 });
     const toSend = {
       ...this.form.value,
       // dateBirth: this.datePipe.transform(this.form.value.dateBirth, 'dd-MM-yyyy'),

@@ -12,7 +12,7 @@ interface driveLicences {
   templateUrl: './gestioneAccount.component.html',
   styleUrls: ['./gestioneAccount.component.scss'],
 })
-export class GestioneAccountComponent {
+export class GestioneAccountComponent implements OnInit{
   showContinueButton = false;
   driveLicences: driveLicences[] | undefined;
   selectedDriveLicence: driveLicences | undefined;
@@ -22,16 +22,13 @@ export class GestioneAccountComponent {
   user: any;
   userEmail: any;
   clonedUser: { [s: string]: any } = {};
+  userDataArray: any;
   constructor(
     private userService: userService,
     private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    this.userEmail = localStorage.getItem('userEmail');
-    this.userService.GetUser(this.userEmail).subscribe((res) => {
-      this.user = res;
-    });
     this.driveLicences = [
       { name: 'B' },
       { name: 'C' },
@@ -43,21 +40,24 @@ export class GestioneAccountComponent {
       { name: 'D1E' },
       { name: 'DE' },
     ];
+    this.userService.GetUser(sessionStorage.getItem('email')).subscribe((res) => {
+      this.user = res;
+      console.log('User: ',this.user);
+    });
     return this.user;
   }
 
   loadUserData() {
-    this.userService.GetUser(this.userEmail).subscribe((res) => {
+    this.userService.GetUser(sessionStorage.getItem('email')).subscribe((res) => {
       this.user = res;
+      console.log('User: ',this.user);
     });
   }
-
   onRowEditInit(user: any) {
-    this.clonedUser[user.email as string] = { ...user };
+    this.clonedUser[user?.data.email as string] = { ...user?.data };
   }
 
   onRowEditSave(user: any) {
-    //Needs to implement EditUser
     this.userService.EditUser(user).subscribe(res => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Subscription Updated' });
     });
@@ -65,8 +65,8 @@ export class GestioneAccountComponent {
   }
 
   onRowEditCancel(user: any, index: number) {
-    this.user[index] = this.clonedUser[user.email as string];
-    delete this.clonedUser[user.email as string];
+    this.user[index] = this.clonedUser[user?.data.email as string];
+    delete this.clonedUser[user.data.email as string];
     this.loadUserData();
   }
 }

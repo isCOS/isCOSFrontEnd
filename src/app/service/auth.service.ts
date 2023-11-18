@@ -7,10 +7,11 @@ import { Observable, map } from 'rxjs';
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  ip = "10.31.12.211:5294"
+  // ip = "10.31.12.211:5294"
+  ip = '127.0.0.1:5294';
 
   CheckAuthoritation(email: any, token: any): Observable<string> {
-    const url = `http://${this.ip}  /api/User/checkAuthorization?email=${email}&token=${token}`
+    const url = `http://${this.ip}/api/User/checkAuthorization?email=${email}&token=${token}`
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',

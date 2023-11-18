@@ -12,7 +12,7 @@
                         <a (click)="showAccountDialog(); usageDialogVisible = false; contactsDialogVisible = false; vehiclesDialogVisible = false"
                             label="Show" class="active cursor-pointer">Account</a>
                         <p-dialog header="Modifica dati" [showHeader]="true" [resizable]='false' [draggable]='false'
-                            [(visible)]="accountDialogVisible" [style]="{width: 'auto'}">
+                            [(visible)]="accountDialogVisible" [style]="{width: 'auto', heigth:'auto'}">
                             <app-gestione-account></app-gestione-account>
                         </p-dialog>
                     </div>

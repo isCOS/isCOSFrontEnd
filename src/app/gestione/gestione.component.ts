@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, query, keyframes } from '@angular/animations';
 import { Output, EventEmitter } from '@angular/core';
+import { userService } from '../service/user.service';
 
 @Component({
   selector: 'app-gestione',
@@ -9,7 +10,7 @@ import { Output, EventEmitter } from '@angular/core';
   animations: [
   ]
 })
-export class GestioneComponent {
+export class GestioneComponent implements OnInit{
 
   showBox: boolean = true;
   accountDialogVisible: boolean = false;
@@ -18,8 +19,19 @@ export class GestioneComponent {
   contactsDialogVisible: boolean = false;
   veicleDialogVisible: boolean = false;
   currentDialog: string = '';
-
+  user: any;
   @Output() toggle = new EventEmitter<void>();
+
+  constructor(
+    private userService: userService
+  ) {}
+
+  ngOnInit(): void {
+    this.userService.GetUser(sessionStorage.getItem('email')).subscribe((res) => {
+      this.user = res;
+      // console.log('User: ',this.user);
+    });
+  }
 
   openDialog(dialogName: string) {
     this.currentDialog = dialogName;
@@ -28,7 +40,6 @@ export class GestioneComponent {
   showVeicleDialog() {
     this.veicleDialogVisible = !this.veicleDialogVisible;
   }
-
 
   showAccountDialog() {
     this.accountDialogVisible = !this.accountDialogVisible;
@@ -52,6 +63,5 @@ export class GestioneComponent {
     this.visible = true;
   }
 
-  constructor() { }
 
 }

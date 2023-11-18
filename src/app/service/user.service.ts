@@ -5,9 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class userService {
-  ip = "10.31.12.211:5294"
-  // registrationUrl = environment.apiUrl + '/User/AddPersona';
-  // apiurl = 'http://localhost:3000/accounts'
+  // ip = "10.31.12.211:5294"
+  ip = '127.0.0.1:5294';
   apiurl = `http://${this.ip}/api/User/`;
   logeed = false;
   constructor(private http: HttpClient) {}
@@ -24,7 +23,7 @@ export class userService {
   }
 
   GetUser(userId: string) {
-    const url = `http://${this.ip}/api/User/GetUserByEmail/${userId}`;
+    const url = `http://${this.ip}/api/User/GetUserByEmail?email=${userId}`;
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
