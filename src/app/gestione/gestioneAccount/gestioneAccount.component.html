@@ -1,94 +1,139 @@
-<!-- <p>User Email: {{user?.data.email}}</p>
-<p>User Name: {{user?.data.name}}</p>
-<p>User Surname: {{user?.data.surname}}</p>
-<p>User Date Birth: {{user?.data.dateBirth}}</p>
-<p>User Drive Licence Type: {{user?.data.drivingLicense.type}}</p>
-<p>User Name Drive Licence DeadLine: {{user?.data.drivingLicense.deadLine}}</p> -->
-
-
 <div class="card">
   <p-toast></p-toast>
-  <p-table [value]="[this.user]" dataKey="id" editMode="row" [tableStyle]="{'min-width': '50rem'}">
-      <ng-template pTemplate="header">
-          <tr>
-              <th style="width:20%">Name</th>
-              <th style="width:20%">Surname</th>
-              <th style="width:20%">E-mail</th>
-              <th style="width:20%">Date Birth</th>
-              <th style="width:20%">Driving License</th>
-              <th style="width:20%">Driving License Type</th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-user let-editing="editing" let-ri="rowIndex">
-          <tr [pEditableRow]="this.user">
-              <td>
-                  <p-cellEditor>
-                      <ng-template pTemplate="input">
-                          <input pInputText type="text" [(ngModel)]="user?.data.name">
-                      </ng-template>
-                      <ng-template pTemplate="output">
-                          {{user?.data.name}}
-                      </ng-template>
-                  </p-cellEditor>
-              </td>
-              <td>
-                  <p-cellEditor>
-                      <ng-template pTemplate="input">
-                          <input pInputText type="text" [(ngModel)]="user?.data.surname" required>
-                      </ng-template>
-                      <ng-template pTemplate="output">
-                          {{user?.data.surname}}
-                      </ng-template>
-                  </p-cellEditor>
-              </td>
-              <td>
-                  <p-cellEditor>
-                      <ng-template pTemplate="input">
-                          <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="user?.data.email" [style]="{'width':'100%'}"></p-dropdown>
-                      </ng-template>
-                      <ng-template pTemplate="output">
-                          {{user?.data.email}}
-                      </ng-template>
-                  </p-cellEditor>
-              </td>
-              <td>
-                  <p-cellEditor>
-                      <ng-template pTemplate="input">
-                          <input pInputText type="text" [(ngModel)]="user?.data.dateBirth">
-                      </ng-template>
-                      <ng-template pTemplate="output">
-                          {{user?.data.dateBirth}}
-                      </ng-template>
-                  </p-cellEditor>
-              </td>
-              <td>
-                  <p-cellEditor>
-                      <ng-template pTemplate="input">
-                          <input pInputText type="text" [(ngModel)]="user?.data.drivingLicense.deadLine">
-                      </ng-template>
-                      <ng-template pTemplate="output">
-                          {{user?.data.drivingLicense.deadLine}}
-                      </ng-template>
-                  </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="user?.data.drivingLicense.type">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{user?.data.drivingLicense.type}}
-                    </ng-template>
-                </p-cellEditor>
-            </td>
-              <td>
-                  <div class="flex align-items-center justify-content-center gap-2">
-                      <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
-                      <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                      <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-                  </div>
-              </td>
-          </tr>
-      </ng-template>
+  <p-table
+    [value]="[user]"
+    dataKey="id"
+    editMode="row"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 20%">Name</th>
+        <th style="width: 20%">Surname</th>
+        <th style="width: 20%">E-mail</th>
+        <th style="width: 20%">Date Birth</th>
+        <th style="width: 20%">Driving License</th>
+        <th style="width: 20%">Driving License Type</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-user
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
+      <tr [pEditableRow]="user">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user?.data.name" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user?.data.name }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="user?.data.surname" />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user?.data.surname }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown
+                appendTo="body"
+                [(ngModel)]="user?.data.email"
+                [style]="{ width: '100%' }"
+              ></p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user?.data.email }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [(ngModel)]="user?.data.dateBirth"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user?.data.dateBirth }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [(ngModel)]="user?.data.drivingLicense.deadLine"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user?.data.drivingLicense.deadLine }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [(ngModel)]="user?.data.drivingLicense.type"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user?.data.drivingLicense.type }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button
+              *ngIf="!editing"
+              pButton
+              pRipple
+              type="button"
+              pInitEditableRow
+              icon="pi pi-pencil"
+              (click)="onRowEditInit()"
+              class="p-button-rounded p-button-text"
+            ></button>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pSaveEditableRow
+              icon="pi pi-check"
+              (click)="onRowEditSave(user?.data)"
+              class="p-button-rounded p-button-text p-button-success mr-2"
+            ></button>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pCancelEditableRow
+              icon="pi pi-times"
+              (click)="onRowEditCancel(user?.data, ri)"
+              class="p-button-rounded p-button-text p-button-danger"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
   </p-table>
 </div>

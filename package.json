@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve & json-server --watch db.json --parallel",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -21,6 +21,7 @@
     "@angular/router": "^16.2.0",
     "@mapbox/mapbox-gl-directions": "^4.1.1",
     "@types/mapbox-gl": "^2.7.15",
+    "@types/node": "^20.9.2",
     "mapbox-gl": "^2.15.0",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
