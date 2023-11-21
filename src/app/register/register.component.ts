@@ -76,21 +76,18 @@ export class RegisterComponent implements OnInit {
   });
 
   proceedRegistration() {
-    //this.form.reset();
-    const tempDate = new Date(this.form.value.dateBirth!);
-    const tempDate2 = new Date(this.form.value.deadLine!);
-    tempDate.setTime(tempDate.getTime() - tempDate.getTimezoneOffset() * 60 * 1000);
-    tempDate2.setTime(tempDate2.getTime() - tempDate2.getTimezoneOffset() * 60 * 1000);
-    // tempDate.getTimezoneOffset();
-    // tempDate2.getTimezoneOffset();
+    const tempDate = new Date(this.form.value.dateBirth);
+    const tempDate2 = new Date(this.form.value.deadLine);
     this.form.patchValue({ dateBirth: tempDate });
     this.form.patchValue({ deadLine: tempDate2 });
+    
     const toSend = {
       ...this.form.value,
-      // dateBirth: this.datePipe.transform(this.form.value.dateBirth, 'dd-MM-yyyy'),
-      // deadLine: this.datePipe.transform(this.form.value.deadLine, 'dd-MM-yyyy'),
-      drivingLicense: {type: this.form.value.drivingLicense, deadLine: this.form.value.deadLine! },
+      dateBirth: this.datePipe.transform(this.form.value.dateBirth, 'yyyy-MM-dd'),
+      deadLine: this.datePipe.transform(this.form.value.deadLine, 'yyyy-MM-dd'),
+      drivingLicense: {type: this.form.value.drivingLicense, deadLine: this.datePipe.transform(this.form.value.deadLine, 'yyyy-MM-dd') }
     };
+    
     this.userService.AddUser(toSend).subscribe((data: any) => {
       console.log(data);
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Registration completed' });
@@ -98,6 +95,31 @@ export class RegisterComponent implements OnInit {
     
     console.log(toSend);
   }
+  
+  
+  // proceedRegistration() {
+  //   //this.form.reset();
+  //   const tempDate = new Date(this.form.value.dateBirth!);
+  //   const tempDate2 = new Date(this.form.value.deadLine!);
+  //   tempDate.setTime(tempDate.getTime() - tempDate.getTimezoneOffset() * 60 * 1000);
+  //   tempDate2.setTime(tempDate2.getTime() - tempDate2.getTimezoneOffset() * 60 * 1000);
+  //   // tempDate.getTimezoneOffset();
+  //   // tempDate2.getTimezoneOffset();
+  //   this.form.patchValue({ dateBirth: tempDate });
+  //   this.form.patchValue({ deadLine: tempDate2 });
+  //   const toSend = {
+  //     ...this.form.value,
+  //     dateBirth: this.datePipe.transform(this.form.value.dateBirth, 'yyyy-MM-dd'),
+  //     deadLine: this.datePipe.transform(this.form.value.deadLine, 'yyyy-MM-dd'),
+  //     drivingLicense: {type: this.form.value.drivingLicense, deadLine: this.form.value.deadLine! },
+  //   };
+  //   this.userService.AddUser(toSend).subscribe((data: any) => {
+  //     console.log(data);
+  //     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Registration completed' });
+  //   });
+    
+  //   console.log(toSend);
+  // }
 
   onContinue() {
     this.showContinueButton = !this.showContinueButton;

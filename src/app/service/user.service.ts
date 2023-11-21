@@ -16,18 +16,7 @@ export class userService {
     return this.http.post<any>(url, data, {
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'text/plain',
-        'Access-Control-Allow-Origin': '*',
-      },
-    });
-  }
-
-  GetUser(userId: string) {
-    const url = `http://${this.ip}/api/User/GetUserByEmail?email=${userId}`;
-    return this.http.get<any>(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'text/plain',
+        'Accept': 'text/plain',
         'Access-Control-Allow-Origin': '*',
       },
     });
@@ -38,7 +27,7 @@ export class userService {
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'text/plain',
+        'Accept': 'text/plain',
         'Access-Control-Allow-Origin': '*',
       }
     });
@@ -49,7 +38,7 @@ export class userService {
     return this.http.post<any>(url, user, {
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'text/plain',
+        'Accept': 'text/plain',
         'Access-Control-Allow-Origin': '*',
       },
     });
@@ -60,7 +49,7 @@ export class userService {
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'text/plain',
+        'Accept': 'text/plain',
         'Access-Control-Allow-Origin': '*',
       }
     });

@@ -12,6 +12,7 @@ import { userService } from '../service/user.service';
 })
 export class GestioneComponent implements OnInit{
 
+  editMode: boolean = false;
   showBox: boolean = true;
   accountDialogVisible: boolean = false;
   vehiclesDialogVisible: boolean = false;
@@ -27,10 +28,12 @@ export class GestioneComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.userService.GetUser(sessionStorage.getItem('email')).subscribe((res) => {
-      this.user = res;
-      // console.log('User: ',this.user);
-    });
+    // this.userService.GetUser(sessionStorage.getItem('email')).subscribe((res) => {
+    //   this.user = res;
+    //   console.log('User: ',this.user);
+    // });
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    console.log('User session storage: ', this.user);
   }
 
   openDialog(dialogName: string) {

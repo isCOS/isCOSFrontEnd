@@ -56,6 +56,7 @@ export class LoginComponent {
       this.userdata =  res;
       sessionStorage.setItem('email', this.userdata.data.email);
       sessionStorage.setItem('token', this.userdata.data.token);
+      sessionStorage.setItem('user', JSON.stringify(this.userdata.data));
       this.router.navigate(['/gestione']);
     },
       error => {
