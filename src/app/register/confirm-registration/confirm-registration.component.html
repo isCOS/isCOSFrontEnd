@@ -1,0 +1,22 @@
+<div class="mt-4">
+  <form
+    [formGroup]="confirmEmailForm"
+    method="post"
+    (ngSubmit)="confirmEmail()"
+  >
+    <span class="p-float-label">
+      <p-inputMask
+        mask="999999"
+        formControlName="confirmCode"
+        (autoFocus)="(false)"
+        [required]="true"
+      ></p-inputMask>
+      <label>Codice di conferma</label>
+    </span>
+    <div class="mt-3">
+      <p-button type="submit" [disabled]="!confirmEmailForm.valid"
+        >Conferma</p-button
+      >
+    </div>
+  </form>
+</div>
