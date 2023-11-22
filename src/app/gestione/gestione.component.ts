@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, query, keyframes } from '@angular/animations';
 import { Output, EventEmitter } from '@angular/core';
 import { userService } from '../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gestione',
@@ -24,7 +25,8 @@ export class GestioneComponent implements OnInit{
   @Output() toggle = new EventEmitter<void>();
 
   constructor(
-    private userService: userService
+    private userService: userService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -66,5 +68,9 @@ export class GestioneComponent implements OnInit{
     this.visible = true;
   }
 
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
 
 }
