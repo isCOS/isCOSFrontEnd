@@ -101,9 +101,11 @@
                         </p-dialog>
                     </div>
                     <div>
-                        <a label="Show" href="https://github.com/GabrieleSantangelo/isCOS.git"
-                            class="active cursor-pointer"><p-avatar image="/assets/GitHub2.png" styleClass="mr-2"
+                        <a href="https://github.com/GabrieleSantangelo/isCOS.git"><p-avatar image="/assets/GitHub2.png" styleClass="mr-2"
                                 size="large" shape="circle"></p-avatar></a>
+                    </div>
+                    <div>
+                        <p-button icon="pi pi-sign-out" [rounded]="true" [text]="true" severity="help " (onClick)="logout()"></p-button>
                     </div>
                 </div>
             </nav>
