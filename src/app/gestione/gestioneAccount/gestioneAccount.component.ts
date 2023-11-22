@@ -78,7 +78,7 @@ export class GestioneAccountComponent implements OnInit {
   onRowEditSave(user: any) {
     console.log('User modificato: ', user);
     this.proceedEditing();
-    this.loadUserData();
+    
   }
   proceedEditing() {
     const tempDate = new Date(this.editingForm.value.dateBirth);
@@ -86,12 +86,6 @@ export class GestioneAccountComponent implements OnInit {
     this.editingForm.patchValue({ dateBirth: tempDate });
     this.editingForm.patchValue({ deadLine: tempDate2 });
     this.editingForm.patchValue({ email: this.user.email });
-    // const toSend = {
-    //   ...this.editingForm.value,
-    //   dateBirth: this.datePipe.transform(this.editingForm.value.dateBirth, 'yyyy-MM-dd'),
-    //   deadLine: this.datePipe.transform(this.editingForm.value.deadLine, 'yyyy-MM-dd'),
-    //   drivingLicense: {type: this.editingForm.value.drivingLicense, deadLine: this.datePipe.transform(this.editingForm.value.deadLine, 'yyyy-MM-dd') }
-    // };
     const { deadLine, ...rest } = this.editingForm.value;
     const toSend = {
       ...rest,
@@ -101,6 +95,7 @@ export class GestioneAccountComponent implements OnInit {
         deadLine: this.datePipe.transform(this.editingForm.value.deadLine, 'yyyy-MM-dd'),
       },
     };
+    this.user = toSend;
     console.log('ToSend form: ', toSend);
     this.userService.EditUser(toSend).subscribe((res) => {
       this.messageService.add({
@@ -108,7 +103,10 @@ export class GestioneAccountComponent implements OnInit {
         summary: 'Success',
         detail: 'Subscription Updated',
       });
+      sessionStorage.removeItem('user');
+      sessionStorage.setItem('user', JSON.stringify(toSend));
     });
+    return this.user;
   }
 
   // onRowEditCancel(user: any, index: number) {
