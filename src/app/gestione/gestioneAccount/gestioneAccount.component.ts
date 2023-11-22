@@ -78,7 +78,7 @@ export class GestioneAccountComponent implements OnInit {
   onRowEditSave(user: any) {
     console.log('User modificato: ', user);
     this.proceedEditing();
-    
+
   }
   proceedEditing() {
     const tempDate = new Date(this.editingForm.value.dateBirth);
@@ -108,7 +108,10 @@ export class GestioneAccountComponent implements OnInit {
     });
     return this.user;
   }
-
+  onRowEditCancel(){
+    this.editMode = false;
+    this.loadUserData();
+  }
   // onRowEditCancel(user: any, index: number) {
   //   this.user[index] = this.clonedUser[user?.data.email as string];
   //   delete this.clonedUser[user.data.email as string];
