@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition, query, keyframes } from '@angular/animations';
 import { Output, EventEmitter } from '@angular/core';
 import { userService } from '../service/user.service';
 import { Router } from '@angular/router';
+import { DialogsService } from '../service/dialogs.service';
 
 @Component({
   selector: 'app-gestione',
@@ -26,6 +26,7 @@ export class GestioneComponent implements OnInit{
 
   constructor(
     private userService: userService,
+    private dialogService: DialogsService,
     private router: Router
   ) {}
 
@@ -35,11 +36,21 @@ export class GestioneComponent implements OnInit{
     //   console.log('User: ',this.user);
     // });
     this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.dialogService.currentEditMode.subscribe(editMode => this.editMode = editMode);
     console.log('User session storage: ', this.user);
   }
 
   openDialog(dialogName: string) {
     this.currentDialog = dialogName;
+  }
+
+  setEditMode(value: boolean) {
+    this.dialogService.changeEditMode(value);
+    this.loadUserData();
+  }
+
+  loadUserData() {
+    this.user = JSON.parse(sessionStorage.getItem('user'));
   }
 
   showVeicleDialog() {

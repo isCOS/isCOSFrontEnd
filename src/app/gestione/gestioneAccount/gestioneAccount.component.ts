@@ -4,6 +4,7 @@ import { userService } from '../../service/user.service';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { DialogsService } from 'src/app/service/dialogs.service';
 
 interface driveLicences {
   name: string;
@@ -15,6 +16,7 @@ interface driveLicences {
   styleUrls: ['./gestioneAccount.component.scss'],
 })
 export class GestioneAccountComponent implements OnInit {
+
   showContinueButton = false;
   driveLicences: driveLicences[] | undefined;
   selectedDriveLicence: driveLicences | undefined;
@@ -25,12 +27,13 @@ export class GestioneAccountComponent implements OnInit {
   userEmail: any;
   jsonUser: any;
   stringifiedUser: any;
-  editMode: boolean = false;
+  editMode: boolean = true;
   clonedUser: { [s: string]: any } = {};
 
   constructor(
     private userService: userService,
     private fb: FormBuilder,
+    private dialogsService: DialogsService,
     private datePipe: DatePipe,
     private messageService: MessageService
   ) {}
@@ -48,7 +51,8 @@ export class GestioneAccountComponent implements OnInit {
       { name: 'D1E' },
       { name: 'DE' },
     ];
-    this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.loadUserData();
+    this.dialogsService.currentEditMode.subscribe(editMode => this.editMode = editMode);
     console.log('User session storage dialog: ', this.user);
   }
 
@@ -110,11 +114,11 @@ export class GestioneAccountComponent implements OnInit {
   }
   onRowEditCancel(){
     this.editMode = false;
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Subscription Cancelled',
+    });
     this.loadUserData();
   }
-  // onRowEditCancel(user: any, index: number) {
-  //   this.user[index] = this.clonedUser[user?.data.email as string];
-  //   delete this.clonedUser[user.data.email as string];
-  //   this.loadUserData();
-  // }
 }

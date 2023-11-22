@@ -54,6 +54,20 @@ export class userService {
       }
     });
   }
+  
+  verifyEmail(email: any, code: any) {
+    const encodedEmail = encodeURIComponent(email);
+    console.log(encodedEmail);
+    console.log(code);
+    const url = `http://${this.ip}/api/User/VerificationUser?email=${encodedEmail}&token=${code}`
+    return this.http.put<any>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      }
+    });
+  }
 }
 
 /*

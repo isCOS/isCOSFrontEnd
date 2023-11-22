@@ -22,6 +22,7 @@ import { ManagerAccountComponent } from './managementSystem/manager-account/mana
 import { NavigatorComponent } from './navigator/navigator.component';
 import { GestioneAccountComponent } from './gestione/gestioneAccount/gestioneAccount.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ConfirmRegistrationComponent } from './register/confirm-registration/confirm-registration.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AuthGuard } from './guard/auth.guard';
     WorkingGlobeComponent,
     ManagerAccountComponent,
     NavigatorComponent,
-    GestioneAccountComponent
+    GestioneAccountComponent,
+    ConfirmRegistrationComponent
   ],
   imports: [
     BrowserAnimationsModule,
