@@ -23,32 +23,19 @@
         </div>
         <div class="card flex mt-4">
           <span class="p-float-label input-group">
-            <p-calendar
-              formControlName="dateBirth"
-              appendTo="body"
-              dateFormat="dd/mm/yy"
-            ></p-calendar>
+            <p-calendar formControlName="dateBirth" appendTo="body" dateFormat="dd/mm/yy"></p-calendar>
             <label htmlFor="date">Data di nascita</label>
           </span>
         </div>
       </div>
       <div *ngIf="showContinueButton">
         <div class="card flex justify-content-center mt-4">
-          <p-dropdown
-            formControlName="drivingLicense"
-            [options]="driveLicences"
-            optionValue="name"
-            optionLabel="name"
-            placeholder="Tipo patente"
-          ></p-dropdown>
+          <p-dropdown formControlName="drivingLicense" [options]="driveLicences" optionValue="name" optionLabel="name"
+            placeholder="Tipo patente"></p-dropdown>
         </div>
         <div class="card flex justify-content-center mt-4">
           <span class="p-float-label input-group">
-            <p-calendar
-              formControlName="deadLine"
-              appendTo="body"
-              dateFormat="dd/mm/yy"
-            ></p-calendar>
+            <p-calendar formControlName="deadLine" appendTo="body" dateFormat="dd/mm/yy"></p-calendar>
             <label htmlFor="date">Data scadenza patente</label>
           </span>
         </div>
@@ -66,38 +53,19 @@
         </div>
         <div class="card flex justify-content-center mt-4">
           <span class="p-float-label input-group">
-            <input
-              pInputText
-              type="password"
-              formControlName="repeatPassword"
-            />
+            <input pInputText type="password" formControlName="repeatPassword" />
             <label htmlFor="password">Ripeti password</label>
           </span>
         </div>
       </div>
-      <button
-        *ngIf="!showContinueButton"
-        type="button"
-        class="mt-3"
-        (click)="onContinue()"
-      >
+      <button *ngIf="!showContinueButton" type="button" class="mt-3" (click)="onContinue()">
         Continua
       </button>
-      <button
-        *ngIf="showContinueButton"
-        type="button"
-        class="mt-3"
-        (click)="onContinue()"
-      >
+      <button *ngIf="showContinueButton" type="button" class="mt-3" (click)="onContinue()">
         Indietro
       </button>
-      <button
-        *ngIf="showContinueButton"
-        type="button"
-        [disabled]="!form.valid"
-        (click)="proceedRegistration()"
-        class="mt-3"
-      >
+      <button *ngIf="showContinueButton" type="button" [disabled]="!form.valid" (click)="proceedRegistration()"
+        class="mt-3">
         Registrati
       </button>
       <div *ngIf="showContinueButton">
@@ -111,25 +79,12 @@
       </div>
       <div class="signUp-link flex align-items-center">
         <p>Hai già un account?</p>
-        <p-button
-          (click)="onToggle()"
-          [text]="true"
-          styleClass="text-white"
-          class="tableButton cursor-pointer"
-          >Accedi</p-button
-        >
+        <p-button (click)="onToggle()" [text]="true" styleClass="text-white"
+          class="tableButton cursor-pointer">Accedi</p-button>
       </div>
     </form>
-    <p-dialog
-      [visible]="this.confirmAccountDialog"
-      header="Conferma la mail"
-      appendTo="body"
-      [closeOnEscape]="false"
-      [draggable]="false"
-      [resizable]="false"
-      [closable]="false"
-      [style]="{ width: 'auto', heigth: 'auto' }"
-    >
+    <p-dialog [visible]="this.confirmAccountDialog" header="Conferma la mail" appendTo="body" [closeOnEscape]="false"
+      [draggable]="false" [resizable]="false" [closable]="false" [style]="{ width: 'auto', heigth: 'auto' }">
       <app-confirm-registration></app-confirm-registration>
     </p-dialog>
   </div>
