@@ -7,9 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimengModule } from 'src/primeng.module';
 import { DialogModule } from 'primeng/dialog';
-import { LoginComponent} from './login/login.component';
+import { LoginComponent} from './authentication/login/login.component';
 import { GlobeComponent } from './globes/globe/globe.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './authentication/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { GestioneComponent } from './gestione/gestione.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +22,9 @@ import { ManagerAccountComponent } from './managementSystem/manager-account/mana
 import { NavigatorComponent } from './navigator/navigator.component';
 import { GestioneAccountComponent } from './gestione/gestioneAccount/gestioneAccount.component';
 import { AuthGuard } from './guard/auth.guard';
-import { ConfirmRegistrationComponent } from './register/confirm-registration/confirm-registration.component';
+import { ConfirmRegistrationComponent } from './authentication/register/confirm-registration/confirm-registration.component';
+import { ChangePasswordComponent } from './authentication/login/change-password/change-password.component';
+import { ConfirmChangePasswordComponent } from './authentication/confirm-change-password/confirm-change-password.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { ConfirmRegistrationComponent } from './register/confirm-registration/co
     ManagerAccountComponent,
     NavigatorComponent,
     GestioneAccountComponent,
-    ConfirmRegistrationComponent
+    ConfirmRegistrationComponent,
+    ChangePasswordComponent,
+    ConfirmChangePasswordComponent
   ],
   imports: [
     BrowserAnimationsModule,

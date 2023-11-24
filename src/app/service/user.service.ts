@@ -58,7 +58,6 @@ export class userService {
   verifyEmail(email: any, code: any) {
     const encodedEmail = encodeURIComponent(email);
     console.log(encodedEmail);
-    console.log(code);
     const url = `http://${this.ip}/api/User/VerificationUser?email=${encodedEmail}&token=${code}`
     return this.http.put<any>(url, {
       headers: {
@@ -68,7 +67,33 @@ export class userService {
       }
     });
   }
+
+  changePasswordRequest(data:any){
+    const url = `http://${this.ip}/api/User/ChangePasswordRequest`;
+    return this.http.post<any>(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      }
+    });
+  }
+
+  confirmChangePassword(email: any, token:any){
+    const encodedEmail = encodeURIComponent(email);
+    const url = `http://${this.ip}/api/User/ChangePassword?email=${encodedEmail}&token=${token}`;
+    return this.http.post<any>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      }
+    });
+  }
+
 }
+
+
 
 /*
 :method: POST

@@ -79,8 +79,9 @@
       </div>
       <div class="signUp-link flex align-items-center">
         <p>Hai già un account?</p>
-        <p-button (click)="onToggle()" [text]="true" styleClass="text-white"
-          class="tableButton cursor-pointer">Accedi</p-button>
+        <a (click)="onToggle()" class="ml-2 cursor-pointer text-white">Accedi</a>
+        <!-- <p-button (click)="onToggle()" [text]="true" styleClass="text-white"
+          class="tableButton cursor-pointer">Accedi</p-button> -->
       </div>
     </form>
     <p-dialog [visible]="this.confirmAccountDialog" header="Conferma la mail" appendTo="body" [closeOnEscape]="false"

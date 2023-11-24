@@ -12,6 +12,12 @@ export class DialogsService {
   private showConfirmDialogSource = new BehaviorSubject<boolean>(false);
   currentConfirmDialog = this.showConfirmDialogSource.asObservable();
 
+  private showChangePasswordDialogSource = new BehaviorSubject<boolean>(false);
+  currentChangePasswordDialog = this.showChangePasswordDialogSource.asObservable();
+
+  private showConfirmChangePasswordDialogSource = new BehaviorSubject<boolean>(false);
+  currentConfirmChangePasswordDialog = this.showConfirmChangePasswordDialogSource.asObservable();
+
   constructor() { }
 
   changeEditMode(mode: boolean) {
@@ -20,6 +26,14 @@ export class DialogsService {
 
   changeConfirmDialog(mode: boolean) {
     this.showConfirmDialogSource.next(mode);
+  }
+
+  changePasswordFormDialog(mode: boolean) {
+    this.showChangePasswordDialogSource.next(mode);
+  }
+
+  changeConfirmPasswordFormDialog(mode: boolean) {
+    this.showConfirmChangePasswordDialogSource.next(mode);
   }
 
 }

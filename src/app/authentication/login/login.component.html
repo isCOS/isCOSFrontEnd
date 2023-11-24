@@ -1,0 +1,71 @@
+<p-toast></p-toast>
+<div class="box flex-wrap pt-2 pb-2 pl-3 pr-3">
+  <div class="form-wrapper sign-in" *ngIf="showBox" [@leaveRight]>
+    <form [formGroup]="form" method="post" (ngSubmit)="sendLoginRequest()">
+      <h2>Login</h2>
+      <div class="card flex justify-content-center mt-4">
+        <span class="p-float-label input-group">
+          <input pInputText type="email" formControlName="email" required />
+          <label htmlFor="email">Email</label>
+        </span>
+      </div>
+      <div class="card flex justify-content-center mt-4">
+        <span class="p-float-label input-group">
+          <input
+            pInputText
+            type="password"
+            formControlName="password"
+            required
+          />
+          <label htmlFor="password">Password</label>
+        </span>
+      </div>
+      <button
+        type="button"
+        (click)="checkCorrectPassword()"
+        [disabled]="!form.valid"
+      >
+        Accedi
+      </button>
+      <div class="signUp-link flex align-items-center h-1">
+        <p>Non hai ancora un account?</p>
+        <a (click)="onToggle()" class="ml-2 cursor-pointer">Registrati</a>
+        <!-- <p-button (click)="onToggle()" [text]="true" styleClass="text-white">Registrati</p-button> -->
+      </div>
+      <div class="signUp-link flex align-items-center h-1 mb-2">
+        <p-button
+          (click)="showChangePasswordDialog()"
+          [text]="true"
+          styleClass="text-white"
+          class="tableButton cursor-pointer"
+          [size]="small"
+          >Ho dimenticato la password</p-button
+        >
+      </div>
+    </form>
+    <p-dialog
+      [visible]="this.changePasswordDialog"
+      header="Cambia password"
+      appendTo="body"
+      [closeOnEscape]="false"
+      [draggable]="false"
+      [resizable]="false"
+      [closable]="false"
+      [style]="{ width: 'auto', heigth: 'auto' }"
+    >
+      <app-change-password></app-change-password>
+    </p-dialog>
+    <p-dialog
+      [visible]="this.confirmChangePasswordDialog"
+      header="Conferma cambio password"
+      appendTo="body"
+      [closeOnEscape]="false"
+      [draggable]="false"
+      [resizable]="false"
+      [closable]="false"
+      [style]="{ width: 'auto', heigth: 'auto' }"
+    >
+      <app-confirm-change-password></app-confirm-change-password>
+    </p-dialog>
+  </div>
+</div>

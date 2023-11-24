@@ -1,14 +1,27 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
-import { FormControl, FormBuilder, Validators } from '@angular/forms';
-import { userService } from '../service/user.service';
+import {
+  FormControl,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
+import { userService } from '../../service/user.service';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
-import { DialogsService } from '../service/dialogs.service';
+import { DialogsService } from '../../service/dialogs.service';
 
 interface driveLicences {
   name: string;
+}
+export function passwordMatchValidator(c: AbstractControl) {
+  if (!c.get('password').value || !c.get('repeatPassword').value) {
+    return null;
+  }
+  if (c.get('password').value !== c.get('repeatPassword').value) {
+    return { passwordMismatch: true };
+  }
+  return null;
 }
 
 @Component({
@@ -41,7 +54,6 @@ export class RegisterComponent implements OnInit {
       (confirmAccountDialog) =>
         (this.confirmAccountDialog = confirmAccountDialog)
     );
-
   }
 
   onToggle() {
@@ -55,38 +67,40 @@ export class RegisterComponent implements OnInit {
     private messageService: MessageService
   ) {}
   //Build the form
-  form = this.fb.group({
-    name: new FormControl(
-      '',
-      Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(25),
-      ])
-    ),
-    surname: new FormControl(
-      '',
-      Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
-      ])
-    ),
-    email: new FormControl(
-      '',
-      Validators.compose([
-        Validators.required,
-        Validators.pattern(this.emailRegex),
-      ])
-    ),
-    dateBirth: new FormControl<Date | null>(null, Validators.required),
-    drivingLicense: new FormControl<driveLicences | null>(null),
-    deadLine: new FormControl<Date | null>(null, Validators.required),
-    businessName: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    repeatPassword: new FormControl('', Validators.required),
-    //Set date to the current date
-  });
+  form = this.fb.group(
+    {
+      name: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(25),
+        ])
+      ),
+      surname: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ])
+      ),
+      email: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(this.emailRegex),
+        ])
+      ),
+      dateBirth: new FormControl<Date | null>(null, Validators.required),
+      drivingLicense: new FormControl<driveLicences | null>(null),
+      deadLine: new FormControl<Date | null>(null, Validators.required),
+      businessName: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      repeatPassword: new FormControl('', Validators.required),
+    },
+    { validator: passwordMatchValidator }
+  );
 
   proceedRegistration() {
     const tempDate = new Date(this.form.value.dateBirth);
