@@ -12,6 +12,7 @@ import { userService } from '../../service/user.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { TreeNode } from 'primeng/api';
 import { DialogsService } from '../../service/dialogs.service';
 
 @Component({
@@ -38,6 +39,7 @@ import { DialogsService } from '../../service/dialogs.service';
 })
 export class LoginComponent implements OnInit {
   showBox: boolean = true;
+  nodes: TreeNode[] | undefined;
 
   @Output() toggle = new EventEmitter<void>();
   emailRegex: any = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -47,14 +49,7 @@ export class LoginComponent implements OnInit {
   confirmChangePasswordDialog: boolean = false;
 
   ngOnInit(): void {
-    this.dialogService.currentChangePasswordDialog.subscribe(
-      (changePasswordDialog) =>
-        (this.changePasswordDialog = changePasswordDialog)
-    );
-    this.dialogService.currentConfirmChangePasswordDialog.subscribe(
-      (confirmChangePasswordDialog) =>
-        (this.confirmChangePasswordDialog = confirmChangePasswordDialog)
-    );
+    
   }
 
   onToggle() {
@@ -111,7 +106,5 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  showChangePasswordDialog() {
-    this.changePasswordDialog = !this.changePasswordDialog;
-  }
+  
 }

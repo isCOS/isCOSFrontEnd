@@ -32,40 +32,6 @@
         <a (click)="onToggle()" class="ml-2 cursor-pointer">Registrati</a>
         <!-- <p-button (click)="onToggle()" [text]="true" styleClass="text-white">Registrati</p-button> -->
       </div>
-      <div class="signUp-link flex align-items-center h-1 mb-2">
-        <p-button
-          (click)="showChangePasswordDialog()"
-          [text]="true"
-          styleClass="text-white"
-          class="tableButton cursor-pointer"
-          [size]="small"
-          >Ho dimenticato la password</p-button
-        >
-      </div>
     </form>
-    <p-dialog
-      [visible]="this.changePasswordDialog"
-      header="Cambia password"
-      appendTo="body"
-      [closeOnEscape]="false"
-      [draggable]="false"
-      [resizable]="false"
-      [closable]="false"
-      [style]="{ width: 'auto', heigth: 'auto' }"
-    >
-      <app-change-password></app-change-password>
-    </p-dialog>
-    <p-dialog
-      [visible]="this.confirmChangePasswordDialog"
-      header="Conferma cambio password"
-      appendTo="body"
-      [closeOnEscape]="false"
-      [draggable]="false"
-      [resizable]="false"
-      [closable]="false"
-      [style]="{ width: 'auto', heigth: 'auto' }"
-    >
-      <app-confirm-change-password></app-confirm-change-password>
-    </p-dialog>
   </div>
 </div>

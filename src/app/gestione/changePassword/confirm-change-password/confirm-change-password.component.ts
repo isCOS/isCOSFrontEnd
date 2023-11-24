@@ -38,7 +38,7 @@ export class ConfirmChangePasswordComponent {
           detail: 'Your account has been verified',
         });
         sessionStorage.removeItem('email');
-        this.dialogService.changeConfirmPasswordFormDialog(false);
+        this.dialogService.changeConfirmPasswordFormView(false);
       } else {
         this.messageService.add({
           severity: 'error',

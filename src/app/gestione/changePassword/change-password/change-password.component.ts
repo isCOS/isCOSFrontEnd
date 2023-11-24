@@ -22,7 +22,7 @@ export function passwordMatchValidator(c: AbstractControl) {
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss'],
+  styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit{
   constructor(
@@ -33,24 +33,20 @@ export class ChangePasswordComponent implements OnInit{
   ) {}
 
   emailRegex: any = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  changePasswordDialog: boolean = false;
+  changePasswordView: boolean = false;
+  user: any;
 
   ngOnInit(): void {
-    this.dialogService.currentChangePasswordDialog.subscribe(
-      (changePasswordDialog) =>
-        (this.changePasswordDialog = changePasswordDialog)
+    this.dialogService.currentChangePasswordView.subscribe(
+      (changePasswordView) =>
+        (this.changePasswordView = changePasswordView)
     );
+    this.user = JSON.parse(sessionStorage.getItem('user'));
   }
 
   changePasswordForm = this.fb.group(
     {
-      email: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(this.emailRegex),
-        ])
-      ),
+      email: '',
       oldPassword: new FormControl('', Validators.required),
       newPassword: new FormControl('', Validators.required),
       confirmNewPassword: new FormControl('', Validators.required),
@@ -59,7 +55,10 @@ export class ChangePasswordComponent implements OnInit{
   );
 
   sendChangePasswordRequest() {
-    sessionStorage.setItem('email', this.changePasswordForm.value.email);
+    this.changePasswordForm.patchValue({
+      email: this.user.email,
+    });
+    // console.log("form change",this.changePasswordForm.value)
     this.userService
       .changePasswordRequest(this.changePasswordForm.value)
       .subscribe((res) => {
@@ -70,9 +69,11 @@ export class ChangePasswordComponent implements OnInit{
             summary: 'Success',
             detail: 'Controlla la mail per confermare il cambio password',
           });
-          this.dialogService.changePasswordFormDialog(false);
-          this.dialogService.changeConfirmPasswordFormDialog(true);
+          this.dialogService.changePasswordFormView(false);
+          this.dialogService.changeConfirmPasswordFormView(true);
         }
       });
   }
+  
 }
+

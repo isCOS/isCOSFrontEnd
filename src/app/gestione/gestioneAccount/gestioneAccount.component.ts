@@ -16,7 +16,6 @@ interface driveLicences {
   styleUrls: ['./gestioneAccount.component.scss'],
 })
 export class GestioneAccountComponent implements OnInit {
-
   showContinueButton = false;
   driveLicences: driveLicences[] | undefined;
   selectedDriveLicence: driveLicences | undefined;
@@ -29,6 +28,8 @@ export class GestioneAccountComponent implements OnInit {
   stringifiedUser: any;
   editMode: boolean = true;
   clonedUser: { [s: string]: any } = {};
+  changePasswordView: boolean = false;
+  confirmChangePasswordView: boolean = false;
 
   constructor(
     private userService: userService,
@@ -52,8 +53,19 @@ export class GestioneAccountComponent implements OnInit {
       { name: 'DE' },
     ];
     this.loadUserData();
-    this.dialogsService.currentEditMode.subscribe(editMode => this.editMode = editMode);
-    console.log('User session storage dialog: ', this.user);
+    this.dialogsService.currentEditMode.subscribe(
+      (editMode) => (this.editMode = editMode)
+    );
+    this.dialogsService.currentChangePasswordView.subscribe(
+      (changePasswordView) =>
+        (this.changePasswordView = changePasswordView)
+    );
+    this.dialogsService.currentConfirmChangePasswordView.subscribe(
+      (confirmChangePasswordView) =>
+        (this.confirmChangePasswordView = confirmChangePasswordView)
+    );
+    // console.log('User session storage dialog: ', this.user);
+  
   }
 
   editingForm = this.fb.group({
@@ -82,7 +94,6 @@ export class GestioneAccountComponent implements OnInit {
   onRowEditSave(user: any) {
     console.log('User modificato: ', user);
     this.proceedEditing();
-
   }
   proceedEditing() {
     const tempDate = new Date(this.editingForm.value.dateBirth);
@@ -96,7 +107,10 @@ export class GestioneAccountComponent implements OnInit {
       dateBirth: this.datePipe.transform(rest.dateBirth, 'yyyy-MM-dd'),
       drivingLicense: {
         type: rest.drivingLicense,
-        deadLine: this.datePipe.transform(this.editingForm.value.deadLine, 'yyyy-MM-dd'),
+        deadLine: this.datePipe.transform(
+          this.editingForm.value.deadLine,
+          'yyyy-MM-dd'
+        ),
       },
     };
     this.user = toSend;
@@ -112,7 +126,7 @@ export class GestioneAccountComponent implements OnInit {
     });
     return this.user;
   }
-  onRowEditCancel(){
+  onRowEditCancel() {
     this.editMode = false;
     this.messageService.add({
       severity: 'info',
@@ -120,5 +134,8 @@ export class GestioneAccountComponent implements OnInit {
       detail: 'Subscription Cancelled',
     });
     this.loadUserData();
+  }
+  showChangePassword() {
+    this.changePasswordView = !this.changePasswordView;
   }
 }

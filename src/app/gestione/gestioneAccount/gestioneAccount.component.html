@@ -97,4 +97,19 @@
       </tr>
     </table>
   </form>
+  <div class="flex justify-content-start">
+    <p-button
+      [text]="true"
+      (click)="showChangePassword()"
+      severity="secondary"
+      class="tableButton cursor-pointer"
+      label="Cambia password"
+    ></p-button>
+  </div>
+  <div *ngIf="changePasswordView">
+    <app-change-password></app-change-password>
+  </div>
+  <div *ngIf="confirmChangePasswordView">
+    <app-confirm-change-password></app-confirm-change-password>
+  </div>
 </div>

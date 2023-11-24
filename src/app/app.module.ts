@@ -23,8 +23,10 @@ import { NavigatorComponent } from './navigator/navigator.component';
 import { GestioneAccountComponent } from './gestione/gestioneAccount/gestioneAccount.component';
 import { AuthGuard } from './guard/auth.guard';
 import { ConfirmRegistrationComponent } from './authentication/register/confirm-registration/confirm-registration.component';
-import { ChangePasswordComponent } from './authentication/login/change-password/change-password.component';
-import { ConfirmChangePasswordComponent } from './authentication/confirm-change-password/confirm-change-password.component';
+// import { ChangePasswordComponent } from './authentication/login/change-password/change-password.component';
+// import { ConfirmChangePasswordComponent } from './authentication/confirm-change-password/confirm-change-password.component';
+import { ChangePasswordComponent } from './gestione/changePassword/change-password/change-password.component';
+import { ConfirmChangePasswordComponent } from './gestione/changePassword/confirm-change-password/confirm-change-password.component';
 
 
 @NgModule({

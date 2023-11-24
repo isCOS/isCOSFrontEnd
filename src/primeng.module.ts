@@ -12,6 +12,7 @@ import { TableModule } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { MenubarModule } from 'primeng/menubar';
+import { TreeModule } from 'primeng/tree';
 import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
     TableModule,
     ToastModule,
     AvatarGroupModule,
+    TreeModule,
     TabMenuModule,
     AvatarModule,
   ],
