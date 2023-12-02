@@ -18,6 +18,12 @@ export class DialogsService {
   private showConfirmChangePasswordViewSource = new BehaviorSubject<boolean>(false);
   currentConfirmChangePasswordView = this.showConfirmChangePasswordViewSource.asObservable();
 
+  private showAddVehicleViewSource = new BehaviorSubject<boolean>(false);
+  currentAddVehicleView = this.showAddVehicleViewSource.asObservable();
+
+  private editVehicleViewSource = new BehaviorSubject<number>(-1);
+  currentEditVehicleView = this.editVehicleViewSource.asObservable();
+
   constructor() { }
 
   changeEditMode(mode: boolean) {
@@ -34,6 +40,14 @@ export class DialogsService {
 
   changeConfirmPasswordFormView(mode: boolean) {
     this.showConfirmChangePasswordViewSource.next(mode);
+  }
+
+  changeAddVehicleView(mode: boolean) {
+    this.showAddVehicleViewSource.next(mode);
+  }
+
+  changeEditVehicleView(mode: number) {
+    this.editVehicleViewSource.next(mode);
   }
 
 }

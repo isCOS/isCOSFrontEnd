@@ -1,0 +1,167 @@
+<div class="card flex justify-content-center">
+  <div class="flex flex-column mt-2">
+    <div *ngFor="let vehicle of vehicles?.data; let i = index">
+      <form [formGroup]="vehicleEditingForm" (onSubmit)="saveEdit()">
+        <p-accordion>
+          <p-accordionTab header="{{ vehicle.brand }} {{ vehicle.model }}">
+            <div class="mt-4">
+              <p>Targa: {{ vehicle.licensePlate }}</p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.brand"
+                  formControlName="brand"
+                />
+                <label>Marchio</label>
+              </span>
+              <p *ngIf="editMode === -1">Marchio: {{ vehicle.brand }}</p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.model"
+                  formControlName="model"
+                />
+                <label>Modello</label>
+              </span>
+              <p *ngIf="editMode === -1">Modello: {{ vehicle.model }}</p>
+            </div>
+            <div class="mt-4">
+              <p-dropdown
+                *ngIf="editMode === i"
+                [options]="fuelType"
+                optionValue="name"
+                optionLabel="name"
+                appendTo="body"
+                [(ngModel)]="vehicle.fuelType"
+                formControlName="fuelType"
+              ></p-dropdown>
+              <p *ngIf="editMode === -1">
+                Tipo alimentazione: {{ vehicle.fuelType }}
+              </p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.km"
+                  formControlName="km"
+                />
+                <label>Km</label>
+              </span>
+              <p *ngIf="editMode === -1">Km: {{ vehicle.km }}</p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.weight"
+                  formControlName="weight"
+                />
+                <label>Peso (kg)</label>
+              </span>
+              <p *ngIf="editMode === -1">Peso (kg): {{ vehicle.weight }}</p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.maxLoad"
+                  formControlName="maxLoad"
+                />
+                <label>Massimo carico trasportabile (kg)</label>
+              </span>
+              <p *ngIf="editMode === -1">
+                Massimo carico trasportabile (kg): {{ vehicle.maxLoad }}
+              </p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.litersTank"
+                  formControlName="litersTank"
+                />
+                <label>Capienza serbatoio (L)</label>
+              </span>
+              <p *ngIf="editMode === -1">
+                Capeinza serbatoio (L): {{ vehicle.litersTank }}
+              </p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.engineDisplacement"
+                  formControlName="engineDisplacement"
+                />
+                <label>Cilindrata (cm^3)</label>
+              </span>
+              <p *ngIf="editMode === -1">
+                Cilindrata (cm^3): {{ vehicle.engineDisplacement }}
+              </p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.urbanConsumption"
+                  formControlName="urbanConsumption"
+                />
+                <label>Consumo urbano (km/L)</label>
+              </span>
+              <p *ngIf="editMode === -1">
+                Consumo urbano (km/L): {{ vehicle.urbanConsumption }}
+              </p>
+            </div>
+            <div class="mt-4">
+              <span class="p-float-label" *ngIf="editMode === i">
+                <input
+                  pInputText
+                  [(ngModel)]="vehicle.extraUrbanConsumption"
+                  formControlName="extraUrbanConsumption"
+                />
+                <label>Consumo extraurbano (km/L)</label>
+              </span>
+              <p *ngIf="editMode === -1" aria-haspopup="true">
+                Consumo extraurbano (km/L): {{ vehicle.extraUrbanConsumption }}
+              </p>
+            </div>
+            <div class="mt-4">
+              <p-button
+                *ngIf="editMode === -1"
+                [text]="true"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-text"
+                (click)="enableEditing(i)"
+              >
+              </p-button>
+              <p-button
+                *ngIf="editMode === i"
+                [text]="true"
+                type="submit"
+                icon="pi pi-check"
+                severity="success"
+                class="p-button-rounded p-button-text"
+                (click)="saveEdit()"
+              >
+              </p-button>
+              <p-button
+                *ngIf="editMode === i"
+                [text]="true"
+                icon="pi pi-times"
+                severity="danger"
+                class="p-button-rounded p-button-text"
+                (click)="closeEditing()"
+              >
+              </p-button>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </form>
+    </div>
+  </div>
+</div>

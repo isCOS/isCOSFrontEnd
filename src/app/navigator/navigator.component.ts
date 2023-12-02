@@ -17,7 +17,7 @@ export class NavigatorComponent implements OnInit {
   style = 'mapbox://styles/mapbox/streets-v12';
   lat = 37.75;
   lng = -122.41;
-  validVehicle = false;
+  validVehicle: boolean = true;
   vehiclesBrands: vehiclesBrands[] | undefined;
   selectedVehicleBrand: vehiclesBrands | undefined;
   constructor(private renderer: Renderer2) {}
@@ -183,7 +183,7 @@ export class NavigatorComponent implements OnInit {
         }
       },
     };
-
+    //Location pulsing dot
     map.on('load', () => {
       map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
       let coordinates;
@@ -271,7 +271,6 @@ export class NavigatorComponent implements OnInit {
       }
     }
     spinGlobe();
-
     // When animation is complete, start spinning if there is no ongoing interaction
     map.on('moveend', () => {
       spinGlobe();

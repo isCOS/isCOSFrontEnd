@@ -1,0 +1,137 @@
+<!-- Vehicles list -->
+<!-- <div *ngFor="let vehicle of vehicles?.data; let ri = index">
+  <div class="vehicleBox">
+    <div class="flex justify-content-between">
+      <div class="flex">
+        <h4>{{ vehicle.brand }} {{ vehicle.model }}</h4>
+      </div>
+      <div class="flex">
+        <p-button
+          icon="pi pi-chevron-right"
+          [rounded]="true"
+          class="mt-2"
+          [text]="true"
+          severity="secondary"
+          (onClick)="showVehicleDetails(vehicle, ri)"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Vehicles specifics -->
+<!-- <div class="vehicleDetailsBox">
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.brand"
+      formControlName="brand"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.brand }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.model"
+      formControlName="model"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.model }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.licensePlate"
+      formControlName="licensePlate"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.licensePlate }}</p>
+  </div>
+  <div>
+    <p-dropdown
+      *ngIf="editMode"
+      [options]="fuelType"
+      optionValue="name"
+      optionLabel="name"
+      appendTo="body"
+      formControlName="fuelType"
+    ></p-dropdown>
+    <p *ngIf="!editMode">{{ selectedVehicle.fuelType }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.km"
+      formControlName="km"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.km }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.weight"
+      formControlName="weight"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.weight }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.maxLoad"
+      formControlName="maxLoad"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.maxLoad }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.litersTank"
+      formControlName="litersTank"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.litersTank }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.engineDisplacement"
+      formControlName="engineDisplacement"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.engineDisplacement }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.urbanConsumption"
+      formControlName="urbanConsumption"
+    />
+    <p *ngIf="!editMode">{{ selectedVehicle.urbanConsumption }}</p>
+  </div>
+  <div>
+    <input
+      pInputText
+      class="w-4rem"
+      *ngIf="editMode"
+      [(ngModel)]="selectedVehicle.extraUrbanConsumption"
+      formControlName="extraUrbanConsumption"
+    />
+    <p *ngIf="!editMode" aria-haspopup="true">
+      {{ selectedVehicle.extraUrbanConsumption }}
+    </p>
+  </div>
+</div> -->

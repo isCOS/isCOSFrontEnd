@@ -27,6 +27,8 @@ import { ConfirmRegistrationComponent } from './authentication/register/confirm-
 // import { ConfirmChangePasswordComponent } from './authentication/confirm-change-password/confirm-change-password.component';
 import { ChangePasswordComponent } from './gestione/changePassword/change-password/change-password.component';
 import { ConfirmChangePasswordComponent } from './gestione/changePassword/confirm-change-password/confirm-change-password.component';
+import { GestioneVeicoliComponent } from './gestione/gestione-veicoli/gestione-veicoli.component';
+import { VehicleTableComponent } from './gestione/gestione-veicoli/vehicle-table/vehicle-table.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { ConfirmChangePasswordComponent } from './gestione/changePassword/confir
     GestioneAccountComponent,
     ConfirmRegistrationComponent,
     ChangePasswordComponent,
-    ConfirmChangePasswordComponent
+    ConfirmChangePasswordComponent,
+    GestioneVeicoliComponent,
+    VehicleTableComponent
   ],
   imports: [
     BrowserAnimationsModule,

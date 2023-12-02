@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
-import { userService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { DialogsService } from '../service/dialogs.service';
 
@@ -25,19 +24,14 @@ export class GestioneComponent implements OnInit{
   @Output() toggle = new EventEmitter<void>();
 
   constructor(
-    private userService: userService,
     private dialogService: DialogsService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // this.userService.GetUser(sessionStorage.getItem('email')).subscribe((res) => {
-    //   this.user = res;
-    //   console.log('User: ',this.user);
-    // });
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.dialogService.currentEditMode.subscribe(editMode => this.editMode = editMode);
-    console.log('User session storage: ', this.user);
+    // console.log('User session storage: ', this.user);
   }
 
   openDialog(dialogName: string) {
@@ -47,6 +41,14 @@ export class GestioneComponent implements OnInit{
   setEditMode(value: boolean) {
     this.dialogService.changeEditMode(value);
     this.loadUserData();
+  }
+
+  setVehicleEditMode(value: number) {
+    this.dialogService.changeEditVehicleView(value);
+  }
+
+  setAddVehicleView(value: boolean) {
+    this.dialogService.changeAddVehicleView(value);
   }
 
   loadUserData() {

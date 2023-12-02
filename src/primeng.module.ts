@@ -14,6 +14,8 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { MenubarModule } from 'primeng/menubar';
 import { TreeModule } from 'primeng/tree';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   exports: [
@@ -21,10 +23,12 @@ import { TabMenuModule } from 'primeng/tabmenu';
     CalendarModule,
     InputTextModule,
     InputMaskModule,
+    ContextMenuModule,
     DropdownModule,
     SplitterModule,
     ImageModule,
     MenubarModule,
+    AccordionModule,
     TableModule,
     ToastModule,
     AvatarGroupModule,

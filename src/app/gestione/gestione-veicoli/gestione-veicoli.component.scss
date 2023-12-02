@@ -1,0 +1,11 @@
+:host ::ng-deep {
+    .p-inputtext {
+        background: transparent !important;
+        width: 20rem;
+    }
+    .p-dropdown {
+        background: transparent !important;
+        border-bottom: 1px solid #dbdbdb;
+        width: 20rem;
+    }
+}
