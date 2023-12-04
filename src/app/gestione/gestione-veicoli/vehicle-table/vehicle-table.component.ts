@@ -8,6 +8,7 @@ import { MenuItem } from 'primeng/api';
 import { VehicleService } from 'src/app/service/vehicle.service';
 import { MessageService } from 'primeng/api';
 import { DialogsService } from 'src/app/service/dialogs.service';
+import { userService } from 'src/app/service/user.service';
 
 interface fuelTypes {
   name: string;
@@ -23,7 +24,8 @@ export class VehicleTableComponent implements OnInit {
     private messageService: MessageService,
     private fb: FormBuilder,
     private vehicleService: VehicleService,
-    private dialogsService: DialogsService
+    private dialogsService: DialogsService,
+    private userService: userService
   ) {}
 
   vehicles: any;
@@ -61,10 +63,8 @@ export class VehicleTableComponent implements OnInit {
         icon: 'pi pi-fw pi-pencil',
       }
     ];
-
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    //Manca il companyName nell'utente che mi viene restituito
-    this.companyName = this.user.companyName;
+    this.companyName = this.user.businessName;
   }
 
   loadVehicle(){
@@ -78,7 +78,7 @@ export class VehicleTableComponent implements OnInit {
   }
 
   vehicleEditingForm: FormGroup = this.fb.group({
-    companyName: ['Reply'], //sostituire non appena viene modificata l'API
+    companyName: [''], //sostituire non appena viene modificata l'API
     licensePlate: ['', Validators.required], //
     brand: ['', Validators.required], //
     model: ['', Validators.required], //
@@ -113,9 +113,12 @@ export class VehicleTableComponent implements OnInit {
 
   saveEdit(){
     this.vehicleEditingForm.patchValue({
+      companyName: this.companyName,
+    });
+    this.vehicleEditingForm.patchValue({
       licensePlate: this.vehicles.data[this.editMode].licensePlate,
     });
-    console.log(this.vehicleEditingForm.value);
+    // console.log('Editing form value: ', this.vehicleEditingForm.value);
     this.vehicleService.EditVehicle(this.vehicleEditingForm.value).subscribe((data: any) => {
       console.log(data);
       if (data.code === 0){

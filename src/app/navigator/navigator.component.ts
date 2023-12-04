@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import * as mapboxDirection from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import { VehicleService } from '../service/vehicle.service';
 
-interface vehiclesBrands {
+interface vehicle {
   name: string;
   code: string;
 }
@@ -17,11 +18,15 @@ export class NavigatorComponent implements OnInit {
   style = 'mapbox://styles/mapbox/streets-v12';
   lat = 37.75;
   lng = -122.41;
-  validVehicle: boolean = true;
-  vehiclesBrands: vehiclesBrands[] | undefined;
-  selectedVehicleBrand: vehiclesBrands | undefined;
-  constructor(private renderer: Renderer2) {}
+  validVehicle: boolean = false;
+  vehicles: any;
+  selectedVehicle: vehicle[] | undefined;
+  constructor(
+    private renderer: Renderer2,
+    private vehicleService: VehicleService
+  ) {}
   ngOnInit() {
+    const email = sessionStorage.getItem('email');
     this.loadScript(
       'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js'
     )
@@ -41,6 +46,14 @@ export class NavigatorComponent implements OnInit {
       .catch((error) =>
         console.error('Errore durante il caricamento degli script:', error)
       );
+    this.vehicleService.GetListVehicleByUser(email).subscribe((res) => {
+      this.vehicles = res.data;
+      for (let i = 0; i < this.vehicles.length; i++) {
+        this.vehicles[i].name = this.vehicles[i].brand + ' ' + this.vehicles[i].model;
+        this.vehicles[i].code = this.vehicles[i].licensePlate;
+        console.log(this.vehicles[i].name, this.vehicles[i].code);
+      }
+    });
   }
 
   ngOnDestroy() {

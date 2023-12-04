@@ -8,7 +8,6 @@ export class userService {
   // ip = "10.31.12.211:5294"
   ip = '127.0.0.1:5294';
   apiurl = `http://${this.ip}/api/User/`;
-  logeed = false;
   constructor(private http: HttpClient) {}
 
   AddUser(data: any) {

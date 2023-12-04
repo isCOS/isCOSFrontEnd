@@ -119,7 +119,7 @@ export class GestioneAccountComponent implements OnInit {
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: 'Subscription Updated',
+        detail: 'User information updated',
       });
       sessionStorage.removeItem('user');
       sessionStorage.setItem('user', JSON.stringify(toSend));
@@ -131,7 +131,7 @@ export class GestioneAccountComponent implements OnInit {
     this.messageService.add({
       severity: 'info',
       summary: 'Info',
-      detail: 'Subscription Cancelled',
+      detail: 'Edit Cancelled',
     });
     this.loadUserData();
   }
