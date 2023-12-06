@@ -135,3 +135,29 @@
     </p>
   </div>
 </div> -->
+
+
+
+//Navigator
+  <!-- <div class="">
+      <h4>Select vehicle and fuel percentage</h4>
+    </div>
+    <div class="card flex justify-content-center">
+      <p-dropdown
+        dropdownIcon="pi pi-car"
+        [options]="vehicles"
+        optionLabel="name"
+        showClear="true"
+        placeholder="Select vehicle"
+        (onChange)="onVehicleChange($event.value)"
+      ></p-dropdown>
+    </div>
+    <div class="card flex justify-content-center mt-2">
+      <p-knob
+        [textColor]="black"
+        [step]="5"
+        valueColor="MediumTurquoise"
+        rangeColor="SlateGray"
+        (onChange)="onVehicleFuelPercentageChange($event)"
+      ></p-knob>
+    </div> -->

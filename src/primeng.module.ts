@@ -13,9 +13,11 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { MenubarModule } from 'primeng/menubar';
 import { TreeModule } from 'primeng/tree';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { AccordionModule } from 'primeng/accordion';
+import { KnobModule } from 'primeng/knob';
 
 @NgModule({
   exports: [
@@ -25,9 +27,11 @@ import { AccordionModule } from 'primeng/accordion';
     InputMaskModule,
     ContextMenuModule,
     DropdownModule,
+    ProgressSpinnerModule,
     SplitterModule,
     ImageModule,
     MenubarModule,
+    KnobModule,
     AccordionModule,
     TableModule,
     ToastModule,

@@ -62,7 +62,8 @@ export class GestioneVeicoliComponent implements OnInit {
     console.log(this.vehicleForm.value);
     this.vehicleService.AddVehicle(this.vehicleForm.value).subscribe((res) => {
       console.log(res);
-      this.continueForm();
+      this.vehicleForm.reset();
+      this.dialogsService.changeAddVehicleView(false);
     });
   }
 }

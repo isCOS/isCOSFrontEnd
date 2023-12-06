@@ -1,0 +1,27 @@
+.selectTripVehicleAndFuel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9) !important;
+    top: 2rem;
+    right: 2rem;
+    //Border
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    //Shadow
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    //Padding
+    padding: 1rem;
+}
+
+button{
+    width: 11rem;
+}
+
+.progressionSpinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

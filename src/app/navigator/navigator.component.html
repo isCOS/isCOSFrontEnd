@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <head>
   <meta charset="utf-8" />
   <title>Create a rotating globe</title>
@@ -5,6 +6,11 @@
     name="viewport"
     content="initial-scale=1,maximum-scale=1,user-scalable=no"
   />
+  <link
+    href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css"
+    rel="stylesheet"
+  />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
 
   <style>
     body {
@@ -18,21 +24,77 @@
       bottom: 0;
       width: 100%;
     }
+    .marker {
+      display: block;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 0;
+    }
   </style>
 </head>
-<div id="map"></div>
 <body>
-  <form>
-    <div class="card flex justify-content-center">
-      <p-dropdown
-        formControl="vehicle"
-        dropdownIcon="pi pi-car"
-        [options]="vehicles"
-        optionLabel="name"
-        showClear="true"
-        placeholder="Select vehicle"
-      ></p-dropdown>
-      <p-button type="button" label="select"></p-button>
-    </div>
-  </form>
+  <div id="map" class="absolute"></div>
+  <div class="selectTripVehicleAndFuel">
+    <form [formGroup]="selectVehicleForm" (ngSubmit)="startNavigation()">
+      <div class="card flex justify-content-center">
+        <p-dropdown
+          dropdownIcon="pi pi-car"
+          formControlName="vehicle"
+          [options]="vehicles"
+          optionLabel="name"
+          showClear="true"
+          placeholder="Select vehicle"
+        ></p-dropdown>
+      </div>
+      <div class="card flex justify-content-center mt-2">
+        <p-knob
+          formControlName="value"
+          [step]="5"
+          valueColor="MediumTurquoise"
+          rangeColor="SlateGray"
+        ></p-knob>
+      </div>
+      <div
+        *ngIf="!enableNavigation"
+        class="card flex justify-content-center mt-2"
+      >
+        <button
+          pButton
+          type="submit"
+          [disabled]="!selectVehicleForm.valid"
+          label="Start navigation"
+          class="p-button-success"
+        ></button>
+      </div>
+      <div class="card flex justify-content-center mt-2">
+        <button
+          *ngIf="enableNavigation"
+          pButton
+          type="button"
+          label="Stop navigation"
+          class="p-button-danger"
+          (click)="stopNavigation()"
+        ></button>
+      </div>
+      <div class="card flex justify-content-center mt-2">
+        <button
+          pButton
+          type="button"
+          label="Indietro"
+          class="p-button-secondary"
+          (click)="stopNavigation()"
+          [routerLink]="['/gestione']"
+        ></button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="!receivedResponse" class="card progressionSpinner">
+    <p-progressSpinner
+      styleClass="w-4rem h-4rem"
+      strokeWidth="8"
+      fill="transparent"
+      animationDuration=".5s"
+    ></p-progressSpinner>
+  </div>
 </body>

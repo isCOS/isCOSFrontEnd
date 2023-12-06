@@ -52,7 +52,7 @@
               [draggable]="false"
               (onHide)="setVehicleEditMode(-1); setAddVehicleView(false)"
               [(visible)]="vehiclesDialogVisible"
-              [style]="{ width: 'auto',heigth: 'auto'}"
+              [style]="{ width: 'auto', heigth: 'auto' }"
             >
               <app-gestione-veicoli></app-gestione-veicoli>
             </p-dialog>
@@ -190,6 +190,12 @@
         </div>
       </nav>
     </header>
-    <button type="button" routerLink="/navigator">Naviga</button>
+    <button
+      pButton
+      class="navigationButton"
+      type="button"
+      routerLink="/navigator"
+      label="Naviga"
+    ></button>
   </div>
 </div>
