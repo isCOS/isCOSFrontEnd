@@ -86,7 +86,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
   //Create a form
   selectVehicleForm = this.fb.group({
     vehicle: ['', Validators.required],
-    value: ['', Validators.required],
+    value: [100, Validators.required],
   });
 
   //If the cities are selected, then run the function sendRequest()
@@ -409,7 +409,6 @@ export class NavigatorComponent implements OnInit, DoCheck {
     this.fuelPercentage = this.selectVehicleForm.value.value;
     // console.log(this.selectedVehicleLicensePlate, this.fuelPercentage);
     this.enableNavigation = true;
-    this.selectVehicleForm.reset();
   }
 
   sendRequest() {
@@ -448,6 +447,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
     this.originCityNameValid = false;
     this.destinationCityNameValid = false;
     this.directions.removeRoutes();
+    this.selectVehicleForm.reset();
     this.loadMap();
   }
 
