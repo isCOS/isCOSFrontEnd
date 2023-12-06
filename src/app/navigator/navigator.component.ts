@@ -95,7 +95,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
       if (this.map && !this.directionsAdded) {
         let directions = new mapboxDirection({
           accessToken: mapboxgl.accessToken,
-          interactive: true,
+          interactive: false,
         });
         this.map.addControl(directions, 'top-left');
         this.directionsAdded = true; // Set a flag to ensure directions are only added once
@@ -331,7 +331,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
 
     this.map.on('style.load', () => {
       this.map.setFog({}); // Set the default atmosphere style
-      // spinGlobe();
+      spinGlobe();
     });
 
     // The following values can be changed to control rotation speed:
@@ -345,28 +345,28 @@ export class NavigatorComponent implements OnInit, DoCheck {
 
     let userInteracting = false;
     let spinEnabled = true;
-    //Sping globe function
-    // function spinGlobe() {
-    //   const zoom = this.map.getZoom();
-    //   if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-    //     let distancePerSecond = 360 / secondsPerRevolution;
-    //     if (zoom > slowSpinZoom) {
-    //       // Slow spinning at higher zooms
-    //       const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-    //       distancePerSecond *= zoomDif;
-    //     }
-    //     const center = this.map.getCenter();
-    //     center.lng -= distancePerSecond;
-    //     // Smoothly animate the map over one second.
-    //     // When this animation is complete, it calls a 'moveend' event.
-    //     this.map.easeTo({ center, duration: 1000, easing: (n) => n });
-    //   }
-    // }
-    // spinGlobe();
+    //Spin globe function
+    function spinGlobe() {
+      const zoom = this.map.getZoom();
+      if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
+        let distancePerSecond = 360 / secondsPerRevolution;
+        if (zoom > slowSpinZoom) {
+          // Slow spinning at higher zooms
+          const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+          distancePerSecond *= zoomDif;
+        }
+        const center = this.map.getCenter();
+        center.lng -= distancePerSecond;
+        // Smoothly animate the map over one second.
+        // When this animation is complete, it calls a 'moveend' event.
+        this.map.easeTo({ center, duration: 1000, easing: (n) => n });
+      }
+     }
+     spinGlobe();
     // When animation is complete, start spinning if there is no ongoing interaction
-    // this.map.on('moveend', () => {
-    //   spinGlobe();
-    // });
+     this.map.on('moveend', () => {
+       spinGlobe();
+     });
     return this.originCityName, this.destinationCityName;
   }
   // onVehicleChange(selectedVehicle: any): void {
@@ -409,6 +409,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
     this.fuelPercentage = this.selectVehicleForm.value.value;
     // console.log(this.selectedVehicleLicensePlate, this.fuelPercentage);
     this.enableNavigation = true;
+    this.directions.setInteractive(false);
   }
 
   sendRequest() {
@@ -477,6 +478,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
         marker.togglePopup();
       });
     }
+    
     // console.log(`I'm into addMarker function`, this.gasStationList);
   }
 }

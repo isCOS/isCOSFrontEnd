@@ -9,3 +9,21 @@
         width: 20rem;
     }
 }
+
+button {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to right, #8b6fa4, #795796, #784f9b);
+    font-size: 16px;
+    color: #FFF;
+    cursor: pointer;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+}
+button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
