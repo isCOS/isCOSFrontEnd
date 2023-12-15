@@ -115,13 +115,14 @@ export class NavigatorComponent implements OnInit, DoCheck {
       console.log('origin coordinates', this.originCoordinates);
       console.log('destination coordinates', this.destinationCoordinates);
       const mapboxurl = 'https://api.mapbox.com/directions/v5/mapbox/driving/';
-      const url = `${mapboxurl}${this.originCoordinates[0]}%2C${this.originCoordinates[1]}%3B${this.destinationCoordinates[0]}%2C${this.destinationCoordinates[1]}?alternatives=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${this.token}`;
+      const url = `${mapboxurl}${this.originCoordinates[0]},${this.originCoordinates[1]};${this.destinationCoordinates[0]},${this.destinationCoordinates[1]}?alternatives=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${this.token}`;
+      console.log(url); 
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
           //Get the route with the less km
           let routes = data.routes;
-          let route =  routes.sort(this.compareDistance);
+          let route =  routes.sort((a: any, b: any) => a.distance - b.distance);
           console.log('sorted ',route)
           console.log('Return data from mapbox fetch', data);
         });
@@ -492,7 +493,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
   }
 
   compareDistance(a:any, b:any) {
-    return a.duration > b.duration;
+    return a.distance > b.distance;
   }
 
   async addMarker() {
