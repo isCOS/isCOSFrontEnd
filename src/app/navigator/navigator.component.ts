@@ -379,7 +379,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
 
     this.map.on('style.load', () => {
       this.map.setFog({}); // Set the default atmosphere style
-      spinGlobe();
+      // spinGlobe();
     });
 
     this.spinGlobe();
@@ -402,41 +402,21 @@ export class NavigatorComponent implements OnInit, DoCheck {
 
     let userInteracting = false;
     let spinEnabled = true;
-    //Sping globe function
-    // function spinGlobe() {
-    //   const zoom = this.map.getZoom();
-    //   if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-    //     let distancePerSecond = 360 / secondsPerRevolution;
-    //     if (zoom > slowSpinZoom) {
-    //       // Slow spinning at higher zooms
-    //       const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-    //       distancePerSecond *= zoomDif;
-    //     }
-    //     const center = this.map.getCenter();
-    //     center.lng -= distancePerSecond;
-    //     // Smoothly animate the map over one second.
-    //     // When this animation is complete, it calls a 'moveend' event.
-    //     this.map.easeTo({ center, duration: 1000, easing: (n) => n });
-    //   }
-    // }
-    // spinGlobe();
-    // When animation is complete, start spinning if there is no ongoing interaction
-    // this.map.on('moveend', () => {
-    //   spinGlobe();
-    // });
-    return this.originCityName, this.destinationCityName;
+    const zoom = this.map.getZoom();
+    if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
+      let distancePerSecond = 360 / secondsPerRevolution;
+      if (zoom > slowSpinZoom) {
+        // Slow spinning at higher zooms
+        const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+        distancePerSecond *= zoomDif;
+      }
+      const center = this.map.getCenter();
+      center.lng -= distancePerSecond;
+      // Smoothly animate the map over one second.
+      // When this animation is complete, it calls a 'moveend' event.
+      this.map.easeTo({ center, duration: 1000, easing: (n) => n });
+    }
   }
-  // onVehicleChange(selectedVehicle: any): void {
-  //   this.selectedVehicleLicensePlate = selectedVehicle.licensePlate;
-  //   this.validVehicle = true;
-  //   this.loadMap();
-  // }
-
-  // onVehicleFuelPercentageChange(e: any): void {
-  //   this.fuelPercentage = e;
-  //   this.fuelPercentageValid = true;
-  //   this.fuelPercentageFunctionThrow = true;
-  // }
 
   async getCityName(coordinates) {
     return fetch(
@@ -466,7 +446,6 @@ export class NavigatorComponent implements OnInit, DoCheck {
     this.fuelPercentage = this.selectVehicleForm.value.value;
     // console.log(this.selectedVehicleLicensePlate, this.fuelPercentage);
     this.enableNavigation = true;
-    this.directions.setInteractive(false);
   }
 
   sendRequest() {
@@ -542,7 +521,6 @@ export class NavigatorComponent implements OnInit, DoCheck {
         marker.togglePopup();
       });
     }
-    
     // console.log(`I'm into addMarker function`, this.gasStationList);
   }
 }
