@@ -6,6 +6,7 @@ import { VehicleService } from '../service/vehicle.service';
 import { MapboxService } from '../service/mapbox.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
 
 interface vehicle {
   name: string;
@@ -40,16 +41,21 @@ export class NavigatorComponent implements OnInit, DoCheck {
   enableNavigation: boolean = false;
   directionsAdded: boolean = false;
   receivedResponse: boolean = true;
+  route: any;
+  token =
+    'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
   directions = new mapboxDirection({
     accessToken: mapboxgl.accessToken,
     interactive: false,
   });
+
   constructor(
     private renderer: Renderer2,
     private vehicleService: VehicleService,
     private mapboxService: MapboxService,
     private fb: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private http: HttpClient
   ) {}
   ngOnInit() {
     const email = sessionStorage.getItem('email');
@@ -95,7 +101,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
       if (this.map && !this.directionsAdded) {
         let directions = new mapboxDirection({
           accessToken: mapboxgl.accessToken,
-          interactive: true,
+          interactive: false,
         });
         this.map.addControl(directions, 'top-left');
         this.directionsAdded = true; // Set a flag to ensure directions are only added once
@@ -106,8 +112,51 @@ export class NavigatorComponent implements OnInit, DoCheck {
       this.destinationCityNameValid &&
       !this.requestSent
     ) {
+      console.log('origin coordinates', this.originCoordinates);
+      console.log('destination coordinates', this.destinationCoordinates);
+      const mapboxurl = 'https://api.mapbox.com/directions/v5/mapbox/driving/';
+      const url = `${mapboxurl}${this.originCoordinates[0]}%2C${this.originCoordinates[1]}%3B${this.destinationCoordinates[0]}%2C${this.destinationCoordinates[1]}?alternatives=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${this.token}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          //Get the route with the less km
+          let routes = data.routes;
+          let route =  routes.sort(this.compareDistance);
+          console.log('sorted ',route)
+          console.log('Return data from mapbox fetch', data);
+        });
+        this.map.on('load', function () {
+          this.map.addSource('route', {
+            'type': 'geojson',
+            'data': {
+              'type': 'Feature',
+              'properties': {},
+              'geometry': {
+                'type': 'LineString',
+                'coordinates': [
+                  // Insert the coordinates of the route here
+                ]
+              }
+            }
+          });
+        
+          this.map.addLayer({
+            'id': 'route',
+            'type': 'line',
+            'source': 'route',
+            'layout': {
+              'line-join': 'round',
+              'line-cap': 'round'
+            },
+            'paint': {
+              'line-color': '#888',
+              'line-width': 8
+            }
+          });
+        });
       this.sendRequest();
       this.requestSent = true; // Set the flag to true after sending the request
+      return this.route;
     }
     if (this.gasStationRequestValid && !this.markerFunctionThrow) {
       this.addMarker();
@@ -155,9 +204,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
       'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css';
     mapboxCssLink.type = 'text/css';
     this.renderer.appendChild(document.head, mapboxCssLink);
-    const token =
-      'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
-    (mapboxgl as any).accessToken = token;
+    (mapboxgl as any).accessToken = this.token;
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
@@ -167,23 +214,21 @@ export class NavigatorComponent implements OnInit, DoCheck {
       scrollZoom: true,
     });
     const size = 200;
-    //Controls
-    // if (this.validVehicle && this.fuelPercentageValid) {
-    //   this.map.addControl(directions, 'top-left');
-    // }
 
     this.directions.on('origin', async (event) => {
       const origin = event.feature;
       this.originCoordinates = origin.geometry.coordinates;
-      // console.log('Origin coordinates:', origin.geometry.coordinates);
       this.originCityName = await this.getCityName(
         origin.geometry.coordinates
       ).then((res) => {
         return res.split(',')[0];
       });
-      // console.log('Origin city:', this.originCityName);
       this.originCityNameValid = true;
-      return this.originCityName, this.originCityNameValid;
+      return [
+        this.originCityName,
+        this.originCityNameValid,
+        this.originCoordinates,
+      ];
     });
     this.directions.on('destination', async (event) => {
       const destination = event.feature;
@@ -194,8 +239,11 @@ export class NavigatorComponent implements OnInit, DoCheck {
         return res.split(',')[0];
       });
       this.destinationCityNameValid = true;
-      // console.log('Destination city:', this.destinationCityName);
-      return this.destinationCityName, this.destinationCityNameValid;
+      return [
+        this.destinationCityName,
+        this.destinationCityNameValid,
+        this.destinationCoordinates,
+      ];
     });
 
     interface StyleImageInterface {
@@ -334,8 +382,17 @@ export class NavigatorComponent implements OnInit, DoCheck {
       // spinGlobe();
     });
 
-    // The following values can be changed to control rotation speed:
+    this.spinGlobe();
+    //When animation is complete, start spinning if there is no ongoing interaction
+    this.map.on('moveend', () => {
+      this.spinGlobe();
+    });
+    return this.originCityName, this.destinationCityName;
+  }
 
+  //Sping globe function
+  spinGlobe() {
+    // The following values can be changed to control rotation speed:
     // At low zooms, complete a revolution every two minutes.
     const secondsPerRevolution = 120;
     // Above zoom level 5, do not rotate.
@@ -345,41 +402,21 @@ export class NavigatorComponent implements OnInit, DoCheck {
 
     let userInteracting = false;
     let spinEnabled = true;
-    //Sping globe function
-    // function spinGlobe() {
-    //   const zoom = this.map.getZoom();
-    //   if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-    //     let distancePerSecond = 360 / secondsPerRevolution;
-    //     if (zoom > slowSpinZoom) {
-    //       // Slow spinning at higher zooms
-    //       const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-    //       distancePerSecond *= zoomDif;
-    //     }
-    //     const center = this.map.getCenter();
-    //     center.lng -= distancePerSecond;
-    //     // Smoothly animate the map over one second.
-    //     // When this animation is complete, it calls a 'moveend' event.
-    //     this.map.easeTo({ center, duration: 1000, easing: (n) => n });
-    //   }
-    // }
-    // spinGlobe();
-    // When animation is complete, start spinning if there is no ongoing interaction
-    // this.map.on('moveend', () => {
-    //   spinGlobe();
-    // });
-    return this.originCityName, this.destinationCityName;
+    const zoom = this.map.getZoom();
+    if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
+      let distancePerSecond = 360 / secondsPerRevolution;
+      if (zoom > slowSpinZoom) {
+        // Slow spinning at higher zooms
+        const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+        distancePerSecond *= zoomDif;
+      }
+      const center = this.map.getCenter();
+      center.lng -= distancePerSecond;
+      // Smoothly animate the map over one second.
+      // When this animation is complete, it calls a 'moveend' event.
+      this.map.easeTo({ center, duration: 1000, easing: (n) => n });
+    }
   }
-  // onVehicleChange(selectedVehicle: any): void {
-  //   this.selectedVehicleLicensePlate = selectedVehicle.licensePlate;
-  //   this.validVehicle = true;
-  //   this.loadMap();
-  // }
-
-  // onVehicleFuelPercentageChange(e: any): void {
-  //   this.fuelPercentage = e;
-  //   this.fuelPercentageValid = true;
-  //   this.fuelPercentageFunctionThrow = true;
-  // }
 
   async getCityName(coordinates) {
     return fetch(
@@ -417,8 +454,10 @@ export class NavigatorComponent implements OnInit, DoCheck {
       .FindGasStation(
         this.selectedVehicleLicensePlate,
         this.fuelPercentage,
-        this.originCityName,
-        this.destinationCityName
+        this.originCoordinates[0],
+        this.originCoordinates[1],
+        this.destinationCoordinates[0],
+        this.destinationCoordinates[1]
       )
       .subscribe((res) => {
         this.receivedResponse = true;
@@ -447,8 +486,13 @@ export class NavigatorComponent implements OnInit, DoCheck {
     this.originCityNameValid = false;
     this.destinationCityNameValid = false;
     this.directions.removeRoutes();
+    this.receivedResponse = true;
     this.selectVehicleForm.reset();
     this.loadMap();
+  }
+
+  compareDistance(a:any, b:any) {
+    return a.duration > b.duration;
   }
 
   async addMarker() {
@@ -460,9 +504,9 @@ export class NavigatorComponent implements OnInit, DoCheck {
         closeOnClick: false,
       }).setHTML(
         `${this.gasStationList[i].name}<br>` +
-        `Street: ${this.gasStationList[i].address}<br>` +
-        `€ ${this.gasStationList[i].price.toFixed(4)}`
-      );      
+          `Street: ${this.gasStationList[i].address}<br>` +
+          `€ ${this.gasStationList[i].price.toFixed(4)}`
+      );
       const marker = new mapboxgl.Marker({ color: 'red' })
         .setLngLat([
           this.gasStationList[i].coordinates.longitude,

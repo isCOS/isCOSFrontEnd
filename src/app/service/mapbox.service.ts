@@ -21,8 +21,8 @@ export class MapboxService {
     });
   }
 
-  FindGasStation(licensePlate: any, percentTank: any, startTown: any, endTown: any){
-    const url = `http://${this.ip}/api/MapBox/FindGasStation?licensePlate=${licensePlate}&percentTank=${percentTank}&startTown=${startTown}&endTown=${endTown}`;
+  FindGasStation(licensePlate: any, percentTank: any, initLongitude: any, initLatitude: any, endLongitude: any, endLatitude: any) {
+    const url = `http://${this.ip}/api/MapBox/FindGasStation?licensePlate=${licensePlate}&percentTank=${percentTank}&initLongitude=${initLongitude}&initLatitude=${initLatitude}&endLongitude=${endLongitude}&endLatitude=${endLatitude}`;
     return this.http.get<any>(url, {
       headers: {
         'Content-Type': 'application/json',
