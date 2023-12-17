@@ -44,5 +44,16 @@ export class VehicleService {
       },
     });
   }
-  
+
+  deleteVehicle(email: any, token: any, licensePlate: any) {
+    const encodedEmail = encodeURIComponent(email);
+    const url = `http://${this.ip}/api/Vehicle/DeleteVehicle?email=${encodedEmail}&token=${token}&licensePlate=${licensePlate}`;
+    return this.http.delete<any>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'text/plain',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
 }

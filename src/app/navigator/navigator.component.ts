@@ -1,17 +1,11 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import * as mapboxDirection from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import { VehicleService } from '../service/vehicle.service';
 import { MapboxService } from '../service/mapbox.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
-
-interface vehicle {
-  name: string;
-  code: string;
-}
 
 @Component({
   selector: 'app-navigator',
@@ -25,8 +19,11 @@ export class NavigatorComponent implements OnInit, DoCheck {
   vehicles: any;
   selectedVehicle: any;
   selectedVehicleLicensePlate: any;
-  originCoordinates: any;
-  destinationCoordinates: any;
+  //Coordinates
+  initLongitude: any;
+  initLatitude: any;
+  endLongitude: any;
+  endLatitude: any;
   gasStationRequestValid: boolean = false;
   gasStationList = [];
   requestSent: boolean = false; // Add this line
@@ -41,13 +38,10 @@ export class NavigatorComponent implements OnInit, DoCheck {
   enableNavigation: boolean = false;
   directionsAdded: boolean = false;
   receivedResponse: boolean = true;
+  selectedRoute: any;
   route: any;
   token =
     'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
-  directions = new mapboxDirection({
-    accessToken: mapboxgl.accessToken,
-    interactive: false,
-  });
 
   constructor(
     private renderer: Renderer2,
@@ -89,75 +83,44 @@ export class NavigatorComponent implements OnInit, DoCheck {
     });
   }
 
-  //Create a form
   selectVehicleForm = this.fb.group({
     vehicle: ['', Validators.required],
     value: [100, Validators.required],
   });
 
-  //If the cities are selected, then run the function sendRequest()
-  ngDoCheck() {
-    if (this.enableNavigation) {
-      if (this.map && !this.directionsAdded) {
-        let directions = new mapboxDirection({
-          accessToken: mapboxgl.accessToken,
-          interactive: false,
-        });
-        this.map.addControl(directions, 'top-left');
-        this.directionsAdded = true; // Set a flag to ensure directions are only added once
-      }
-    }
+  selectCitiesForm = this.fb.group({
+    origin: ['', Validators.required],
+    destination: ['', Validators.required],
+  });
+
+  async ngDoCheck() {
     if (
       this.originCityNameValid &&
       this.destinationCityNameValid &&
       !this.requestSent
     ) {
-      console.log('origin coordinates', this.originCoordinates);
-      console.log('destination coordinates', this.destinationCoordinates);
+      let coordinates = await this.getCityCoordinates();
+      // console.log('coordinates', coordinates);
       const mapboxurl = 'https://api.mapbox.com/directions/v5/mapbox/driving/';
-      const url = `${mapboxurl}${this.originCoordinates[0]},${this.originCoordinates[1]};${this.destinationCoordinates[0]},${this.destinationCoordinates[1]}?alternatives=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${this.token}`;
-      console.log(url); 
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          //Get the route with the less km
-          let routes = data.routes;
-          let route =  routes.sort((a: any, b: any) => a.distance - b.distance);
-          console.log('sorted ',route)
-          console.log('Return data from mapbox fetch', data);
-        });
-        this.map.on('load', function () {
-          this.map.addSource('route', {
-            'type': 'geojson',
-            'data': {
-              'type': 'Feature',
-              'properties': {},
-              'geometry': {
-                'type': 'LineString',
-                'coordinates': [
-                  // Insert the coordinates of the route here
-                ]
-              }
-            }
+      const url = `${mapboxurl}${coordinates[1]},${coordinates[0]};${coordinates[3]},${coordinates[2]}?alternatives=true&geometries=geojson&language=en&overview=full&steps=true&access_token=${this.token}`;
+      while (!this.requestSent) {
+        this.sendRequest();
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            //Get the route with the less km
+            let routes = data.routes;
+            let route = routes.sort(
+              (a: any, b: any) => a.distance - b.distance
+            );
+            console.log('sorted ', route);
+            let selectedRoute = route[0];
+            console.log('selected route', selectedRoute);
+            console.log('Return data from mapbox fetch', data);
+            this.showRoute(selectedRoute, coordinates[0], coordinates[1]);
           });
-        
-          this.map.addLayer({
-            'id': 'route',
-            'type': 'line',
-            'source': 'route',
-            'layout': {
-              'line-join': 'round',
-              'line-cap': 'round'
-            },
-            'paint': {
-              'line-color': '#888',
-              'line-width': 8
-            }
-          });
-        });
-      this.sendRequest();
-      this.requestSent = true; // Set the flag to true after sending the request
-      return this.route;
+        this.requestSent = true;
+      }
     }
     if (this.gasStationRequestValid && !this.markerFunctionThrow) {
       this.addMarker();
@@ -191,8 +154,9 @@ export class NavigatorComponent implements OnInit, DoCheck {
     });
   }
 
-  async loadMap() {
+  loadMap() {
     // Carica lo script di Mapbox
+    // console.log('selected route inside loadMap function', selectedRoute);
     const mapboxScript = this.renderer.createElement('script');
     mapboxScript.src =
       'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js';
@@ -214,38 +178,6 @@ export class NavigatorComponent implements OnInit, DoCheck {
       interactive: true,
       scrollZoom: true,
     });
-    const size = 200;
-
-    this.directions.on('origin', async (event) => {
-      const origin = event.feature;
-      this.originCoordinates = origin.geometry.coordinates;
-      this.originCityName = await this.getCityName(
-        origin.geometry.coordinates
-      ).then((res) => {
-        return res.split(',')[0];
-      });
-      this.originCityNameValid = true;
-      return [
-        this.originCityName,
-        this.originCityNameValid,
-        this.originCoordinates,
-      ];
-    });
-    this.directions.on('destination', async (event) => {
-      const destination = event.feature;
-      this.destinationCoordinates = destination.geometry.coordinates;
-      this.destinationCityName = await this.getCityName(
-        destination.geometry.coordinates
-      ).then((res) => {
-        return res.split(',')[0];
-      });
-      this.destinationCityNameValid = true;
-      return [
-        this.destinationCityName,
-        this.destinationCityNameValid,
-        this.destinationCoordinates,
-      ];
-    });
 
     interface StyleImageInterface {
       width: number;
@@ -255,7 +187,8 @@ export class NavigatorComponent implements OnInit, DoCheck {
       render: () => boolean;
       context?: CanvasRenderingContext2D;
     }
-    //Location pulsing dot
+    const size = 200;
+
     const pulsingDot: StyleImageInterface = {
       // This implements `StyleImageInterface`
       // to draw a pulsing dot icon on the map.
@@ -324,7 +257,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
         }
       },
     };
-    //Location pulsing dot
+
     this.map.on('load', () => {
       this.map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
       let coordinates;
@@ -382,13 +315,10 @@ export class NavigatorComponent implements OnInit, DoCheck {
       this.map.setFog({}); // Set the default atmosphere style
       // spinGlobe();
     });
-
     this.spinGlobe();
-    //When animation is complete, start spinning if there is no ongoing interaction
     this.map.on('moveend', () => {
       this.spinGlobe();
     });
-    return this.originCityName, this.destinationCityName;
   }
 
   //Sping globe function
@@ -430,14 +360,43 @@ export class NavigatorComponent implements OnInit, DoCheck {
           let feature = data.features[i];
           // If the place_type array includes 'place', return the place_name
           if (feature.place_type.includes('place')) {
-            return feature.place_name;
             console.log(feature.place_name);
+            return feature.place_name;
           }
         }
         // If no feature has place_type 'place', return the place_name of the first feature
         return data.features[0].place_name;
       })
       .catch((error) => console.log(error));
+  }
+
+  async getCityCoordinates() {
+    const originCityName = this.selectCitiesForm.value.origin;
+    const destinationCityName = this.selectCitiesForm.value.destination;
+
+    let originResponse = await fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${originCityName}.json?access_token=${mapboxgl.accessToken}`
+    );
+    let originData = await originResponse.json();
+    this.initLongitude = originData.features[0].geometry.coordinates[0];
+    this.initLatitude = originData.features[0].geometry.coordinates[1];
+
+    let destinationResponse = await fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${destinationCityName}.json?access_token=${mapboxgl.accessToken}`
+    );
+    let destinationData = await destinationResponse.json();
+    this.endLongitude = destinationData.features[0].geometry.coordinates[0];
+    this.endLatitude = destinationData.features[0].geometry.coordinates[1];
+
+    this.originCityNameValid = true;
+    this.destinationCityNameValid = true;
+
+    return [
+      this.initLatitude,
+      this.initLongitude,
+      this.endLatitude,
+      this.endLongitude,
+    ];
   }
 
   startNavigation() {
@@ -455,10 +414,10 @@ export class NavigatorComponent implements OnInit, DoCheck {
       .FindGasStation(
         this.selectedVehicleLicensePlate,
         this.fuelPercentage,
-        this.originCoordinates[0],
-        this.originCoordinates[1],
-        this.destinationCoordinates[0],
-        this.destinationCoordinates[1]
+        this.initLongitude,
+        this.initLatitude,
+        this.endLongitude,
+        this.endLatitude
       )
       .subscribe((res) => {
         this.receivedResponse = true;
@@ -486,14 +445,11 @@ export class NavigatorComponent implements OnInit, DoCheck {
     this.requestSent = false;
     this.originCityNameValid = false;
     this.destinationCityNameValid = false;
-    this.directions.removeRoutes();
+    // this.directions.removeRoutes();
     this.receivedResponse = true;
     this.selectVehicleForm.reset();
+    this.selectCitiesForm.reset();
     this.loadMap();
-  }
-
-  compareDistance(a:any, b:any) {
-    return a.distance > b.distance;
   }
 
   async addMarker() {
@@ -523,5 +479,44 @@ export class NavigatorComponent implements OnInit, DoCheck {
       });
     }
     // console.log(`I'm into addMarker function`, this.gasStationList);
+  }
+  async showRoute(selectedRoute: any, initLatitude: any, initLongitude: any) {
+    this.map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      zoom: 5,
+      center: [initLongitude, initLatitude],
+      interactive: true,
+      scrollZoom: true,
+    });
+    this.map.on('load', () => {
+      if (selectedRoute) {
+        this.map.addSource('route', {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: selectedRoute.geometry.coordinates,
+            },
+          },
+        });
+
+        this.map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: 'route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#254ff5',
+            'line-width': 8,
+          },
+        });
+      }
+    });
   }
 }

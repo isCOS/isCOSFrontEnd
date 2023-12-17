@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 import { VehicleService } from 'src/app/service/vehicle.service';
 import { MessageService } from 'primeng/api';
@@ -36,7 +32,7 @@ export class VehicleTableComponent implements OnInit {
   vehicleDetails: boolean = false;
   selectedVehicle: any;
   user: any;
-  companyName:any;
+  companyName: any;
 
   ngOnInit(): void {
     this.vehicleService
@@ -61,13 +57,13 @@ export class VehicleTableComponent implements OnInit {
       {
         label: 'Modifica',
         icon: 'pi pi-fw pi-pencil',
-      }
+      },
     ];
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.companyName = this.user.businessName;
   }
 
-  loadVehicle(){
+  loadVehicle() {
     this.vehicleService
       .GetListVehicleByUser(sessionStorage.getItem('email'))
       .subscribe((data: any) => {
@@ -111,7 +107,7 @@ export class VehicleTableComponent implements OnInit {
     this.vehicleDetails = !this.vehicleDetails;
   }
 
-  saveEdit(){
+  saveEdit() {
     this.vehicleEditingForm.patchValue({
       companyName: this.companyName,
     });
@@ -119,18 +115,38 @@ export class VehicleTableComponent implements OnInit {
       licensePlate: this.vehicles.data[this.editMode].licensePlate,
     });
     // console.log('Editing form value: ', this.vehicleEditingForm.value);
-    this.vehicleService.EditVehicle(this.vehicleEditingForm.value).subscribe((data: any) => {
-      console.log(data);
-      if (data.code === 0){
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Vehicle edited',
-        });
-      }
-      this.editMode = -1;
-      this.loadVehicle();
-    });
+    this.vehicleService
+      .EditVehicle(this.vehicleEditingForm.value)
+      .subscribe((data: any) => {
+        console.log(data);
+        if (data.code === 0) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Vehicle edited',
+          });
+        }
+        this.editMode = -1;
+        this.loadVehicle();
+      });
   }
-
+  deleteVehicle(index: any) {
+    this.vehicleService
+      .deleteVehicle(
+        sessionStorage.getItem('email'),
+        sessionStorage.getItem('token'),
+        this.vehicles.data[index].licensePlate
+      )
+      .subscribe((data: any) => {
+        console.log(data);
+        if (data.code === 0) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Vehicle deleted',
+          });
+        }
+        this.loadVehicle();
+      });
+  }
 }

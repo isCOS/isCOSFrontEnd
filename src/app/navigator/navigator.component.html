@@ -54,7 +54,6 @@
         <p-knob
           formControlName="value"
           [step]="5"
-
           valueColor="MediumTurquoise"
           rangeColor="SlateGray"
         ></p-knob>
@@ -89,6 +88,34 @@
           class="p-button-secondary"
           (click)="stopNavigation()"
           [routerLink]="['/gestione']"
+        ></button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="enableNavigation" class="selectCities">
+    <form
+      [formGroup]="selectCitiesForm"
+      (ngSubmit)="originCityNameValid = true; destinationCityNameValid = true"
+    >
+      <div class="mt-4">
+        <span class="p-float-label">
+          <input pInputText id="username" formControlName="origin" />
+          <label for="username">Origin City</label>
+        </span>
+      </div>
+      <div class="mt-4">
+        <span class="p-float-label">
+          <input pInputText id="username" formControlName="destination" />
+          <label for="username">Destination City</label>
+        </span>
+      </div>
+      <div class="card flex mt-2">
+        <button
+          pButton
+          type="submit"
+          [disabled]="!selectCitiesForm.valid"
+          label="Avvia"
+          class="p-button-success"
         ></button>
       </div>
     </form>

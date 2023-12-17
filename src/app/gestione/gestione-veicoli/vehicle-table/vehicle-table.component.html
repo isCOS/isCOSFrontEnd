@@ -88,7 +88,7 @@
                 <label>Capienza serbatoio (L)</label>
               </span>
               <p *ngIf="editMode === -1">
-                Capeinza serbatoio (L): {{ vehicle.litersTank }}
+                Capienza serbatoio (L): {{ vehicle.litersTank }}
               </p>
             </div>
             <div class="mt-4">
@@ -156,6 +156,15 @@
                 severity="danger"
                 class="p-button-rounded p-button-text"
                 (click)="closeEditing()"
+              >
+              </p-button>
+              <p-button
+                *ngIf="editMode === i"
+                [text]="true"
+                icon="pi pi-trash"
+                severity="danger"
+                class="p-button-rounded p-button-text"
+                (click)="deleteVehicle(i)"
               >
               </p-button>
             </div>
