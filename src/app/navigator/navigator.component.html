@@ -99,13 +99,25 @@
     >
       <div class="mt-4">
         <span class="p-float-label">
-          <input pInputText id="username" formControlName="origin" />
+          <!-- <input pInputText id="username" formControlName="origin" /> -->
+          <p-autoComplete
+            formControlName="origin"
+            [suggestions]="filteredCity"
+            (completeMethod)="filterCity($event)"
+            [dropdown]="true"
+          ></p-autoComplete>
           <label for="username">Origin City</label>
         </span>
       </div>
       <div class="mt-4">
         <span class="p-float-label">
-          <input pInputText id="username" formControlName="destination" />
+          <!-- <input pInputText id="username" formControlName="destination" /> -->
+          <p-autoComplete
+            formControlName="destination"
+            [suggestions]="filteredCity"
+            (completeMethod)="filterCity($event)"
+            [dropdown]="true"
+          ></p-autoComplete>
           <label for="username">Destination City</label>
         </span>
       </div>

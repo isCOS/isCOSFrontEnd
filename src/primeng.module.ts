@@ -17,11 +17,13 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { AccordionModule } from 'primeng/accordion';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { KnobModule } from 'primeng/knob';
 
 @NgModule({
   exports: [
     ButtonModule,
+    AutoCompleteModule,
     CalendarModule,
     InputTextModule,
     InputMaskModule,

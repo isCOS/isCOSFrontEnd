@@ -7,6 +7,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
+
 @Component({
   selector: 'app-navigator',
   templateUrl: './navigator.component.html',
@@ -40,6 +45,9 @@ export class NavigatorComponent implements OnInit, DoCheck {
   receivedResponse: boolean = true;
   selectedRoute: any;
   route: any;
+  cities: any;
+  filteredCity: any[] = [];
+  selectedCity: any[] = [];
   token =
     'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
 
@@ -53,14 +61,12 @@ export class NavigatorComponent implements OnInit, DoCheck {
   ) {}
   ngOnInit() {
     const email = sessionStorage.getItem('email');
-    this.loadScript(
-      'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js'
-    )
-      .then(() =>
-        this.loadScript(
-          'https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'
-        )
-      )
+    this.http.get('assets/citta_italia.json').subscribe((data) => {
+      this.cities = data;
+      this.cities = this.cities.data;
+      // console.log(this.cities);
+    });
+    this.loadScript('https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js')
       .then(() =>
         this.loadScript(
           'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css'
@@ -68,10 +74,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
       )
       .then(() => {
         this.loadMap();
-      })
-      .catch((error) =>
-        console.error('Errore durante il caricamento degli script:', error)
-      );
+      });
     this.vehicleService.GetListVehicleByUser(email).subscribe((res) => {
       this.vehicles = res.data;
       for (let i = 0; i < this.vehicles.length; i++) {
@@ -152,6 +155,23 @@ export class NavigatorComponent implements OnInit, DoCheck {
       script.onerror = (error) => reject(error);
       this.renderer.appendChild(document.body, script);
     });
+  }
+
+  filterCity(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+    let query = event.query;
+    // console.log("inside filterCity",this.cities, this.cities.length)
+    for (let i = 0; i < this.cities.length; i++) {
+      let city = this.cities[i];
+      if (
+        city.name.toLowerCase().indexOf(query.toLowerCase()) == 0 &&
+        this.selectedCity.indexOf(city.name.toLowerCase()) == -1
+      ) {
+        filtered.push(city.name);
+      }
+    }
+    this.filteredCity = filtered;
+    // console.log(this.filteredCity);
   }
 
   loadMap() {
