@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-globe',
@@ -11,8 +12,7 @@ export class GlobeComponent {
   style = 'mapbox://styles/mapbox/streets-v12';
   lat = 37.75;
   lng = -122.41;
-  token: string =
-    'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
+  token: string = environment.mapbox_token;
   constructor(private renderer: Renderer2) { }
   ngOnInit() {
 
@@ -229,8 +229,7 @@ export class GlobeComponent {
     mapboxCssLink.href = 'https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css';
     mapboxCssLink.type = 'text/css';
     this.renderer.appendChild(document.head, mapboxCssLink);
-    const token =
-      'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
+    const token = environment.mapbox_token;
     (mapboxgl as any).accessToken = token;
     const map = new mapboxgl.Map({
       container: 'map',

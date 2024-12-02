@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class userService {
   // ip = "10.31.12.211:5294"
-  ip = '127.0.0.1:5294';
+  ip = environment.apiKey;
   apiurl = `http://${this.ip}/api/User/`;
   constructor(private http: HttpClient) {}
 

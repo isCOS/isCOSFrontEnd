@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -13,8 +14,7 @@ export class WorkingGlobeComponent {
   lng = -122.41;
   constructor() { }
   ngOnInit() {
-    const token =
-      'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
+    const token = environment.mapbox_token;
     (mapboxgl as any).accessToken = token;
     const map = new mapboxgl.Map({
       container: 'map',

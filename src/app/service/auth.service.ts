@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { Observable, map } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
   // ip = "10.31.12.211:5294"
-  ip = '127.0.0.1:5294';
+  ip = environment.apiKey;
 
   CheckAuthoritation(email: any, token: any): Observable<string> {
     const url = `http://${this.ip}/api/User/checkAuthorization?email=${email}&token=${token}`

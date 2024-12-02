@@ -47,9 +47,13 @@ export class LoginComponent implements OnInit {
   userdata: any;
   changePasswordDialog: boolean = false;
   confirmChangePasswordDialog: boolean = false;
+  confirmAccountDialog: boolean = false;
 
   ngOnInit(): void {
-    
+    this.dialogsService.currentConfirmDialog.subscribe(
+      (confirmAccountDialog) =>
+        (this.confirmAccountDialog = confirmAccountDialog)
+    );
   }
 
   onToggle() {
@@ -60,7 +64,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private userService: userService,
-    private dialogService: DialogsService,
+    private dialogsService: DialogsService,
     private messageService: MessageService,
     private router: Router
   ) {}
@@ -96,7 +100,14 @@ export class LoginComponent implements OnInit {
             detail: 'User not found',
           });
         }
-        if (error.status === 400) {
+        if (error.status === 400 && error.error.code === 102){
+          this.messageService.add({
+            summary: 'Info',
+            detail: 'Account must be activated',
+          });
+          this.showConfirmAccount();
+        }
+        else if (error.status === 400) {
           this.messageService.add({
             severity: 'error',
             summary: 'Errore',
@@ -106,5 +117,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  
+  showConfirmAccount() {
+    this.dialogsService.changeConfirmDialog(true);
+  }
 }

@@ -33,5 +33,9 @@
         <!-- <p-button (click)="onToggle()" [text]="true" styleClass="text-white">Registrati</p-button> -->
       </div>
     </form>
+    <p-dialog [visible]="this.confirmAccountDialog" header="Conferma la mail" appendTo="body" [closeOnEscape]="false"
+      [draggable]="false" [resizable]="false" [closable]="false" [style]="{ width: 'auto', heigth: 'auto' }">
+      <app-confirm-registration></app-confirm-registration>
+    </p-dialog>
   </div>
 </div>
