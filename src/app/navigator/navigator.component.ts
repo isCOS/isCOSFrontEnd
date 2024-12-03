@@ -6,6 +6,8 @@ import { MapboxService } from '../service/mapbox.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -18,6 +20,7 @@ interface AutoCompleteCompleteEvent {
   styleUrls: ['./navigator.component.scss'],
 })
 export class NavigatorComponent implements OnInit, DoCheck {
+  token: string = environment.mapbox_token;
   style = 'mapbox://styles/mapbox/streets-v12';
   lat = 37.75;
   lng = -122.41;
@@ -48,8 +51,6 @@ export class NavigatorComponent implements OnInit, DoCheck {
   cities: any;
   filteredCity: any[] = [];
   selectedCity: any[] = [];
-  token =
-    'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
 
   constructor(
     private renderer: Renderer2,
